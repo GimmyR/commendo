@@ -33,6 +33,7 @@
     "class-validator": "^0.15.1",
     "date-fns": "^4.4.0",
     "dotenv": "^17.4.2",
+    "file-type": "16.5.4",
     "pg": "^8.21.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"

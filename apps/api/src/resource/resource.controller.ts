@@ -14,8 +14,8 @@ export class ResourceController {
     }
 
     @Post()
-    async uploadImage(@Req() req: Request, @Headers("x-file-name") filename: string) {
-        const resourcePath = await this.resourceServ.saveImage(req, filename);
+    async uploadImage(@Req() req: Request) {
+        const resourcePath = await this.resourceServ.create(req, ["jpeg", "jpg", "png"]);
         return { pathname: resourcePath };
     }
 }
