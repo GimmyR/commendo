@@ -1,4 +1,4 @@
-import { Controller, Get, Headers, Param, Post, Req, Res } from '@nestjs/common';
+import { Controller, Get, Param, Post, Req, Res } from '@nestjs/common';
 import type { Request, Response } from 'express';
 import { ResourceService } from 'src/resource/resource.service';
 
