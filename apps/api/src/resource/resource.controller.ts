@@ -1,7 +1,5 @@
-import { Controller, Get, Param, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
-import type { Response } from 'express';
-import { getMulterOptions } from 'src/resource/multer.config';
+import { Controller, Get, Headers, Param, Post, Req, Res } from '@nestjs/common';
+import type { Request, Response } from 'express';
 import { ResourceService } from 'src/resource/resource.service';
 
 @Controller('resource')
@@ -17,12 +15,8 @@ export class ResourceController {
     }
 
     @Post()
-    @UseInterceptors(FileInterceptor("file", getMulterOptions()))
-    async uploadImage(@UploadedFile() file: Express.Multer.File) {
-        return {
-            message: "Image has been successfully uploaded",
-            filename: file.filename,
-            path: `/api/resource/${file.filename}`
-        };
+    async uploadImage(@Req() req: Request, @Headers("x-file-name") filename: string) {
+        const resourcePath = await this.resourceServ.saveImage(req, filename);
+        return { pathname: resourcePath };
     }
 }
