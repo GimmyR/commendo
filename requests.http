@@ -1,0 +1,52 @@
+### GET languages
+GET http://localhost:8000/api/lang
+
+### GET unique language
+GET http://localhost:8000/api/lang/fr
+
+### POST language
+POST http://localhost:8000/api/lang
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5hbWUiOiJhZG1pbiIsInJvbGVzIjpbMV0sImlhdCI6MTc4MTgzNjM5MH0.qcg5Nj_xgP8LH1dWItxZIymxfsP1u6GwCVv7MZydSuU
+Content-Type: application/json
+
+{
+    "name": "English",
+    "abbrev": "eng"
+}
+
+### POST create account
+POST http://localhost:8000/api/account/sign-up
+Content-Type: application/json
+
+{
+    "username": "gimmy",
+    "password": "pwdGimmy"
+}
+
+### POST sign in account
+POST http://localhost:8000/api/account/sign-in
+Content-Type: application/json
+
+{
+    "username": "gimmy",
+    "password": "pwdGimmy"
+}
+
+### PATCH edit password
+PATCH http://localhost:8000/api/account/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsIm5hbWUiOiJnaW1teSIsImlhdCI6MTc4MTc3NDU0N30.Qv2Hr9XbEt7ivnDEiNAJQdXnJtiEvjt16zQ423_uvbU
+Content-Type: application/json
+
+{
+    "currentPassword": "pwdGimmy",
+    "newPassword": "pwd123"
+}
+
+### POST sign in as admin
+POST http://localhost:8000/api/account/sign-in
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "pwdAdmin"
+}

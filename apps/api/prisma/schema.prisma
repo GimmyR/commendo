@@ -1,0 +1,41 @@
+generator client {
+    provider = "prisma-client-js"
+    moduleFormat = "cjs"
+}
+
+datasource db {
+    provider = "postgresql"
+}
+
+model Lang {
+    id            Int           @id @default(autoincrement())
+    name          String        @unique @db.VarChar(20)
+    abbrev        String        @unique @db.VarChar(10)
+    roleNames     RoleName[]
+    @@map("lang")
+}
+
+model Role {
+    id            Int           @id @default(autoincrement())
+    names         RoleName[]
+    accounts      Account[]
+    @@map("role")
+}
+
+model RoleName {
+    roleId        Int
+    langId        Int
+    name          String        @db.VarChar(20)
+    role          Role          @relation(fields: [roleId], references: [id], onDelete: Cascade)
+    lang          Lang          @relation(fields: [langId], references: [id], onDelete: Cascade)
+    @@id([roleId, langId])
+    @@map("role_name")
+}
+
+model Account {
+    id            Int           @id @default(autoincrement())
+    username      String        @unique @db.VarChar(50)
+    password      String        @db.Char(60)
+    roles         Role[]
+    @@map("account")
+}
