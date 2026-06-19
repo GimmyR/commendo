@@ -10,8 +10,7 @@ export class ResourceController {
 
     @Get(":filename")
     async getByFilename(@Param("filename") filename: string, @Res() res: Response) {
-        const fileStream = this.resourceServ.getByFilename(filename);
-        fileStream.pipe(res)
+        this.resourceServ.findByFilename(res, filename);
     }
 
     @Post()

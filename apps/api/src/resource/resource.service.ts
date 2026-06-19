@@ -3,6 +3,7 @@ import path, { join } from 'path';
 import * as fs from "fs";
 import { format } from 'date-fns';
 import { Readable } from 'stream';
+import { Response } from 'express';
 
 @Injectable()
 export class ResourceService implements OnModuleInit {
@@ -22,12 +23,13 @@ export class ResourceService implements OnModuleInit {
         }
     }
 
-    getByFilename(filename: string) {
+    findByFilename(response: Response, filename: string) {
         const filePath = join(process.cwd(), "resources", filename);
 
         if(!fs.existsSync(filePath)) throw new NotFoundException(`File not found : ${filename}`);
 
-        return fs.createReadStream(filePath);
+        const stream = fs.createReadStream(filePath);
+        stream.pipe(response);
     }
 
     async saveImage(stream: Readable, filename: string): Promise<string> {
