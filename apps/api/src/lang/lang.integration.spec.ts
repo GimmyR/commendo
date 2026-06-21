@@ -27,10 +27,10 @@ describe("Test LangController", () => {
     });
 
     it("Should create language", async () => {
-        const language: Partial<CreateLanguage> = {
+        const language: CreateLanguage = new CreateLanguage({
             name: "English",
             abbrev: "eng"
-        };
+        });
 
         const res = await fetch(`${apiURL}/api/lang`, {
             method: "POST",
