@@ -1,12 +1,12 @@
 import { Container } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
-import Navbar from "../navbar";
 import Menu from "../menu";
+import NavigationBar from "../navigation-bar";
 
 export default function Layout() {
     return (
         <>
-            <Navbar/>
+            <NavigationBar/>
             <Menu/>
             <Container fluid>
                 <Outlet/>
