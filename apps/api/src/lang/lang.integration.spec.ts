@@ -1,6 +1,6 @@
 import { HttpStatus, INestApplication } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { Lang } from "@prisma/client";
+import { CreateLanguage } from "@repo/shared";
 import { CleanerService } from "src/cleaner/cleaner.service";
 import { initIntegrationTest } from "src/test.helper";
 
@@ -27,7 +27,7 @@ describe("Test LangController", () => {
     });
 
     it("Should create language", async () => {
-        const language: Partial<Lang> = {
+        const language: Partial<CreateLanguage> = {
             name: "English",
             abbrev: "eng"
         };

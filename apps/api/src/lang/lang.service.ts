@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateLanguageRequest } from 'src/lang/lang.dto';
+import { CreateLanguage } from '@repo/shared';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -24,7 +24,7 @@ export class LangService {
         return lang;
     }
 
-    async create(language: CreateLanguageRequest) {
+    async create(language: CreateLanguage) {
         return await this.prisma.lang.upsert({
             where: { name: language.name, abbrev: language.abbrev },
             update: {},
