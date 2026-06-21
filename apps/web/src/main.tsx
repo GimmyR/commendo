@@ -11,10 +11,6 @@ const router = createBrowserRouter([{
         {
             path: "",
             element: <Home/>
-        },
-        {
-            path: "posts",
-            element: <div className='text-warning'>Your posts, bitches !</div>
         }
     ]
 }]);
