@@ -1,10 +1,10 @@
 import { ConflictException, Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
-import { EditPasswordRequest, SignUpRequest } from 'src/account/account.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from "bcrypt";
 import { Account, Role } from '@prisma/client';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
+import { EditPassword, SignUp } from '@repo/shared';
 
 @Injectable()
 export class AccountService {
@@ -32,7 +32,7 @@ export class AccountService {
         });
     }
 
-    async create(account: SignUpRequest, roleId?: number) {
+    async create(account: SignUp, roleId?: number) {
         const user = await this.findByUsername(account.username);
 
         if(user) throw new ConflictException(`Account with username as '${account.username}' already exists`);
@@ -84,7 +84,7 @@ export class AccountService {
         return await bcrypt.compare(plainText, hashed);
     }
 
-    async editPassword(request: Request, edit: EditPasswordRequest) {
+    async editPassword(request: Request, edit: EditPassword) {
         const account = await this.confirmIdentity(request, edit);
 
         return await this.prisma.account.update({
@@ -97,7 +97,7 @@ export class AccountService {
         });
     }
 
-    private async confirmIdentity(request: Request, edit: EditPasswordRequest) {
+    private async confirmIdentity(request: Request, edit: EditPassword) {
         const account = await this.prisma.account.findUnique({
             where: {
                 id: request["user"].sub,

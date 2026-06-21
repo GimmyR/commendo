@@ -1,6 +1,6 @@
 import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { CreateRoleWithLangAbbrev } from 'src/role/role.dto';
+import { CreateRoleWithLangAbbrev } from '@repo/shared';
 import { RoleService } from 'src/role/role.service';
 
 @Injectable()

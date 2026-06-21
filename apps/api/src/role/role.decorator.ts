@@ -1,4 +1,4 @@
 import { SetMetadata } from '@nestjs/common';
-import { CreateRoleWithLangAbbrev } from 'src/role/role.dto';
+import { CreateRoleWithLangAbbrev } from '@repo/shared';
 
 export const Roles = (...args: CreateRoleWithLangAbbrev[]) => SetMetadata('roles', args);

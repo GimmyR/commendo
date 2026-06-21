@@ -1,6 +1,6 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { CreateRole, CreateRoleWithLangAbbrev } from '@repo/shared';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateRoleRequest, CreateRoleWithLangAbbrev } from 'src/role/role.dto';
 
 @Injectable()
 export class RoleService {
@@ -8,7 +8,7 @@ export class RoleService {
         private readonly prisma: PrismaService
     ) {}
 
-    async create(role: CreateRoleRequest) {
+    async create(role: CreateRole) {
         const roles = await this.getByRoleNameAndLangId(role);
 
         if(roles.length == 0)
@@ -32,7 +32,7 @@ export class RoleService {
         else throw new InternalServerErrorException(`Too many role names found for : ${role}`);
     }
 
-    async getByRoleNameAndLangId(role: CreateRoleRequest) {
+    async getByRoleNameAndLangId(role: CreateRole) {
         return await this.prisma.role.findMany({
             where: {
                 names: {

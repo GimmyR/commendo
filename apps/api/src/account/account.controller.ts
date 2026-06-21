@@ -1,9 +1,10 @@
 import { Body, Controller, Patch, Post, Req, UnauthorizedException, UseGuards, UseInterceptors } from '@nestjs/common';
+import { EditPassword, SignUp } from '@repo/shared';
 import type { Request } from 'express';
-import { EditPasswordRequest, SignUpRequest } from 'src/account/account.dto';
 import { AccountGuard } from 'src/account/account.guard';
 import { SignInInterceptor } from 'src/account/account.interceptor';
 import { AccountService } from 'src/account/account.service';
+import { ValidationInterceptor } from 'src/validation/validation.interceptor';
 
 @Controller('account')
 export class AccountController {
@@ -12,13 +13,14 @@ export class AccountController {
     ) {}
 
     @Post("sign-up")
-    async signUp(@Body() account: SignUpRequest) {
+    @UseInterceptors(new ValidationInterceptor(SignUp))
+    async signUp(@Body() account: SignUp) {
         return await this.accountServ.create(account);
     }
 
     @Post("sign-in")
-    @UseInterceptors(SignInInterceptor)
-    async signIn(@Body() account: SignUpRequest) {
+    @UseInterceptors(new ValidationInterceptor(SignUp), SignInInterceptor)
+    async signIn(@Body() account: SignUp) {
         const user = await this.accountServ.findByUsername(account.username);
 
         if(!user || !(await this.accountServ.comparePasswords(account.password, user.password)))
@@ -28,8 +30,9 @@ export class AccountController {
     }
 
     @Patch()
+    @UseInterceptors(new ValidationInterceptor(EditPassword))
     @UseGuards(AccountGuard)
-    async editPassword(@Body() account: EditPasswordRequest, @Req() req: Request) {
+    async editPassword(@Body() account: EditPassword, @Req() req: Request) {
         const user = await this.accountServ.editPassword(req, account);
         return { id: user.id };
     }
