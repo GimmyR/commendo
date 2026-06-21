@@ -18,7 +18,7 @@ async function bootstrap() {
     }));
 
     const config = new DocumentBuilder()
-       .setTitle("Turborepo API")
+       .setTitle("Commendo API")
        .setDescription("NestJS API documentation with Swagger UI")
        .setVersion("1.0")
        .addBearerAuth({
