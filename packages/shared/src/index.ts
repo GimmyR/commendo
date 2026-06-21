@@ -24,3 +24,9 @@ export class CreateLanguage extends RequestDto {
         return errors;
     }
 }
+
+export class LanguageItem {
+    id!: number;
+    name!: string;
+    abbrev!: string;
+}
