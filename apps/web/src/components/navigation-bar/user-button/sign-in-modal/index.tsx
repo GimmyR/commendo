@@ -9,12 +9,12 @@ type Props = {
 };
 
 export default function SignInModal({ isShown, close } : Props) {
-    const {account, error, setUsername, setPassword, resetAccount, setError} = useSignInModal();
+    const {credentials, error, setUsername, setPassword, resetAccount, setError} = useSignInModal();
 
     const handleSignIn = async () => {
         setError(undefined);
         try {
-            const result = await signIn(account);
+            const result = await signIn(credentials);
             console.log(result);
         } catch(error) {
             setError(error.message);
@@ -36,8 +36,8 @@ export default function SignInModal({ isShown, close } : Props) {
                     <h1 className="text-center fs-4 mb-4">Connexion</h1>
                     {error && <Alert variant="danger" className="col-10 col-md-8 mb-4 py-1 rounded-0">{error}</Alert>}
                     <Form className="col-10 col-md-8">
-                        <SignInInputGroup icon="person" type="text" value={account.username} onChange={setUsername} placeholder="Nom d'utilisateur"/>
-                        <SignInInputGroup icon="lock" type="password" value={account.password} onChange={setPassword} placeholder="Mot de passe"/>
+                        <SignInInputGroup icon="person" type="text" value={credentials.username} onChange={setUsername} placeholder="Nom d'utilisateur"/>
+                        <SignInInputGroup icon="lock" type="password" value={credentials.password} onChange={setPassword} placeholder="Mot de passe"/>
                         <Button onClick={handleSignIn} variant="success" className="col-12 mt-2 rounded-0">Se connecter</Button>
                     </Form>
                 </Stack>
