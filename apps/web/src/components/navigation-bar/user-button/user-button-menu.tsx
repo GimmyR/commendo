@@ -1,5 +1,6 @@
-import { Button, Dropdown } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import LanguageSelect from "./language-select";
+import SignInButton from "./sign-in-button";
 
 export default function UserButtonMenu() {
     return (
@@ -8,7 +9,7 @@ export default function UserButtonMenu() {
                 <LanguageSelect/>
             </Dropdown.Item>
             <Dropdown.Item className="cmd-dropdown-item">
-                <Button variant="success" className="col-12">Connexion</Button>
+                <SignInButton/>
             </Dropdown.Item>
         </Dropdown.Menu>
     );
