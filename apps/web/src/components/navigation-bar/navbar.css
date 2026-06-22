@@ -1,0 +1,21 @@
+.cmd-btn:hover {
+    border-color: rgb(204, 184, 0);
+    color: rgb(255, 230, 0);
+    background-color: #198754;
+}
+
+.cmd-btn:active {
+    border-color: rgb(255, 230, 0) !important;
+    color: rgb(255, 238, 89) !important;
+    background-color: #198754 !important;
+}
+
+.user-btn {
+    font-size: 25px;
+}
+
+@media (min-width: 992px) {
+    .user-btn {
+        font-size: 24px;
+    }
+}
