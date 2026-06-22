@@ -5,7 +5,7 @@ type Props = {
     close: () => void;
 };
 
-export default function LoginModal({ isShown, close } : Props) {
+export default function SignInModal({ isShown, close } : Props) {
     return (
         <Modal show={isShown} onHide={close} centered>
             <Modal.Body>
