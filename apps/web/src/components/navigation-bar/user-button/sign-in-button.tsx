@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap";
-import useSignInButton from "../../../libs/hooks/use-sign-in-button";
+import useSignInButton from "@/libs/hooks/use-sign-in-button";
 import SignInModal from "./sign-in-modal";
 
 export default function SignInButton() {

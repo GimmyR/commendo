@@ -1,7 +1,7 @@
 import { Alert, Button, Form, Modal, Stack } from "react-bootstrap";
 import SignInInputGroup from "./sign-in-input-group";
-import useSignInModal from "../../../../libs/hooks/use-sign-in-modal";
-import { signIn } from "../../../../libs/actions/account";
+import { signIn } from "@/libs/actions/account";
+import useSignInModal from "@/libs/hooks/use-sign-in-modal";
 
 type Props = {
     isShown: boolean;
