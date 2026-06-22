@@ -1,3 +1,9 @@
+.cmd-btn.dropdown-toggle {
+    border-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+    background-color: #198754;
+}
+
 .cmd-btn:hover {
     border-color: rgb(204, 184, 0);
     color: rgb(255, 230, 0);
@@ -12,6 +18,14 @@
 
 .user-btn {
     font-size: 25px;
+}
+
+.user-btn::after {
+    display: none !important;
+}
+
+.cmd-dropdown-item:hover {
+    background-color: white;
 }
 
 @media (min-width: 992px) {

@@ -2,6 +2,7 @@ import { Container, Navbar, Stack } from "react-bootstrap";
 import IconLink from "../icon-link";
 import "./navbar.css";
 import LargeSearchButton from "./large-search-button";
+import UserButton from "./user-button";
 
 export default function NavigationBar() {
     return (
@@ -11,7 +12,7 @@ export default function NavigationBar() {
                 <LargeSearchButton/>
                 <Stack direction="horizontal" gap={3}>
                     <IconLink to="#" icon="search" linkClass="d-inline d-md-none" iconClass="cmd-btn fs-5"/>
-                    <IconLink to="#" icon="person-circle" iconClass="user-btn cmd-btn"/>
+                    <UserButton/>
                 </Stack>
             </Container>
         </Navbar>
