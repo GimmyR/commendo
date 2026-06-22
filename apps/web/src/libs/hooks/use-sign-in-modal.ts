@@ -1,3 +1,4 @@
+import { useAuth } from "@/libs/hooks/use-auth";
 import type { SignUp } from "@repo/shared";
 import { useState, type ChangeEvent } from "react";
 
@@ -6,6 +7,7 @@ const credentialsPlaceholder: Partial<SignUp> = { username: "", password: "" };
 export default function useSignInModal() {
     const [credentials, setCredentials] = useState<Partial<SignUp>>(credentialsPlaceholder);
     const [error, setError] = useState<string | undefined>();
+    const login = useAuth((state) => state.login);
 
     const setUsername = (event: ChangeEvent<HTMLInputElement>) => {
         setCredentials({...credentials, username: event.target.value})
@@ -19,5 +21,5 @@ export default function useSignInModal() {
         setCredentials({...credentialsPlaceholder});
     };
 
-    return {credentials, setUsername, setPassword, resetAccount, error, setError};
+    return {credentials, setUsername, setPassword, resetAccount, error, setError, login};
 }

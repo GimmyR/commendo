@@ -9,13 +9,14 @@ type Props = {
 };
 
 export default function SignInModal({ isShown, close } : Props) {
-    const {credentials, error, setUsername, setPassword, resetAccount, setError} = useSignInModal();
+    const {credentials, error, setUsername, setPassword, resetAccount, setError, login} = useSignInModal();
 
     const handleSignIn = async () => {
         setError(undefined);
         try {
             const result = await signIn(credentials);
-            console.log(result);
+            login(result.access_token);
+            handleClose();
         } catch(error) {
             setError(error.message);
         }
@@ -38,7 +39,9 @@ export default function SignInModal({ isShown, close } : Props) {
                     <Form className="col-10 col-md-8">
                         <SignInInputGroup icon="person" type="text" value={credentials.username} onChange={setUsername} placeholder="Nom d'utilisateur"/>
                         <SignInInputGroup icon="lock" type="password" value={credentials.password} onChange={setPassword} placeholder="Mot de passe"/>
-                        <Button onClick={handleSignIn} variant="success" className="col-12 mt-2 rounded-0">Se connecter</Button>
+                        <Button onClick={handleSignIn} variant="success" className="col-12 mt-2 rounded-0">
+                            Se connecter
+                        </Button>
                     </Form>
                 </Stack>
             </Modal.Body>
