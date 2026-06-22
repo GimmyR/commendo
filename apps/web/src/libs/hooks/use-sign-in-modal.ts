@@ -8,6 +8,7 @@ export default function useSignInModal() {
     const [credentials, setCredentials] = useState<Partial<SignUp>>(credentialsPlaceholder);
     const [error, setError] = useState<string | undefined>();
     const login = useAuth((state) => state.login);
+    const [submitting, setSubmitting] = useState<boolean>(false);
 
     const setUsername = (event: ChangeEvent<HTMLInputElement>) => {
         setCredentials({...credentials, username: event.target.value})
@@ -21,5 +22,8 @@ export default function useSignInModal() {
         setCredentials({...credentialsPlaceholder});
     };
 
-    return {credentials, setUsername, setPassword, resetAccount, error, setError, login};
+    return { 
+        credentials, setUsername, setPassword, resetAccount, 
+        error, setError, login, submitting, setSubmitting
+    };
 }

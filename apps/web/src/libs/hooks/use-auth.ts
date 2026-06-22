@@ -26,7 +26,6 @@ export const useAuth = create<IAuth>()(
             ...baseAuth,
             login: (token: string) => {
                 const user = jwtDecode<JwtPayload>(token);
-                console.log(user);
                 set({ token, account: user });
             },
             logout: () => {

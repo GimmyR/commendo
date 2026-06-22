@@ -1,4 +1,4 @@
-import { Alert, Button, Form, Modal, Stack } from "react-bootstrap";
+import { Alert, Button, Form, Modal, Spinner, Stack } from "react-bootstrap";
 import SignInInputGroup from "./sign-in-input-group";
 import { signIn } from "@/libs/actions/account";
 import useSignInModal from "@/libs/hooks/use-sign-in-modal";
@@ -9,16 +9,20 @@ type Props = {
 };
 
 export default function SignInModal({ isShown, close } : Props) {
-    const {credentials, error, setUsername, setPassword, resetAccount, setError, login} = useSignInModal();
+    const { credentials, error, submitting, setUsername, setPassword, resetAccount, setError, login, setSubmitting } = useSignInModal();
 
     const handleSignIn = async () => {
+        setSubmitting(true);
         setError(undefined);
+        
         try {
             const result = await signIn(credentials);
             login(result.access_token);
             handleClose();
         } catch(error) {
             setError(error.message);
+        } finally {
+            setSubmitting(false);
         }
     };
 
@@ -40,7 +44,7 @@ export default function SignInModal({ isShown, close } : Props) {
                         <SignInInputGroup icon="person" type="text" value={credentials.username} onChange={setUsername} placeholder="Nom d'utilisateur"/>
                         <SignInInputGroup icon="lock" type="password" value={credentials.password} onChange={setPassword} placeholder="Mot de passe"/>
                         <Button onClick={handleSignIn} variant="success" className="col-12 mt-2 rounded-0">
-                            Se connecter
+                            {submitting ? <Spinner size="sm"/> : "Se connecter"}
                         </Button>
                     </Form>
                 </Stack>
