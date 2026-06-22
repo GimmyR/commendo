@@ -10,7 +10,7 @@ export default function NavigationBar() {
                 <Navbar.Brand className="text-light fw-bold">Commendo</Navbar.Brand>
                 <LargeSearchButton/>
                 <Stack direction="horizontal" gap={3}>
-                    <IconLink to="#" icon="search" linkClass="d-inline d-lg-none" iconClass="cmd-btn fs-5"/>
+                    <IconLink to="#" icon="search" linkClass="d-inline d-md-none" iconClass="cmd-btn fs-5"/>
                     <IconLink to="#" icon="person-circle" iconClass="user-btn cmd-btn"/>
                 </Stack>
             </Container>
