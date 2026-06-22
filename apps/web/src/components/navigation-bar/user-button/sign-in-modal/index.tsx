@@ -1,7 +1,7 @@
 import { Alert, Button, Form, Modal, Stack } from "react-bootstrap";
 import SignInInputGroup from "./sign-in-input-group";
 import useSignInModal from "../../../../libs/hooks/use-sign-in-modal";
-import { cmdFetch } from "../../../../libs/utils/fetch";
+import { signIn } from "../../../../libs/actions/account";
 
 type Props = {
     isShown: boolean;
@@ -12,15 +12,9 @@ export default function SignInModal({ isShown, close } : Props) {
     const {account, error, setUsername, setPassword, resetAccount, setError} = useSignInModal();
 
     const handleSignIn = async () => {
+        setError(undefined);
         try {
-            const result = await cmdFetch("/account/sign-in", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(account)
-            });
-
+            const result = await signIn(account);
             console.log(result);
         } catch(error) {
             setError(error.message);
