@@ -1,0 +1,4 @@
+.menu .btn-close:active, .menu .btn-close:focus {
+    border: none !important;
+    box-shadow: none !important;
+}

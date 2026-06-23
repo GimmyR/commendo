@@ -8,6 +8,8 @@ type Props = {
 
 export default function MenuItem({ to, title } : Props) {
     return (
-        <NavLink to={to} className="text-secondary text-decoration-none menu-item">{title}</NavLink>
+        <NavLink to={to} className="text-secondary text-decoration-none menu-item border-bottom px-1 py-3">
+            {title}
+        </NavLink>
     );
 }
