@@ -25,7 +25,7 @@ export class CreateLanguage extends RequestDto {
     }
 }
 
-export class LanguageItem {
+export class Language {
     id!: number;
     name!: string;
     abbrev!: string;
