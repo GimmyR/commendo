@@ -1,0 +1,4 @@
+.menu-item.active {
+    font-weight: bold;
+    color: rgb(0, 165, 27) !important;
+}
