@@ -13,7 +13,7 @@ export default function UserButtonMenu() {
             </Dropdown.Item>
             <SignedIn>
                 <Dropdown.Divider/>
-                <Dropdown.Item className="text-center">Settings</Dropdown.Item>
+                <Dropdown.Item className="text-center">Paramètres</Dropdown.Item>
                 <Dropdown.Divider/>
                 <Dropdown.Item className="cmd-dropdown-item">
                     <SignOutButton/>
