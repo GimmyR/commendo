@@ -9,8 +9,8 @@ interface JwtPayload {
 }
 
 interface IAuth {
-    token: string;
-    account: JwtPayload;
+    token: string | null;
+    account: JwtPayload | null;
     login: (token: string) => void;
     logout: () => void;
 }

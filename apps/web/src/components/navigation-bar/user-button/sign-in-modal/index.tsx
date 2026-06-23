@@ -19,7 +19,7 @@ export default function SignInModal({ isShown, close } : Props) {
             const result = await signIn(credentials);
             login(result.access_token);
             handleClose();
-        } catch(error) {
+        } catch(error: any) {
             setError(error.message);
         } finally {
             setSubmitting(false);

@@ -2,10 +2,12 @@ import { useAuth } from "@/libs/hooks/use-auth";
 import type { SignUp } from "@repo/shared";
 import { useState, type ChangeEvent } from "react";
 
-const credentialsPlaceholder: Partial<SignUp> = { username: "", password: "" };
+type ISignUp = Omit<Pick<SignUp, keyof SignUp>, "validate">;
+
+const credentialsPlaceholder: ISignUp = { username: "", password: "" };
 
 export default function useSignInModal() {
-    const [credentials, setCredentials] = useState<Partial<SignUp>>(credentialsPlaceholder);
+    const [credentials, setCredentials] = useState<ISignUp>(credentialsPlaceholder);
     const [error, setError] = useState<string | undefined>();
     const login = useAuth((state) => state.login);
     const [submitting, setSubmitting] = useState<boolean>(false);
