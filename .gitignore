@@ -35,3 +35,6 @@ apps/api/resources
 *.njsproj
 *.sln
 *.sw?
+
+# Personal notes
+tmp.txt
