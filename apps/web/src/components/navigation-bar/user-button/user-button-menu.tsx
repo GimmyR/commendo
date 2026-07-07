@@ -8,7 +8,7 @@ import SignOutButton from "@/components/navigation-bar/user-button/sign-out-butt
 export default function UserButtonMenu() {
     return (
         <Dropdown.Menu>
-            <Dropdown.Item className="cmd-dropdown-item">
+            <Dropdown.Item className="cmd-dropdown-item" onClick={(e) => e.stopPropagation()}>
                 <LanguageSelect/>
             </Dropdown.Item>
             <SignedIn>
