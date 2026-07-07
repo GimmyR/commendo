@@ -6,7 +6,7 @@ import { LangService } from 'src/lang/lang.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { RoleWithNames } from 'src/role/role.entity';
 import { RoleService } from 'src/role/role.service';
-import { struct_admin, struct_languages, struct_roles } from 'struct.data';
+import { struct_admin, struct_languages, struct_roles } from '@/struct.data';
 
 @Injectable()
 export class SeederService implements OnModuleInit {
