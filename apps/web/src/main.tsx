@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
 import Home from './components/home';
 import Layout from './components/layout';
+import "./i18n";
 
 const router = createBrowserRouter([{
     path: "/",

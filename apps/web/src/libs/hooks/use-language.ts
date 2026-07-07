@@ -1,19 +1,27 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import i18n from "@/i18n";
 
 interface ILang {
-    id: number | null;
-    select: (id: number) => void;
+    lang: string;
+    select: (newLang: string) => void;
 }
 
 export const useLanguage = create<ILang>()(
     persist(
         (set) => ({
-            id: null,
-            select(id: number) {
-                set({ id })
+            lang: "fr",
+            select(newLang: string) {
+                set({ lang: newLang });
+                i18n.changeLanguage(newLang);
             },
         }),
-        { name: "language-store" }
+        { 
+            name: "language-store",
+            onRehydrateStorage: () => (state) => {
+                if(state)
+                    i18n.changeLanguage(state.lang)
+            }
+        }
     )
 );
