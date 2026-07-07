@@ -4,17 +4,21 @@ import frLargeSearchButton from "./locales/fr/large-search-button.json";
 import engLargeSearchButton from "./locales/eng/large-search-button.json";
 import frUserButtonMenu from "./locales/fr/user-button-menu.json";
 import engUserButtonMenu from "./locales/eng/user-button-menu.json";
+import frMenu from "./locales/fr/menu.json";
+import engMenu from "./locales/eng/menu.json";
 
 i18n.use(initReactI18next)
     .init({
         resources: {
             fr: {
                 largeSearchButton: frLargeSearchButton,
-                userButtonMenu: frUserButtonMenu
+                userButtonMenu: frUserButtonMenu,
+                menu: frMenu
             },
             eng: {
                 largeSearchButton: engLargeSearchButton,
-                userButtonMenu: engUserButtonMenu
+                userButtonMenu: engUserButtonMenu,
+                menu: engMenu
             }
         },
         fallbackLng: "fr",
