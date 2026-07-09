@@ -20,6 +20,7 @@ model Lang {
 
 model Role {
     id            Int           @id @default(autoincrement())
+    type          Int           @unique
     names         RoleName[]
     accounts      Account[]
     active        Boolean       @default(true)
