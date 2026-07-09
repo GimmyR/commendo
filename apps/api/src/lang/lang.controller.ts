@@ -30,7 +30,7 @@ export class LangController {
 
     @Post()
     @UseInterceptors(new ValidationInterceptor(CreateLanguage))
-    @Roles({ name: "Admin", langAbbrev: "fr" })
+    @Roles(1)
     @UseGuards(AccountGuard, RoleGuard)
     @ApiOperation({ summary: "Create language with his name" })
     @ApiBody(CreateLanguageDoc)
