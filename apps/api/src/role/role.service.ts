@@ -14,6 +14,7 @@ export class RoleService {
         if(roles.length == 0)
             return await this.prisma.role.create({
                 data: {
+                    type: role.type,
                     names: {
                         create: {
                             name: role.name,
@@ -30,6 +31,12 @@ export class RoleService {
             return roles[0];
 
         else throw new InternalServerErrorException(`Too many role names found for : ${role}`);
+    }
+
+    async getUniqueByType(type: number) {
+        return await this.prisma.role.findUnique({
+            where: { type }
+        });
     }
 
     async getByRoleNameAndLangId(role: CreateRole) {
