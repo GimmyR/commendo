@@ -1,17 +1,14 @@
 import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { CreateRoleWithLangAbbrev } from '@repo/shared';
-import { RoleService } from 'src/role/role.service';
 
 @Injectable()
 export class RoleGuard implements CanActivate {
     constructor(
-        private reflector: Reflector,
-        private readonly roleServ: RoleService
+        private reflector: Reflector
     ) {}
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
-        const requiredRoles = this.reflector.get<CreateRoleWithLangAbbrev[]>("roles", context.getHandler());
+        const requiredRoles = this.reflector.get<number[]>("roles", context.getHandler());
 
         if(!requiredRoles) return true;
 
@@ -19,9 +16,7 @@ export class RoleGuard implements CanActivate {
         const roles: number[] = request["user"].roles;
 
         for(const required of requiredRoles) {
-            const role = await this.roleServ.getUniqueByRoleNameAndLangAbbrev(required);
-            
-            if(role && roles.includes(role.id))
+            if(roles.includes(required))
                 return true;
         }
 
