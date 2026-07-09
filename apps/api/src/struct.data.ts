@@ -6,7 +6,7 @@ export const struct_languages: CreateLanguage[] = [
 ];
 
 export const struct_roles: CreateRoleWithLangAbbrev[] = [
-    { name: "Admin", langAbbrev: "fr" }
+    { type: 1, name: "Admin", langAbbrev: "fr" }
 ];
 
 export const struct_admin: CreateAccountWithRoleAndLangAbbrev = {
