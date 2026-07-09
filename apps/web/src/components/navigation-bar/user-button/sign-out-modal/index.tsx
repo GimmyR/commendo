@@ -1,5 +1,6 @@
 import { useAuth } from "@/libs/hooks/use-auth";
 import { Button, Modal } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     isShown: boolean;
@@ -7,6 +8,7 @@ type Props = {
 };
 
 export default function SignOutModal({ isShown, close } : Props) {
+    const { t } = useTranslation("signOutModal");
     const logout = useAuth((state) => state.logout);
 
     const confirm = () => {
@@ -19,11 +21,11 @@ export default function SignOutModal({ isShown, close } : Props) {
     return (
         <Modal show={isShown} onHide={close}>
             <Modal.Body className="text-center">
-                Tu es sûr de vouloir te déconnecter ?
+                {t("message")}
             </Modal.Body>
             <Modal.Footer className="justify-content-center">
-                <Button variant="secondary" onClick={close} className="col-5">Annuler</Button>
-                <Button variant="danger" onClick={confirm} className="col-5">Confirmer</Button>
+                <Button variant="secondary" onClick={close} className="col-5">{t("cancel")}</Button>
+                <Button variant="danger" onClick={confirm} className="col-5">{t("confirm")}</Button>
             </Modal.Footer>
         </Modal>
     );
