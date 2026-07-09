@@ -2,6 +2,7 @@ import { Alert, Button, Form, Modal, Spinner, Stack } from "react-bootstrap";
 import SignInInputGroup from "./sign-in-input-group";
 import { signIn } from "@/libs/actions/account";
 import useSignInModal from "@/libs/hooks/use-sign-in-modal";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     isShown: boolean;
@@ -9,6 +10,7 @@ type Props = {
 };
 
 export default function SignInModal({ isShown, close } : Props) {
+    const { t } = useTranslation("signInModal");
     const { credentials, error, submitting, setUsername, setPassword, resetAccount, setError, login, setSubmitting } = useSignInModal();
 
     const handleSignIn = async () => {
@@ -38,13 +40,13 @@ export default function SignInModal({ isShown, close } : Props) {
         <Modal show={isShown} onHide={handleClose} centered>
             <Modal.Body className="py-5">
                 <Stack direction="vertical" className="align-items-center pb-3">
-                    <h1 className="text-center fs-4 mb-4">Connexion</h1>
+                    <h1 className="text-center fs-4 mb-4">{t("login")}</h1>
                     {error && <Alert variant="danger" className="col-10 col-md-8 mb-4 py-1 rounded-0">{error}</Alert>}
                     <Form className="col-10 col-md-8">
-                        <SignInInputGroup icon="person" type="text" value={credentials.username} onChange={setUsername} placeholder="Nom d'utilisateur"/>
-                        <SignInInputGroup icon="lock" type="password" value={credentials.password} onChange={setPassword} placeholder="Mot de passe"/>
+                        <SignInInputGroup icon="person" type="text" value={credentials.username} onChange={setUsername} placeholder={t("username")}/>
+                        <SignInInputGroup icon="lock" type="password" value={credentials.password} onChange={setPassword} placeholder={t("password")}/>
                         <Button onClick={handleSignIn} variant="success" className="col-12 mt-2 rounded-0">
-                            {submitting ? <Spinner size="sm"/> : "Se connecter"}
+                            {submitting ? <Spinner size="sm"/> : t("sign-in")}
                         </Button>
                     </Form>
                 </Stack>
