@@ -1,7 +1,8 @@
 import { CreateAccountWithRoleAndLangAbbrev, CreateLanguage, CreateRoleWithLangAbbrev } from "@repo/shared";
 
 export const struct_languages: CreateLanguage[] = [
-    new CreateLanguage({ name: "Français", abbrev: "fr" })
+    new CreateLanguage({ name: "Français", abbrev: "fr" }),
+    new CreateLanguage({ name: "English", abbrev: "eng" }),
 ];
 
 export const struct_roles: CreateRoleWithLangAbbrev[] = [
