@@ -63,7 +63,7 @@ export class AccountService {
         const payload = {
             sub: account.id,
             name: account.username,
-            roles: account.roles.map(role => role.id)
+            roles: account.roles.map(role => role.type)
         };
 
         return {
