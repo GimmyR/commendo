@@ -80,6 +80,7 @@ export class EditPassword extends RequestDto {
 //==================== ROLE =========================
 
 export class CreateRole extends RequestDto {
+    type!: number;
     langId!: number;
     name!: string;
 
@@ -91,6 +92,8 @@ export class CreateRole extends RequestDto {
     validate(): string[] {
         const errors: string[] = [];
 
+        if(!isDefined(this.type)) errors.push("Role type is missing")
+        if(!isPositive(this.type)) errors.push("Role type should be a positive number");
         if(!isDefined(this.langId)) errors.push("Language ID is missing");
         if(!isPositive(this.langId)) errors.push("Language ID should be a positive number");
         if(isEmpty(this.name)) errors.push("Name is missing");
@@ -100,6 +103,7 @@ export class CreateRole extends RequestDto {
 }
 
 export class CreateRoleWithLangAbbrev {
+    type!: number;
     name!: string;
     langAbbrev!: string;
 }
