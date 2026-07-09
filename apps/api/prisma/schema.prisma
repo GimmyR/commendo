@@ -12,14 +12,14 @@ model Lang {
     name          String        @unique @db.VarChar(20)
     abbrev        String        @unique @db.VarChar(10)
     roleNames     RoleName[]
-    @@map("lang")
+    @@map("cmd_lang")
 }
 
 model Role {
     id            Int           @id @default(autoincrement())
     names         RoleName[]
     accounts      Account[]
-    @@map("role")
+    @@map("cmd_role")
 }
 
 model RoleName {
@@ -29,7 +29,7 @@ model RoleName {
     role          Role          @relation(fields: [roleId], references: [id], onDelete: Cascade)
     lang          Lang          @relation(fields: [langId], references: [id], onDelete: Cascade)
     @@id([roleId, langId])
-    @@map("role_name")
+    @@map("cmd_role_name")
 }
 
 model Account {
@@ -37,5 +37,5 @@ model Account {
     username      String        @unique @db.VarChar(50)
     password      String        @db.Char(60)
     roles         Role[]
-    @@map("account")
+    @@map("cmd_account")
 }
