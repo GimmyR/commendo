@@ -10,8 +10,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5hbWUiO
 Content-Type: application/json
 
 {
-    "name": "English",
-    "abbrev": "eng"
+    "name": "Malagasy",
+    "abbrev": "mg"
 }
 
 ### POST create account
