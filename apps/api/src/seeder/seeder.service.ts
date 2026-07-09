@@ -55,18 +55,12 @@ export class SeederService implements OnModuleInit {
             if(!role || !role.name || !role.langAbbrev)
                 throw new InternalServerErrorException(`Struct data (role) is invalid : ${role}`);
 
-            return await this.roleServ.create(new CreateRole({ name: role.name, langId: lang.id }));
+            return await this.roleServ.create(new CreateRole({ type: role.type, name: role.name, langId: lang.id }));
         }));
     }
 
     private async seedAdmin(roles: RoleWithNames[], languages: Lang[]) {
-        const role = roles.find(r => {
-            const lang = languages.find(l => l.abbrev == struct_admin.role.langAbbrev);
-            const rolename = r.names.find(name => name.name == struct_admin.role.name && name.langId == lang?.id);
-            
-            if(rolename)
-                return r;
-        });
+        const role = roles.find(r => r.type == struct_admin.role.type);
 
         if(!role) throw new InternalServerErrorException(`Struct data (roles) not found : ${struct_admin.role}`);
 
