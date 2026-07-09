@@ -5,6 +5,7 @@ export const CreateLanguageDoc: ApiBodyOptions = {
         title: "CreateLanguage",
         type: "object",
         properties: {
+            type: { type: "number", example: 1 },
             name: { type: "string", example: "English" },
             abbrev: { type: "string", example: "eng" }
         },
