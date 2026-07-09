@@ -8,10 +8,13 @@ datasource db {
 }
 
 model Lang {
-    id            Int           @id @default(autoincrement())
-    name          String        @unique @db.VarChar(20)
-    abbrev        String        @unique @db.VarChar(10)
-    roleNames     RoleName[]
+    id                  Int                     @id @default(autoincrement())
+    name                String                  @unique @db.VarChar(20)
+    abbrev              String                  @unique @db.VarChar(10)
+    roleNames           RoleName[]
+    dishNames           DishName[]
+    ingredientNames     IngredientName[]
+    active              Boolean                 @default(true)
     @@map("cmd_lang")
 }
 
@@ -19,6 +22,7 @@ model Role {
     id            Int           @id @default(autoincrement())
     names         RoleName[]
     accounts      Account[]
+    active        Boolean       @default(true)
     @@map("cmd_role")
 }
 
@@ -36,6 +40,91 @@ model Account {
     id            Int           @id @default(autoincrement())
     username      String        @unique @db.VarChar(50)
     password      String        @db.Char(60)
+    firstname     String?       @db.VarChar(30)
+    lastname      String?       @db.VarChar(20)
+    address       String?
+    email         String?       @unique @db.VarChar(254)
+    phoneNumber   String?       @unique @db.VarChar(30)
     roles         Role[]
+    active        Boolean       @default(true)
     @@map("cmd_account")
+}
+
+model Dish {
+    id                  Int             @id @default(autoincrement())
+    names               DishName[]
+    price               Float
+    ingredients         DishIngredient[]
+    orders              Order[]
+    active              Boolean         @default(true)
+    @@map("cmd_dish")
+}
+
+model DishName {
+    dishId      Int
+    langId      Int
+    name        String          @unique @db.VarChar(50)
+    dish        Dish            @relation(fields: [dishId], references: [id], onDelete: Cascade)
+    lang        Lang            @relation(fields: [langId], references: [id], onDelete: Cascade)
+    active      Boolean         @default(true)
+    @@id([dishId, langId])
+    @@map("cmd_dish_name")
+}
+
+model Ingredient {
+    id          Int                     @id @default(autoincrement())
+    names       IngredientName[]
+    unit        String                  @db.VarChar(10)
+    dishes      DishIngredient[]
+    movements   IngredientMovement[]
+    active      Boolean                 @default(true)
+    @@map("cmd_ingredient")
+}
+
+model IngredientName {
+    ingredientId        Int
+    langId              Int
+    name                String          @unique @db.VarChar(50)
+    ingredient          Ingredient      @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+    lang                Lang            @relation(fields: [langId], references: [id], onDelete: Cascade)
+    @@id([ingredientId, langId])
+    @@map("cmd_ingredient_name")
+}
+
+model DishIngredient {
+    dishId              Int
+    dish                Dish            @relation(fields: [dishId], references: [id], onDelete: Cascade)
+    ingredientId        Int
+    ingredient          Ingredient      @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+    quantity            Float
+    @@id([dishId, ingredientId])
+    @@map("cmd_dish_ingredient")
+}
+
+model Table {
+    id                  Int             @id @default(autoincrement())
+    tableRef            String          @unique @db.Char(2)
+    availability        Int             // 0: unavailable | 1: available | 2: occupied
+    orders              Order[]
+    @@map("cmd_table")
+}
+
+model Order {
+    id                  Int             @id @default(autoincrement())
+    dishId              Int
+    dish                Dish            @relation(fields: [dishId], references: [id], onDelete: Cascade)
+    tableId             Int
+    table               Table           @relation(fields: [tableId], references: [id], onDelete: Cascade)
+    status              Int             // 1: to do | 2: in progress | 3: done | 4: archived
+    @@map("cmd_order")
+}
+
+model IngredientMovement {
+    id                  Int             @id @default(autoincrement())
+    ingredientId        Int
+    ingredient          Ingredient      @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+    type                Int             // -1: used for a dish | 1: restock
+    quantity            Float
+    purchasePrice       Float
+    @@map("cmd_ingredient_movement")
 }
