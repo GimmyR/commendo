@@ -4,7 +4,6 @@ import { LangService } from 'src/lang/lang.service';
 
 @Controller('lang')
 @ApiTags("lang")
-@ApiBearerAuth("access-token")
 export class LangController {
     constructor(
         private readonly langServ: LangService
