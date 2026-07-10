@@ -4,7 +4,7 @@ import * as bcrypt from "bcrypt";
 import { Account, Role } from '@prisma/client';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
-import { EditPassword, SignUp } from '@repo/shared';
+import { EditPassword, SignIn } from '@repo/shared';
 
 @Injectable()
 export class AccountService {
@@ -32,7 +32,7 @@ export class AccountService {
         });
     }
 
-    async create(account: SignUp, roleId?: number) {
+    async create(account: SignIn, roleId?: number) {
         const user = await this.findByUsername(account.username);
 
         if(user) throw new ConflictException(`Account with username as '${account.username}' already exists`);
