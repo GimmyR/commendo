@@ -31,7 +31,7 @@ describe("Test Testcontainers with PostgreSQL", () => {
 
     it("Should confirm struct data exists in test database", async () => {
         const countLang = await prisma.lang.count();
-        expect(countLang).toBe(1);
+        expect(countLang).toBe(2);
         const countRole = await prisma.role.count();
         expect(countRole).toBe(1);
         const countAccount = await prisma.account.count();
