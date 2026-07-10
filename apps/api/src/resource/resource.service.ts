@@ -16,7 +16,7 @@ export class ResourceService implements OnModuleInit {
         try {
             fs.mkdirSync(resourcePath, { recursive: true });
             this.logger.log("Folder to store resources has been successfully created or already exists");
-        } catch(error) {
+        } catch(error: any) {
             this.logger.error(
                 `Cannot create folder to store resources at ${resourcePath}`,
                 error.stack
