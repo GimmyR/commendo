@@ -33,11 +33,11 @@ export class Language {
 
 //====================== ACCOUNT ===========================
 
-export class SignUp extends RequestDto {
+export class SignIn extends RequestDto {
     username!: string;
     password!: string;
 
-    constructor(account: Partial<SignUp>) {
+    constructor(account: Partial<SignIn>) {
         super();
         Object.assign(this, account);
     }

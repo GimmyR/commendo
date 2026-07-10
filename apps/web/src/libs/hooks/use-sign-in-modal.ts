@@ -1,13 +1,13 @@
 import { useAuth } from "@/libs/hooks/use-auth";
-import type { SignUp } from "@repo/shared";
+import type { SignIn } from "@repo/shared";
 import { useState, type ChangeEvent } from "react";
 
-type ISignUp = Omit<Pick<SignUp, keyof SignUp>, "validate">;
+type ISignIn = Omit<Pick<SignIn, keyof SignIn>, "validate">;
 
-const credentialsPlaceholder: ISignUp = { username: "", password: "" };
+const credentialsPlaceholder: ISignIn = { username: "", password: "" };
 
 export default function useSignInModal() {
-    const [credentials, setCredentials] = useState<ISignUp>(credentialsPlaceholder);
+    const [credentials, setCredentials] = useState<ISignIn>(credentialsPlaceholder);
     const [error, setError] = useState<string | undefined>();
     const login = useAuth((state) => state.login);
     const [submitting, setSubmitting] = useState<boolean>(false);

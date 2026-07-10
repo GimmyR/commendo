@@ -1,5 +1,5 @@
 import { Body, Controller, Patch, Post, Req, UnauthorizedException, UseGuards, UseInterceptors } from '@nestjs/common';
-import { EditPassword, SignUp } from '@repo/shared';
+import { EditPassword, SignIn } from '@repo/shared';
 import type { Request } from 'express';
 import { AccountGuard } from 'src/account/account.guard';
 import { SignInInterceptor } from 'src/account/account.interceptor';
@@ -12,15 +12,9 @@ export class AccountController {
         private readonly accountServ: AccountService
     ) {}
 
-    @Post("sign-up")
-    @UseInterceptors(new ValidationInterceptor(SignUp))
-    async signUp(@Body() account: SignUp) {
-        return await this.accountServ.create(account);
-    }
-
     @Post("sign-in")
-    @UseInterceptors(new ValidationInterceptor(SignUp), SignInInterceptor)
-    async signIn(@Body() account: SignUp) {
+    @UseInterceptors(new ValidationInterceptor(SignIn), SignInInterceptor)
+    async signIn(@Body() account: SignIn) {
         const user = await this.accountServ.findByUsername(account.username);
 
         if(!user || !(await this.accountServ.comparePasswords(account.password, user.password)))
