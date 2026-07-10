@@ -44,7 +44,11 @@ export class DishService {
                 names: true,
                 ingredients: {
                     include: {
-                        ingredient: true
+                        ingredient: {
+                            include: {
+                                names: true
+                            }
+                        }
                     }
                 }
             }
