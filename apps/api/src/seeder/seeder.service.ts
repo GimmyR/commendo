@@ -1,6 +1,6 @@
 import { Injectable, InternalServerErrorException, OnModuleInit } from '@nestjs/common';
 import { Lang } from '@prisma/client';
-import { CreateRole, SignUp } from '@repo/shared';
+import { CreateRole, SignIn } from '@repo/shared';
 import { AccountService } from 'src/account/account.service';
 import { LangService } from 'src/lang/lang.service';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -64,7 +64,7 @@ export class SeederService implements OnModuleInit {
 
         if(!role) throw new InternalServerErrorException(`Struct data (roles) not found : ${struct_admin.role}`);
 
-        return await this.accountServ.create(new SignUp({
+        return await this.accountServ.create(new SignIn({
             username: struct_admin.username,
             password: struct_admin.password
         }), role.id);
