@@ -6,8 +6,9 @@ import { RoleModule } from './role/role.module';
 import { SeederModule } from './seeder/seeder.module';
 import { ResourceModule } from './resource/resource.module';
 import { CleanerModule } from './cleaner/cleaner.module';
+import { DishModule } from './dish/dish.module';
 
 @Module({
-  imports: [LangModule, PrismaModule, AccountModule, RoleModule, SeederModule, ResourceModule, CleanerModule],
+  imports: [LangModule, PrismaModule, AccountModule, RoleModule, SeederModule, ResourceModule, CleanerModule, DishModule],
 })
 export class AppModule {}

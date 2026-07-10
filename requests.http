@@ -50,3 +50,6 @@ Content-Type: application/json
     "username": "admin",
     "password": "pwdAdmin"
 }
+
+### GET find all dishes
+GET http://localhost:8000/api/dish?lang=fr&page=1&limit=4
