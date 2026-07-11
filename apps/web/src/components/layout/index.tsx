@@ -6,7 +6,7 @@ export default function Layout() {
     return (
         <>
             <NavigationBar/>
-            <Container fluid>
+            <Container fluid className="p-5">
                 <Outlet/>
             </Container>
         </>
