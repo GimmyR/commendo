@@ -6,7 +6,7 @@ type Props = {
     dish: DishWithIngredients
 };
 
-export default function Dish({ dish } : Props) {
+export default function DishItem({ dish } : Props) {
     const [active, setActive] = useState<boolean>(false);
 
     const handleHover = () => setActive(true);

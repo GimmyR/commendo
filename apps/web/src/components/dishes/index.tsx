@@ -1,4 +1,4 @@
-import Dish from "@/components/dishes/dish";
+import DishItem from "@/components/dishes/dish-item";
 import Pages from "@/components/pagination";
 import useDishes from "@/libs/hooks/use-dishes";
 import { Col, Row, Spinner } from "react-bootstrap";
@@ -14,7 +14,7 @@ export default function Dishes() {
             <Col>
                 <div className="d-flex flex-wrap mb-5">
                     {dishes.map(dish => <div key={dish.id} className="col-12 col-sm-6 col-xl-3 p-3">
-                        <Dish dish={dish}/>
+                        <DishItem dish={dish}/>
                     </div>)}
                 </div>
                 <div className="d-flex flex-row justify-content-center">
