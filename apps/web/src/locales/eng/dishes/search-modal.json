@@ -1,0 +1,8 @@
+{
+    "header": "Search dish",
+    "dishName": "Dish name",
+    "dishMinPrice": "Minimum price",
+    "dishMaxPrice": "Maximum price",
+    "reset": "Reset",
+    "submit": "Submit"
+}

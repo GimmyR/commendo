@@ -10,6 +10,8 @@ import frSignOutModal from "./locales/fr/sign-out-modal.json";
 import engSignOutModal from "./locales/eng/sign-out-modal.json";
 import frSignInModal from "./locales/fr/sign-in-modal.json";
 import engSignInModal from "./locales/eng/sign-in-modal.json";
+import frSearchDishModal from "./locales/fr/dishes/search-modal.json";
+import engSearchDishModal from "./locales/eng/dishes/search-modal.json";
 
 i18n.use(initReactI18next)
     .init({
@@ -19,14 +21,16 @@ i18n.use(initReactI18next)
                 userButtonMenu: frUserButtonMenu,
                 menu: frMenu,
                 signOutModal: frSignOutModal,
-                signInModal: frSignInModal
+                signInModal: frSignInModal,
+                searchDishModal: frSearchDishModal
             },
             eng: {
                 largeSearchButton: engLargeSearchButton,
                 userButtonMenu: engUserButtonMenu,
                 menu: engMenu,
                 signOutModal: engSignOutModal,
-                signInModal: engSignInModal
+                signInModal: engSignInModal,
+                searchDishModal: engSearchDishModal
             }
         },
         fallbackLng: "fr",

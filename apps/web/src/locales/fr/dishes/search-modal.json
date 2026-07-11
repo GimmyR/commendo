@@ -1,0 +1,8 @@
+{
+    "header": "Rechercher un plat",
+    "dishName": "Nom du plat",
+    "dishMinPrice": "Prix minimum",
+    "dishMaxPrice": "Prix maximum",
+    "reset": "Réinitialiser",
+    "submit": "Chercher"
+}
