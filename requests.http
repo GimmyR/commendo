@@ -52,4 +52,4 @@ Content-Type: application/json
 }
 
 ### GET find all dishes
-GET http://localhost:8000/api/dish?lang=eng&page=1&limit=4
+GET http://localhost:8000/api/dish?lang=eng&page=1&limit=4&filter=name:contains:maza;price:gte:10000;price:lte:20000
