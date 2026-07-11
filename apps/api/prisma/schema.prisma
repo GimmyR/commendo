@@ -64,7 +64,7 @@ model Dish {
 model DishName {
     dishId      Int
     langId      Int
-    name        String          @unique @db.VarChar(50)
+    name        String          @db.VarChar(50)
     dish        Dish            @relation(fields: [dishId], references: [id], onDelete: Cascade)
     lang        Lang            @relation(fields: [langId], references: [id], onDelete: Cascade)
     active      Boolean         @default(true)
@@ -85,7 +85,7 @@ model Ingredient {
 model IngredientName {
     ingredientId        Int
     langId              Int
-    name                String          @unique @db.VarChar(50)
+    name                String          @db.VarChar(50)
     ingredient          Ingredient      @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
     lang                Lang            @relation(fields: [langId], references: [id], onDelete: Cascade)
     @@id([ingredientId, langId])
