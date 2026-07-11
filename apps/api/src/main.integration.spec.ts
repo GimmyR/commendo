@@ -1,22 +1,17 @@
 import { INestApplication } from "@nestjs/common";
-import { CleanerService } from "src/cleaner/cleaner.service";
 import { PrismaService } from "src/prisma/prisma.service";
 import { initIntegrationTest } from "src/test.helper";
 
 describe("Test Testcontainers with PostgreSQL", () => {
     let app: INestApplication;
     let prisma: PrismaService;
-    let cleaner: CleanerService;
 
     beforeAll(async () => {
         app = await initIntegrationTest();
         prisma = app.get<PrismaService>(PrismaService);
-        cleaner = app.get<CleanerService>(CleanerService);
     });
 
     afterAll(async () => {
-        await cleaner.reinitDatabase();
-
         if(prisma)
             await prisma.$disconnect();
 

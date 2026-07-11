@@ -1,4 +1,4 @@
-import { CleanerService } from "@/cleaner/cleaner.service";
+import { PrismaService } from "@/prisma/prisma.service";
 import { initIntegrationTest } from "@/test.helper";
 import { HttpStatus, INestApplication } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
@@ -7,20 +7,21 @@ import { EditPassword, SignIn } from "@repo/shared";
 describe("Test AccountController", () => {
     let app: INestApplication;
     let apiURL: string;
-    let cleaner: CleanerService;
+    let prisma: PrismaService;
     let jwtService: JwtService;
     let mockToken: string;
 
     beforeAll(async () => {
         app = await initIntegrationTest();
         apiURL = await app.getUrl();
-        cleaner = app.get<CleanerService>(CleanerService);
+        prisma = app.get<PrismaService>(PrismaService);
         jwtService = app.get<JwtService>(JwtService);
         mockToken = jwtService.sign({ sub: 1, name: "admin", roles: [1] });
     });
 
     afterAll(async () => {
-        await cleaner.reinitDatabase();
+        if(prisma)
+            await prisma.$disconnect();
 
         if(app)
             await app.close();

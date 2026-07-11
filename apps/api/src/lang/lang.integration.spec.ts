@@ -1,20 +1,21 @@
+import { PrismaService } from "@/prisma/prisma.service";
 import { HttpStatus, INestApplication } from "@nestjs/common";
-import { CleanerService } from "src/cleaner/cleaner.service";
 import { initIntegrationTest } from "src/test.helper";
 
 describe("Test LangController", () => {
     let app: INestApplication;
     let apiURL: string;
-    let cleaner: CleanerService;
+    let prisma: PrismaService;
 
     beforeAll(async () => {
         app = await initIntegrationTest();
         apiURL = await app.getUrl();
-        cleaner = app.get<CleanerService>(CleanerService);
+        prisma = app.get<PrismaService>(PrismaService);
     });
 
     afterAll(async () => {
-        await cleaner.reinitDatabase();
+        if(prisma)
+            await prisma.$disconnect();
 
         if(app)
             await app.close();
