@@ -6,9 +6,12 @@ import UserButton from "./user-button";
 import SignedIn from "@/components/signed-in";
 import Menu from "@/components/menu";
 import useNavigationBar from "@/libs/hooks/use-navigation-bar";
+import { useSearch } from "@/libs/hooks/use-search";
 
 export default function NavigationBar() {
     const {show, handleShow, handleClose} = useNavigationBar();
+    const setShow = useSearch((state) => state.setShow);
+    const handleShowSearchModal = () => setShow(true);
 
     return (
         <>
@@ -20,9 +23,9 @@ export default function NavigationBar() {
                         </SignedIn>
                         <Navbar.Brand className="text-light fw-bold">Commendo</Navbar.Brand>
                     </Stack>
-                    <LargeSearchButton/>
+                    <LargeSearchButton onClick={handleShowSearchModal}/>
                     <Stack direction="horizontal" gap={3}>
-                        <IconLink to="#" icon="search" linkClass="d-inline d-md-none" iconClass="cmd-btn fs-5"/>
+                        <IconLink to="#" onClick={handleShowSearchModal} icon="search" linkClass="d-inline d-md-none" iconClass="cmd-btn fs-5"/>
                         <UserButton/>
                     </Stack>
                 </Container>
