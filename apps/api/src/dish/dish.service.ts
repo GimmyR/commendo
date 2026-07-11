@@ -18,35 +18,25 @@ export class DishService {
             orderBy: {
                 id: "asc"
             },
-            where: {
+            include: {
                 names: {
-                    some: {
+                    where: {
                         lang: {
                             abbrev: language
                         }
                     }
                 },
                 ingredients: {
-                    some: {
-                        ingredient: {
-                            names: {
-                                some: {
-                                    lang: {
-                                        abbrev: language
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            include: {
-                names: true,
-                ingredients: {
                     include: {
                         ingredient: {
                             include: {
-                                names: true
+                                names: {
+                                    where: {
+                                        lang: {
+                                            abbrev: language
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
