@@ -1,4 +1,5 @@
 import { DishService } from '@/dish/dish.service';
+import { type Pagination, PaginationPipe } from '@/pagination/pagination.pipe';
 import { Controller, Get, HttpStatus, ParseIntPipe, Query } from '@nestjs/common';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
@@ -18,9 +19,8 @@ export class DishController {
     @ApiResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: "Unknown error" })
     async findAll(
         @Query("lang") language: string, 
-        @Query("page", new ParseIntPipe({ errorHttpStatusCode: HttpStatus.BAD_REQUEST, optional: true })) page: number, 
-        @Query("limit", new ParseIntPipe({ errorHttpStatusCode: HttpStatus.BAD_REQUEST, optional: true })) limit: number
+        @Query(PaginationPipe) pagination: Pagination
     ) {
-        return await this.dishServ.findAll(language, page, limit);
+        return await this.dishServ.findAll(language, pagination);
     }
 }
