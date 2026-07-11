@@ -4,6 +4,13 @@ import { isEmpty } from "class-validator";
 
 export class FilterDishPipe implements PipeTransform {
     transform(value: string, metadata: ArgumentMetadata): Prisma.DishWhereInput {
+        if(isEmpty(value))
+            return {};
+
+        return this.buildFilter(value);
+    }
+
+    private buildFilter(value: string): Prisma.DishWhereInput {
         const conditions = value.split(";");
         const priceCond = {};
         const nameCond = {
