@@ -12,7 +12,7 @@ export default function NavigationBar() {
 
     return (
         <>
-            <Navbar className="bg-success">
+            <Navbar className="bg-success fixed-top">
                 <Container fluid className="justify-content-between">
                     <Stack direction="horizontal" gap={2}>
                         <SignedIn>
