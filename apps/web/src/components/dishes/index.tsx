@@ -1,5 +1,6 @@
 import DishItem from "@/components/dishes/dish-item";
 import DishModal from "@/components/dishes/dish-modal";
+import SearchDishModal from "@/components/dishes/search-modal";
 import Pages from "@/components/pagination";
 import useDishes from "@/libs/hooks/use-dishes";
 import { DishWithIngredients } from "@repo/shared";
@@ -7,7 +8,7 @@ import { useState } from "react";
 import { Col, Row, Spinner } from "react-bootstrap";
 
 export default function Dishes() {
-    const {loadingDishes, dishes, pages, currPage, setCurrPage} = useDishes();
+    const {loadingDishes, dishes, pages, currPage, filter, setCurrPage, setFilter} = useDishes();
     const [showDishModal, setShowDishModal] = useState<boolean>(false);
     const [selectedDish, setSelectedDish] = useState<DishWithIngredients>();
 
@@ -15,6 +16,7 @@ export default function Dishes() {
         setSelectedDish(dish);
         setShowDishModal(true);
     };
+
     const handleHideDishModal = () => setShowDishModal(false);
 
     if(loadingDishes)
@@ -32,6 +34,7 @@ export default function Dishes() {
                     <Pages pages={pages} current={currPage} setCurrent={setCurrPage}/>
                 </div>
                 {selectedDish && <DishModal dish={selectedDish} show={showDishModal} onHide={handleHideDishModal}/>}
+                <SearchDishModal filter={filter} setFilter={setFilter}/>
             </Col>
         </Row>
     );
