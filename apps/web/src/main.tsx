@@ -3,9 +3,9 @@ import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
-import Home from './components/home';
 import Layout from './components/layout';
 import "./i18n";
+import Dishes from '@/components/dishes';
 
 const router = createBrowserRouter([{
     path: "/",
@@ -13,7 +13,7 @@ const router = createBrowserRouter([{
     children: [
         {
             path: "",
-            element: <Home/>
+            element: <Dishes/>
         }
     ]
 }]);
