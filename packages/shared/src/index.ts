@@ -127,10 +127,15 @@ export class IngredientDTO {
     names!: IngredientNameDTO[];
 }
 
+export class DishIngredientDTO {
+    ingredient!: IngredientDTO;
+    quantity!: number;
+}
+
 export class DishWithIngredients {
     id!: number;
     price!: number;
     active!: boolean;
     names!: DishNameDTO[];
-    ingredients!: IngredientDTO[];
+    ingredients!: DishIngredientDTO[];
 }
