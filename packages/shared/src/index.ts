@@ -107,3 +107,30 @@ export class CreateRoleWithLangAbbrev {
     name!: string;
     langAbbrev!: string;
 }
+
+//=================== DISH =====================
+
+export class DishNameDTO {
+    langId!: number;
+    name!: string;
+}
+
+export class IngredientNameDTO {
+    langId!: number;
+    name!: string;
+}
+
+export class IngredientDTO {
+    id!: number;
+    unit!: string;
+    active!: boolean;
+    names!: IngredientNameDTO[];
+}
+
+export class DishWithIngredients {
+    id!: number;
+    price!: number;
+    active!: boolean;
+    names!: DishNameDTO[];
+    ingredients!: IngredientDTO[];
+}
