@@ -58,16 +58,16 @@ export default function SearchDishModal({ filter, setFilter } : Props) {
         <SearchModal header={t("header")}>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
-                    <Form.Label>{t("dishName")}</Form.Label>
-                    <Form.Control type="text" value={name} onChange={handleChangeName} placeholder="Romazava"/>
+                    <Form.Label htmlFor="dish-name">{t("dishName")}</Form.Label>
+                    <Form.Control id="dish-name" type="text" value={name} onChange={handleChangeName} placeholder="Romazava"/>
                 </Form.Group>
                 <Form.Group className="mb-3">
-                    <Form.Label>{t("dishMinPrice")}</Form.Label>
-                    <Form.Control type="number" value={minPrice} onChange={handleChangeMinPrice} step="any"/>
+                    <Form.Label htmlFor="dish-min-price">{t("dishMinPrice")}</Form.Label>
+                    <Form.Control id="dish-min-price" type="number" value={minPrice} onChange={handleChangeMinPrice} step="any"/>
                 </Form.Group>
                 <Form.Group className="mb-4">
-                    <Form.Label>{t("dishMaxPrice")}</Form.Label>
-                    <Form.Control type="text" value={maxPrice} onChange={handleChangeMaxPrice} step="any"/>
+                    <Form.Label htmlFor="dish-max-price">{t("dishMaxPrice")}</Form.Label>
+                    <Form.Control id="dish-max-price" type="number" value={maxPrice} onChange={handleChangeMaxPrice} step="any"/>
                 </Form.Group>
                 <Form.Group className="d-flex flex-row justify-content-end">
                     <Button type="reset" variant="secondary" onClick={handleReset}>{t("reset")}</Button>
