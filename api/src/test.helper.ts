@@ -4,7 +4,7 @@ import { execSync } from 'child_process';
 import { AppModule } from 'src/app.module';
 
 export async function initIntegrationTest(): Promise<INestApplication> {
-    execSync('npx prisma migrate deploy', { env: process.env });
+    execSync('npx prisma db push --accept-data-loss', { stdio: "inherit" });
 
     const moduleFixture: TestingModule = await Test.createTestingModule({
         imports: [AppModule],
