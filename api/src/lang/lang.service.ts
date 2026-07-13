@@ -1,5 +1,5 @@
+import { CreateLanguage } from '@/lang/lang.dto';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateLanguage } from '@repo/shared';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()

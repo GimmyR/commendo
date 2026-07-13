@@ -4,7 +4,7 @@ import * as bcrypt from "bcrypt";
 import { Account, Role } from '@prisma/client';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
-import { EditPassword, SignIn } from '@repo/shared';
+import { EditPassword, SignIn } from '@/account/account.dto';
 
 @Injectable()
 export class AccountService {

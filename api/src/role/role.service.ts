@@ -1,5 +1,5 @@
+import { CreateRole, CreateRoleWithLangAbbrev } from '@/role/role.dto';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { CreateRole, CreateRoleWithLangAbbrev } from '@repo/shared';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()

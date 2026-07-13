@@ -1,8 +1,8 @@
+import { EditPassword, SignIn } from "@/account/account.dto";
 import { PrismaService } from "@/prisma/prisma.service";
 import { initIntegrationTest } from "@/test.helper";
 import { HttpStatus, INestApplication } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { EditPassword, SignIn } from "@repo/shared";
 
 describe("Test AccountController", () => {
     let app: INestApplication;
@@ -28,10 +28,10 @@ describe("Test AccountController", () => {
     });
 
     it("Should sign in correctly", async () => {
-        const credentials: SignIn = new SignIn({
+        const credentials: Pick<SignIn, keyof SignIn> = {
             username: "admin",
             password: "pwdAdmin"
-        });
+        };
 
         const res = await fetch(`${apiURL}/api/account/sign-in`, {
             method: "POST",
@@ -45,10 +45,10 @@ describe("Test AccountController", () => {
     });
 
     it("Should edit password correctly", async () => {
-        const passwords: EditPassword = new EditPassword({
+        const passwords: Pick<EditPassword, keyof EditPassword> = {
             currentPassword: "pwdAdmin",
             newPassword: "pwd123"
-        });
+        };
 
         const res = await fetch(`${apiURL}/api/account`, {
             method: "PATCH",

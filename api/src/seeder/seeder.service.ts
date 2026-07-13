@@ -1,12 +1,13 @@
 import { Injectable, InternalServerErrorException, OnModuleInit } from '@nestjs/common';
 import { Lang } from '@prisma/client';
-import { CreateRole, SignIn } from '@repo/shared';
 import { AccountService } from 'src/account/account.service';
 import { LangService } from 'src/lang/lang.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { RoleWithNames } from 'src/role/role.entity';
 import { RoleService } from 'src/role/role.service';
 import { struct_admin, struct_languages, struct_roles } from '@/struct.data';
+import { CreateRole } from '@/role/role.dto';
+import { SignIn } from '@/account/account.dto';
 
 @Injectable()
 export class SeederService implements OnModuleInit {

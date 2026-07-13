@@ -1,12 +1,10 @@
-import { EditPasswordDoc, SignInDoc } from '@/account/account.doc';
+import { EditPassword, SignIn } from '@/account/account.dto';
 import { Body, Controller, HttpStatus, Patch, Post, Req, UnauthorizedException, UseGuards, UseInterceptors } from '@nestjs/common';
-import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { EditPassword, SignIn } from '@repo/shared';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import type { Request } from 'express';
 import { AccountGuard } from 'src/account/account.guard';
 import { SignInInterceptor } from 'src/account/account.interceptor';
 import { AccountService } from 'src/account/account.service';
-import { ValidationInterceptor } from 'src/validation/validation.interceptor';
 
 @Controller('account')
 @ApiTags('account')
@@ -16,9 +14,8 @@ export class AccountController {
     ) {}
 
     @Post("sign-in")
-    @UseInterceptors(new ValidationInterceptor(SignIn), SignInInterceptor)
+    @UseInterceptors(SignInInterceptor)
     @ApiOperation({ summary: "Sign in and get access token" })
-    @ApiBody(SignInDoc)
     @ApiResponse({ status: HttpStatus.CREATED, description: "User has been successfully signed in" })
     @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: "Username or password is invalid" })
     async signIn(@Body() account: SignIn) {
@@ -31,11 +28,9 @@ export class AccountController {
     }
 
     @Patch()
-    @UseInterceptors(new ValidationInterceptor(EditPassword))
     @UseGuards(AccountGuard)
     @ApiBearerAuth('access-token')
     @ApiOperation({ summary: "Edit password" })
-    @ApiBody(EditPasswordDoc)
     @ApiResponse({ status: HttpStatus.OK, description: "Password has been successfully updated" })
     @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: "Access token or password is invalid" })
     async editPassword(@Body() account: EditPassword, @Req() req: Request) {

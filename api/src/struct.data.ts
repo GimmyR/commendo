@@ -1,4 +1,6 @@
-import { CreateAccountWithRoleAndLangAbbrev, CreateLanguage, CreateRoleWithLangAbbrev } from "@repo/shared";
+import { CreateAccountWithRoleAndLangAbbrev } from "@/account/account.dto";
+import { CreateLanguage } from "@/lang/lang.dto";
+import { CreateRoleWithLangAbbrev } from "@/role/role.dto";
 
 export const struct_languages: CreateLanguage[] = [
     new CreateLanguage({ name: "Français", abbrev: "fr" }),
