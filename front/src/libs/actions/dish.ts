@@ -8,6 +8,36 @@ export interface FilterDish {
     maxPrice: number | undefined;
 }
 
+export interface DishNameDTO {
+    langId: number;
+    name: string;
+}
+
+export interface IngredientNameDTO {
+    langId: number;
+    name: string;
+}
+
+export interface IngredientDTO {
+    id: number;
+    unit: string;
+    active: boolean;
+    names: IngredientNameDTO[];
+}
+
+export interface DishIngredientDTO {
+    ingredient: IngredientDTO;
+    quantity: number;
+}
+
+export interface DishWithIngredients {
+    id: number;
+    price: number;
+    active: boolean;
+    names: DishNameDTO[];
+    ingredients: DishIngredientDTO[];
+}
+
 // ========================================= FUNCTIONS ==============================================
 
 export async function fetchAllDishesWithIngredients(language: string, page: number, limit: number, filter: FilterDish) {

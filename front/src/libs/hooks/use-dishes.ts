@@ -1,6 +1,5 @@
-import { fetchAllDishesWithIngredients, type FilterDish } from "@/libs/actions/dish";
+import { fetchAllDishesWithIngredients, type DishWithIngredients, type FilterDish } from "@/libs/actions/dish";
 import { useLanguage } from "@/libs/hooks/use-language";
-import type { DishWithIngredients } from "@repo/shared";
 import { useEffect, useState } from "react";
 
 export default function useDishes() {

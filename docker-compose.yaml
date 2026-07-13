@@ -43,5 +43,16 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    env_file:
+      - ./front/.env
+    profiles:
+      - prod
+
 volumes:
   commendo:

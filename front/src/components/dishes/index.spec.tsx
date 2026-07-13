@@ -1,6 +1,5 @@
 import Dishes from "@/components/dishes";
-import { fetchAllDishesWithIngredients } from "@/libs/actions/dish";
-import type { DishWithIngredients } from "@repo/shared";
+import { fetchAllDishesWithIngredients, type DishWithIngredients } from "@/libs/actions/dish";
 import { render, screen, waitFor } from "@testing-library/react";
 
 const dish: DishWithIngredients = {

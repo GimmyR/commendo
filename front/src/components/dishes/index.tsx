@@ -2,8 +2,8 @@ import DishItem from "@/components/dishes/dish-item";
 import DishModal from "@/components/dishes/dish-modal";
 import SearchDishModal from "@/components/dishes/search-modal";
 import Pages from "@/components/pagination";
+import type { DishWithIngredients } from "@/libs/actions/dish";
 import useDishes from "@/libs/hooks/use-dishes";
-import { DishWithIngredients } from "@repo/shared";
 import { useState } from "react";
 import { Col, Row, Spinner } from "react-bootstrap";
 

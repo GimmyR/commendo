@@ -1,5 +1,5 @@
+import type { DishWithIngredients } from "@/libs/actions/dish";
 import { CURRENCY } from "@/libs/utils/constants";
-import type { DishWithIngredients } from "@repo/shared";
 import { useState } from "react";
 
 type Props = {

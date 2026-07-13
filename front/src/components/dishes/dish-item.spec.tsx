@@ -1,5 +1,5 @@
 import DishItem from "@/components/dishes/dish-item";
-import type { DishWithIngredients } from "@repo/shared";
+import type { DishWithIngredients } from "@/libs/actions/dish";
 import { render, screen } from "@testing-library/react";
 
 const dish: DishWithIngredients = {

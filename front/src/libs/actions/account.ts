@@ -1,7 +1,15 @@
-import type { SignUp } from "@repo/shared";
 import { cmdFetch } from "../utils/fetch";
 
-export async function signIn(account: Partial<SignUp>) {
+// ================================ TYPES, INTERFACES, CLASSES =====================================
+
+export interface SignIn {
+    username: string;
+    password: string;
+}
+
+// ======================================== FUNCTIONS ==============================================
+
+export async function signIn(account: SignIn) {
     return await cmdFetch("/account/sign-in", {
         method: "POST",
         headers: {
