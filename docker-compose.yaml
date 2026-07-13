@@ -54,5 +54,12 @@ services:
     profiles:
       - prod
 
+  front-ci:
+    build:
+      context: ./front
+      dockerfile: Dockerfile.ci
+    profiles:
+      - ci
+
 volumes:
   commendo:
