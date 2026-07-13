@@ -34,5 +34,14 @@ services:
     profiles:
       - prod
 
+  api-ci:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.ci
+    profiles:
+      - ci
+    volumes:
+      - /var/run/docker.sock:/var/run/docker/sock
+
 volumes:
   commendo:

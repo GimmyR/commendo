@@ -1,17 +1,17 @@
-import { INestApplication, ValidationPipe } from "@nestjs/common";
-import { Test, TestingModule } from "@nestjs/testing";
-import { execSync } from "child_process";
-import { AppModule } from "src/app.module";
+import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
+import { execSync } from 'child_process';
+import { AppModule } from 'src/app.module';
 
 export async function initIntegrationTest(): Promise<INestApplication> {
-    execSync("npx prisma migrate deploy", { env: process.env });
+    execSync('npx prisma migrate deploy', { env: process.env });
 
     const moduleFixture: TestingModule = await Test.createTestingModule({
-        imports: [AppModule]
+        imports: [AppModule],
     }).compile();
 
     const app = moduleFixture.createNestApplication();
-    app.setGlobalPrefix("api");
+    app.setGlobalPrefix('api');
     app.useGlobalPipes(new ValidationPipe({ transform: true }));
     await app.init();
     await app.listen(0);

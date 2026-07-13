@@ -1,3 +1,3 @@
-import { Role, RoleName } from "@prisma/client";
+import { Role, RoleName } from '@prisma/client';
 
 export type RoleWithNames = Role & { names: RoleName[] };

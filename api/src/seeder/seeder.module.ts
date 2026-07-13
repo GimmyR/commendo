@@ -5,6 +5,6 @@ import { RoleService } from 'src/role/role.service';
 import { AccountService } from 'src/account/account.service';
 
 @Module({
-  providers: [SeederService, LangService, RoleService, AccountService]
+    providers: [SeederService, LangService, RoleService, AccountService],
 })
 export class SeederModule {}

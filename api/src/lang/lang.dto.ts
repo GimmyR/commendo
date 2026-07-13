@@ -1,10 +1,10 @@
-import { IsNotEmpty } from "class-validator";
+import { IsNotEmpty } from 'class-validator';
 
 export class CreateLanguage {
-    @IsNotEmpty({ message: "Name is missing" })
+    @IsNotEmpty({ message: 'Name is missing' })
     name!: string;
 
-    @IsNotEmpty({ message: "Abbreviation is missing" })
+    @IsNotEmpty({ message: 'Abbreviation is missing' })
     abbrev!: string;
 
     constructor(language: Partial<CreateLanguage>) {

@@ -15,14 +15,13 @@ export class SeederService implements OnModuleInit {
         private readonly prisma: PrismaService,
         private readonly langServ: LangService,
         private readonly roleServ: RoleService,
-        private readonly accountServ: AccountService
+        private readonly accountServ: AccountService,
     ) {}
 
     async onModuleInit() {
         const needed = await this.needSeeding();
 
-        if(needed)
-            await this.seedStructData();
+        if (needed) await this.seedStructData();
     }
 
     private async needSeeding() {
@@ -35,39 +34,46 @@ export class SeederService implements OnModuleInit {
     private async seedStructData() {
         const languages = await this.seedLanguages();
         const roles = await this.seedRoles(languages);
-        await this.seedAdmin(roles, languages);
+        await this.seedAdmin(roles);
     }
 
     private async seedLanguages() {
-        return await Promise.all(struct_languages.map(async (lang) => {
-            if(!lang || !lang.name || !lang.abbrev)
-                throw new InternalServerErrorException(`Struct data (language) is invalid : ${lang}`);
+        return await Promise.all(
+            struct_languages.map(async (lang) => {
+                if (!lang || !lang.name || !lang.abbrev)
+                    throw new InternalServerErrorException(`Struct data (language) is invalid : ${lang}`);
 
-            return await this.langServ.create(lang);
-        }));
+                return await this.langServ.create(lang);
+            }),
+        );
     }
 
     private async seedRoles(languages: Lang[]) {
-        return await Promise.all(struct_roles.map(async (role) => {
-            const lang = languages.find(lang => lang.abbrev == role.langAbbrev);
+        return await Promise.all(
+            struct_roles.map(async (role) => {
+                const lang = languages.find((lang) => lang.abbrev == role.langAbbrev);
 
-            if(!lang) throw new InternalServerErrorException(`Struct data (language) not found : ${role.langAbbrev}`);
+                if (!lang) throw new InternalServerErrorException(`Struct data (language) not found : ${role.langAbbrev}`);
 
-            if(!role || !role.name || !role.langAbbrev)
-                throw new InternalServerErrorException(`Struct data (role) is invalid : ${role}`);
+                if (!role || !role.name || !role.langAbbrev)
+                    throw new InternalServerErrorException(`Struct data (role) is invalid : ${role}`);
 
-            return await this.roleServ.create(new CreateRole({ type: role.type, name: role.name, langId: lang.id }));
-        }));
+                return await this.roleServ.create(new CreateRole({ type: role.type, name: role.name, langId: lang.id }));
+            }),
+        );
     }
 
-    private async seedAdmin(roles: RoleWithNames[], languages: Lang[]) {
-        const role = roles.find(r => r.type == struct_admin.role.type);
+    private async seedAdmin(roles: RoleWithNames[]) {
+        const role = roles.find((r) => r.type == struct_admin.role.type);
 
-        if(!role) throw new InternalServerErrorException(`Struct data (roles) not found : ${struct_admin.role}`);
+        if (!role) throw new InternalServerErrorException(`Struct data (roles) not found : ${struct_admin.role}`);
 
-        return await this.accountServ.create(new SignIn({
-            username: struct_admin.username,
-            password: struct_admin.password
-        }), role.id);
+        return await this.accountServ.create(
+            new SignIn({
+                username: struct_admin.username,
+                password: struct_admin.password,
+            }),
+            role.id,
+        );
     }
 }

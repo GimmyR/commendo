@@ -9,20 +9,24 @@ import { AccountService } from 'src/account/account.service';
 @Controller('account')
 @ApiTags('account')
 export class AccountController {
-    constructor(
-        private readonly accountServ: AccountService
-    ) {}
+    constructor(private readonly accountServ: AccountService) {}
 
-    @Post("sign-in")
+    @Post('sign-in')
     @UseInterceptors(SignInInterceptor)
-    @ApiOperation({ summary: "Sign in and get access token" })
-    @ApiResponse({ status: HttpStatus.CREATED, description: "User has been successfully signed in" })
-    @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: "Username or password is invalid" })
+    @ApiOperation({ summary: 'Sign in and get access token' })
+    @ApiResponse({
+        status: HttpStatus.CREATED,
+        description: 'User has been successfully signed in',
+    })
+    @ApiResponse({
+        status: HttpStatus.UNAUTHORIZED,
+        description: 'Username or password is invalid',
+    })
     async signIn(@Body() account: SignIn) {
         const user = await this.accountServ.findByUsername(account.username);
 
-        if(!user || !(await this.accountServ.comparePasswords(account.password, user.password)))
-            throw new UnauthorizedException("Username or password is invalid");
+        if (!user || !(await this.accountServ.comparePasswords(account.password, user.password)))
+            throw new UnauthorizedException('Username or password is invalid');
 
         return user;
     }
@@ -30,9 +34,15 @@ export class AccountController {
     @Patch()
     @UseGuards(AccountGuard)
     @ApiBearerAuth('access-token')
-    @ApiOperation({ summary: "Edit password" })
-    @ApiResponse({ status: HttpStatus.OK, description: "Password has been successfully updated" })
-    @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: "Access token or password is invalid" })
+    @ApiOperation({ summary: 'Edit password' })
+    @ApiResponse({
+        status: HttpStatus.OK,
+        description: 'Password has been successfully updated',
+    })
+    @ApiResponse({
+        status: HttpStatus.UNAUTHORIZED,
+        description: 'Access token or password is invalid',
+    })
     async editPassword(@Body() account: EditPassword, @Req() req: Request) {
         const user = await this.accountServ.editPassword(req, account);
         return { id: user.id };

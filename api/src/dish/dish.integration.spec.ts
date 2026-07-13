@@ -1,8 +1,8 @@
-import { PrismaService } from "@/prisma/prisma.service";
-import { initIntegrationTest } from "@/test.helper";
-import { HttpStatus, INestApplication } from "@nestjs/common";
+import { PrismaService } from '@/prisma/prisma.service';
+import { initIntegrationTest } from '@/test.helper';
+import { HttpStatus, INestApplication } from '@nestjs/common';
 
-describe("Test DishController", () => {
+describe('Test DishController', () => {
     let app: INestApplication;
     let apiURL: string;
     let prisma: PrismaService;
@@ -14,11 +14,9 @@ describe("Test DishController", () => {
     });
 
     afterAll(async () => {
-        if(prisma)
-            await prisma.$disconnect();
+        if (prisma) await prisma.$disconnect();
 
-        if(app)
-            await app.close();
+        if (app) await app.close();
     });
 
     beforeEach(async () => {
@@ -35,7 +33,7 @@ describe("Test DishController", () => {
         `);
     });
 
-    it("Should return dish with ingredient in french", async () => {
+    it('Should return dish with ingredient in french', async () => {
         const res = await fetch(`${apiURL}/api/dish?lang=fr`);
         expect(res.status).toBe(HttpStatus.OK);
         const body = await res.json();

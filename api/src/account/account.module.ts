@@ -8,11 +8,11 @@ import { JwtModule } from '@nestjs/jwt';
         JwtModule.registerAsync({
             global: true,
             useFactory: async () => ({
-                secret: process.env.JWT_SECRET
-            })
-        })
+                secret: process.env.JWT_SECRET,
+            }),
+        }),
     ],
     controllers: [AccountController],
-    providers: [AccountService]
+    providers: [AccountService],
 })
 export class AccountModule {}

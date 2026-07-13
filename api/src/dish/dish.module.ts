@@ -3,7 +3,7 @@ import { DishController } from './dish.controller';
 import { DishService } from './dish.service';
 
 @Module({
-  controllers: [DishController],
-  providers: [DishService]
+    controllers: [DishController],
+    providers: [DishService],
 })
 export class DishModule {}

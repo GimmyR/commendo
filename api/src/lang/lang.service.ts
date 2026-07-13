@@ -4,9 +4,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class LangService {
-    constructor(
-        private readonly prisma: PrismaService
-    ) {}
+    constructor(private readonly prisma: PrismaService) {}
 
     async getAll() {
         return await this.prisma.lang.findMany();
@@ -15,11 +13,11 @@ export class LangService {
     async getUniqueByAbbreviation(abbrev: string) {
         const lang = await this.prisma.lang.findUnique({
             where: {
-                abbrev: abbrev
-            }
+                abbrev: abbrev,
+            },
         });
 
-        if(!lang) throw new NotFoundException("Language not found");
+        if (!lang) throw new NotFoundException('Language not found');
 
         return lang;
     }
@@ -28,7 +26,7 @@ export class LangService {
         return await this.prisma.lang.upsert({
             where: { name: language.name, abbrev: language.abbrev },
             update: {},
-            create: { name: language.name, abbrev: language.abbrev }
+            create: { name: language.name, abbrev: language.abbrev },
         });
     }
 }

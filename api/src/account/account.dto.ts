@@ -1,14 +1,14 @@
-import { CreateRoleWithLangAbbrev } from "@/role/role.dto";
-import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty } from "class-validator";
+import { CreateRoleWithLangAbbrev } from '@/role/role.dto';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
 
 export class SignIn {
-    @IsNotEmpty({ message: "Username is missing" })
-    @ApiProperty({ example: "johndoe" })
+    @IsNotEmpty({ message: 'Username is missing' })
+    @ApiProperty({ example: 'johndoe' })
     username!: string;
 
-    @IsNotEmpty({ message: "Password is missing" })
-    @ApiProperty({ example: "pwdJohn" })
+    @IsNotEmpty({ message: 'Password is missing' })
+    @ApiProperty({ example: 'pwdJohn' })
     password!: string;
 
     constructor(user: Partial<SignIn>) {
@@ -19,16 +19,16 @@ export class SignIn {
 export interface CreateAccountWithRoleAndLangAbbrev {
     username: string;
     password: string;
-    role: CreateRoleWithLangAbbrev
+    role: CreateRoleWithLangAbbrev;
 }
 
 export class EditPassword {
-    @IsNotEmpty({ message: "Current password is missing" })
-    @ApiProperty({ example: "pwd123" })
+    @IsNotEmpty({ message: 'Current password is missing' })
+    @ApiProperty({ example: 'pwd123' })
     currentPassword!: string;
 
-    @IsNotEmpty({ message: "New password is missing" })
-    @ApiProperty({ example: "pwd456" })
+    @IsNotEmpty({ message: 'New password is missing' })
+    @ApiProperty({ example: 'pwd456' })
     newPassword!: string;
 
     constructor(passwords: Partial<EditPassword>) {

@@ -8,6 +8,6 @@ import { ResourceModule } from './resource/resource.module';
 import { DishModule } from './dish/dish.module';
 
 @Module({
-  imports: [LangModule, PrismaModule, AccountModule, RoleModule, SeederModule, ResourceModule, DishModule],
+    imports: [LangModule, PrismaModule, AccountModule, RoleModule, SeederModule, ResourceModule, DishModule],
 })
 export class AppModule {}

@@ -4,7 +4,7 @@ import { LangService } from './lang.service';
 import { AccountService } from 'src/account/account.service';
 
 @Module({
-  controllers: [LangController],
-  providers: [LangService, AccountService]
+    controllers: [LangController],
+    providers: [LangService, AccountService],
 })
 export class LangModule {}
