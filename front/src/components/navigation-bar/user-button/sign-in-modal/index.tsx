@@ -1,17 +1,35 @@
 import { Alert, Button, Form, Modal, Spinner, Stack } from "react-bootstrap";
 import SignInInputGroup from "./sign-in-input-group";
-import { signIn } from "@/libs/actions/account";
-import useSignInModal from "@/libs/hooks/use-sign-in-modal";
+import { signIn, type SignIn } from "@/libs/actions/account";
 import { useTranslation } from "react-i18next";
+import { useState, type ChangeEvent } from "react";
+import { useAuth } from "@/libs/hooks/use-auth";
 
 type Props = {
     isShown: boolean;
     close: () => void;
 };
 
+const credentialsPlaceholder: SignIn = { username: "", password: "" };
+
 export default function SignInModal({ isShown, close } : Props) {
     const { t } = useTranslation("signInModal");
-    const { credentials, error, submitting, setUsername, setPassword, resetAccount, setError, login, setSubmitting } = useSignInModal();
+    const [credentials, setCredentials] = useState<SignIn>(credentialsPlaceholder);
+    const [error, setError] = useState<string | undefined>();
+    const login = useAuth((state) => state.login);
+    const [submitting, setSubmitting] = useState<boolean>(false);
+
+    const setUsername = (event: ChangeEvent<HTMLInputElement>) => {
+        setCredentials({...credentials, username: event.target.value})
+    };
+
+    const setPassword = (event: ChangeEvent<HTMLInputElement>) => {
+        setCredentials({...credentials, password: event.target.value})
+    };
+
+    const resetAccount = () => {
+        setCredentials({...credentialsPlaceholder});
+    };
 
     const handleSignIn = async () => {
         setSubmitting(true);
