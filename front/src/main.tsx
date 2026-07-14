@@ -6,6 +6,7 @@ import 'bootstrap-icons/font/bootstrap-icons.min.css';
 import Layout from './components/layout';
 import "./i18n";
 import Dishes from '@/components/dishes';
+import Tables from '@/components/tables';
 
 const router = createBrowserRouter([{
     path: "/",
@@ -14,6 +15,10 @@ const router = createBrowserRouter([{
         {
             path: "",
             element: <Dishes/>
+        },
+        {
+            path: "tables",
+            element: <Tables/>
         }
     ]
 }]);
