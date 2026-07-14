@@ -5,13 +5,15 @@ import LargeSearchButton from "./large-search-button";
 import UserButton from "./user-button";
 import SignedIn from "@/components/signed-in";
 import Menu from "@/components/menu";
-import useNavigationBar from "@/libs/hooks/use-navigation-bar";
 import { useSearch } from "@/libs/hooks/use-search";
+import { useState } from "react";
 
 export default function NavigationBar() {
-    const {show, handleShow, handleClose} = useNavigationBar();
-    const setShow = useSearch((state) => state.setShow);
-    const handleShowSearchModal = () => setShow(true);
+    const [showMenu, setShowMenu] = useState<boolean>(false);
+    const handleClose = () => setShowMenu(false);
+    const handleShow = () => setShowMenu(true);
+    const setShowSearchModal = useSearch((state) => state.setShow);
+    const handleShowSearchModal = () => setShowSearchModal(true);
 
     return (
         <>
@@ -30,7 +32,7 @@ export default function NavigationBar() {
                     </Stack>
                 </Container>
             </Navbar>
-            <Menu show={show} onHide={handleClose}/>
+            <Menu show={showMenu} onHide={handleClose}/>
         </>
     );
 }
