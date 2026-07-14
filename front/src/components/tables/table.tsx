@@ -1,6 +1,7 @@
 import AvailabilityIcon from "@/components/tables/availability-icon";
 import type { ITable } from "@/libs/actions/tables";
 import { Table } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 type Props = {
@@ -8,16 +9,18 @@ type Props = {
 };
 
 export default function TablesTable({ tables } : Props) {
+    const {t} = useTranslation("tablesTable");
+
     return (
         <Table className="text-center">
             <thead>
                 <tr>
                     <th className="d-none d-lg-table-cell">ID</th>
                     <th>
-                        <span className="d-none d-lg-inline">Numéro de table</span>
-                        <span className="d-inline d-lg-none">Numéro</span>
+                        <span className="d-none d-lg-inline">{t("tableRef")}</span>
+                        <span className="d-inline d-lg-none">{t("tableRef-small")}</span>
                     </th>
-                    <th>Disponibilité</th>
+                    <th>{t("availability")}</th>
                     <th></th>
                     <th></th>
                     <th></th>
