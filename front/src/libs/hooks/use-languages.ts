@@ -2,7 +2,7 @@ import { fetchAllLanguages, type Language } from "@/libs/actions/language";
 import { useLanguage } from "@/libs/hooks/use-language";
 import { useEffect, useState } from "react";
 
-export default function useLanguageSelect() {
+export default function useLanguages() {
     const [languages, setLanguages] = useState<Language[]>([]);
     const selectedLanguage = useLanguage((state) => state.lang);
     const selectLang = useLanguage((state) => state.select);
