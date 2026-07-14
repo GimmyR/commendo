@@ -8,13 +8,7 @@ type Props = {
     onHide: () => void;
 };
 
-const links = [
-    { href: "/", title: "dishes" },
-    { href: "/tables", title: "tables" },
-    { href: "/ingredients", title: "ingredients" },
-    { href: "/inventory", title: "inventory" },
-    { href: "/employees", title: "employees" }
-];
+const options = [ "dishes", "tables", "ingredients", "inventory", "employees" ];
 
 export default function Menu({ show, onHide } : Props) {
     const { t } = useTranslation("menu");
@@ -26,7 +20,7 @@ export default function Menu({ show, onHide } : Props) {
             </Offcanvas.Header>
             <Offcanvas.Body className="pt-0">
                 <Stack direction="vertical">
-                    {links.map(link => <MenuItem key={link.href} to={link.href} title={t(link.title)}/>)}
+                    {options.map(option => <MenuItem key={option} to={`/${option == "dishes" ? "" : option}`} title={t(option)}/>)}
                 </Stack>
             </Offcanvas.Body>
         </Offcanvas>

@@ -1,3 +1,4 @@
+import { filterDoc, langDoc, limitDoc, pageDoc } from '@/dish/dish.doc';
 import { FilterDishPipe } from '@/dish/dish.pipe';
 import { DishService } from '@/dish/dish.service';
 import { type Pagination, PaginationPipe } from '@/pagination/pagination.pipe';
@@ -12,25 +13,12 @@ export class DishController {
 
     @Get()
     @ApiOperation({ summary: 'Find all dishes' })
-    @ApiQuery({ name: 'lang', required: true, type: String, example: 'fr' })
-    @ApiQuery({ name: 'page', required: false, type: Number, example: 1 })
-    @ApiQuery({ name: 'limit', required: false, type: Number, example: 10 })
-    @ApiQuery({
-        name: 'filter',
-        required: false,
-        type: String,
-        description:
-            "Filter by name (contains) or price (equals, gt, gte, lt, lte). Operator should start and end with ':'. You can do many conditions by separating them with ';'.",
-        example: 'name:contains:maza;price:gte:10000',
-    })
-    @ApiResponse({
-        status: HttpStatus.OK,
-        description: 'Dishes have been successfully returned',
-    })
-    @ApiResponse({
-        status: HttpStatus.INTERNAL_SERVER_ERROR,
-        description: 'Unknown error',
-    })
+    @ApiQuery(langDoc)
+    @ApiQuery(pageDoc)
+    @ApiQuery(limitDoc)
+    @ApiQuery(filterDoc)
+    @ApiResponse({ status: HttpStatus.OK, description: 'Dishes have been successfully returned' })
+    @ApiResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: 'Unknown error' })
     async findAll(
         @Query('lang') language: string,
         @Query('filter', FilterDishPipe) filter: Prisma.DishWhereInput,

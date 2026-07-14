@@ -1,9 +1,9 @@
-import useLanguageSelect from "@/libs/hooks/use-language-select";
+import useLanguages from "@/libs/hooks/use-languages";
 import type { ChangeEvent } from "react";
 import { Form } from "react-bootstrap";
 
 export default function LanguageSelect() {
-    const {languages, selectedLanguage, selectLang} = useLanguageSelect();
+    const {languages, selectedLanguage, selectLang} = useLanguages();
 
     const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
         selectLang(e.target.value);
