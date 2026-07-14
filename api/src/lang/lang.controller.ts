@@ -9,14 +9,8 @@ export class LangController {
 
     @Get()
     @ApiOperation({ summary: 'Get all languages' })
-    @ApiResponse({
-        status: HttpStatus.OK,
-        description: 'All languages are returned',
-    })
-    @ApiResponse({
-        status: HttpStatus.INTERNAL_SERVER_ERROR,
-        description: 'Unknown error',
-    })
+    @ApiResponse({ status: HttpStatus.OK, description: 'All languages are returned' })
+    @ApiResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: 'Unknown error' })
     async getAll() {
         return await this.langServ.getAll();
     }
