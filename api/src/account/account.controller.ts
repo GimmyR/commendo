@@ -14,14 +14,8 @@ export class AccountController {
     @Post('sign-in')
     @UseInterceptors(SignInInterceptor)
     @ApiOperation({ summary: 'Sign in and get access token' })
-    @ApiResponse({
-        status: HttpStatus.CREATED,
-        description: 'User has been successfully signed in',
-    })
-    @ApiResponse({
-        status: HttpStatus.UNAUTHORIZED,
-        description: 'Username or password is invalid',
-    })
+    @ApiResponse({ status: HttpStatus.CREATED, description: 'User has been successfully signed in' })
+    @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: 'Username or password is invalid' })
     async signIn(@Body() account: SignIn) {
         const user = await this.accountServ.findByUsername(account.username);
 
@@ -35,14 +29,8 @@ export class AccountController {
     @UseGuards(AccountGuard)
     @ApiBearerAuth('access-token')
     @ApiOperation({ summary: 'Edit password' })
-    @ApiResponse({
-        status: HttpStatus.OK,
-        description: 'Password has been successfully updated',
-    })
-    @ApiResponse({
-        status: HttpStatus.UNAUTHORIZED,
-        description: 'Access token or password is invalid',
-    })
+    @ApiResponse({ status: HttpStatus.OK, description: 'Password has been successfully updated' })
+    @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: 'Access token or password is invalid' })
     async editPassword(@Body() account: EditPassword, @Req() req: Request) {
         const user = await this.accountServ.editPassword(req, account);
         return { id: user.id };
