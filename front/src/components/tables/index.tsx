@@ -1,3 +1,4 @@
+import Error from "@/components/error";
 import SignedIn from "@/components/signed-in";
 import SignedOut from "@/components/signed-out";
 import TablesTable from "@/components/tables/table";
@@ -20,11 +21,7 @@ export default function Tables() {
                 </Row>
             </SignedIn>
             <SignedOut>
-                <Row className="pt-5">
-                    <Col className="text-danger">
-                        FORBIDDEN
-                    </Col>
-                </Row>
+                <Error>FORBIDDEN</Error>
             </SignedOut>
         </>
     );
