@@ -43,11 +43,12 @@ export interface DishWithIngredients extends Dish {
 
 // ========================================= FUNCTIONS ==============================================
 
-export async function fetchAllDishesWithIngredients(language: string, page: number, limit: number, filter: FilterDish) {
+export async function fetchAllDishesWithIngredients(language: string, filter: FilterDish, page?: number, limit?: number) {
     const params = new URLSearchParams();
     params.append("lang", language);
-    params.append("page", page.toString());
-    params.append("limit", limit.toString());
+
+    if(page) params.append("page", page.toString());
+    if(limit) params.append("limit", limit.toString());
 
     const filters: string[] = [];
 
