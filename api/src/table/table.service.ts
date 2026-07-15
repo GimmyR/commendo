@@ -1,4 +1,5 @@
 import { PrismaService } from '@/prisma/prisma.service';
+import { EditTable } from '@/table/table.dto';
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
@@ -47,5 +48,12 @@ export class TableService {
             throw new NotFoundException(`Table not found : ${id}`);
 
         return table;
+    }
+
+    async update(id: number, table: EditTable) {
+        return await this.prisma.table.update({
+            where: { id },
+            data: table
+        });
     }
 }
