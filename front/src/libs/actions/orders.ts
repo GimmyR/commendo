@@ -46,3 +46,14 @@ export async function createOrder(order: CreateOrder) {
         body: JSON.stringify(order)
     });
 }
+
+export async function removeOrder(orderId: number): Promise<Order> {
+    const token = useAuth.getState().token;
+    
+    return await cmdFetch(`/order/${orderId}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+}

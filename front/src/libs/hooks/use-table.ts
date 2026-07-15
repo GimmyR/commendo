@@ -1,5 +1,5 @@
 import type { DishWithIngredients } from "@/libs/actions/dishes";
-import { createOrder } from "@/libs/actions/orders";
+import { createOrder, removeOrder, type Order } from "@/libs/actions/orders";
 import { fetchUniqueTableByIdWithOrders, partiallyEditTable, type TableWithOrders } from "@/libs/actions/tables";
 import { useLanguage } from "@/libs/hooks/use-language";
 import { useEffect, useState } from "react";
@@ -44,6 +44,15 @@ export default function useTable(id: number) {
         }
     };
 
+    const deleteOrder = async (order: Order) => {
+        if(table) {
+            const deleted = await removeOrder(order.id);
+            const index = table.orders.findIndex(order => order.id == deleted.id);
+            table.orders.splice(index, 1);
+            setTable({...table});
+        }
+    };
+
     useEffect(() => {
         fetchUniqueTableByIdWithOrders(id)
             .then(data => {
@@ -53,5 +62,5 @@ export default function useTable(id: number) {
             .catch(err => console.error(err));
     }, [language]);
     
-    return {table, loading, bookTable, freeTable, addOrder};
+    return {table, loading, bookTable, freeTable, addOrder, deleteOrder};
 }

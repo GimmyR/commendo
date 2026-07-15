@@ -9,9 +9,10 @@ import { Link } from "react-router-dom";
 type Props = {
     orders: Order[];
     addOrder: (dish: DishWithIngredients) => void;
+    deleteOrder: (order: Order) => void;
 };
 
-export default function OrdersTable({ orders, addOrder } : Props) {
+export default function OrdersTable({ orders, addOrder, deleteOrder } : Props) {
     const {t} = useTranslation("table");
 
     if(orders.length == 0)
@@ -44,7 +45,7 @@ export default function OrdersTable({ orders, addOrder } : Props) {
                         </Link>
                     </th>
                     <th>
-                        <Link to="#" className="text-success">
+                        <Link onClick={() => deleteOrder(order)} to="#" className="text-success">
                             <i className="bi bi-trash"></i>
                         </Link>
                     </th>

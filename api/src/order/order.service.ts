@@ -14,4 +14,12 @@ export class OrderService {
             }
         });
     }
+
+    async deleteById(orderId: number) {
+        return await this.prisma.order.delete({
+            where: {
+                id: orderId
+            }
+        });
+    }
 }

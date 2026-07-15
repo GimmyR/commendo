@@ -17,7 +17,7 @@ type Props = {
 
 export default function UniqueTable() {
     const { id } = useParams<Props>();
-    const {table, loading, bookTable, freeTable, addOrder} = useTable(parseInt(id as string));
+    const {table, loading, bookTable, freeTable, addOrder, deleteOrder} = useTable(parseInt(id as string));
     const {t} = useTranslation("table");
     const [showDishesModal, setShowDishesModal] = useState<boolean>(false);
 
@@ -35,7 +35,7 @@ export default function UniqueTable() {
                         <div className="d-flex flex-row justify-content-start align-items-center mb-4">
                             <TableRef reference={table.tableRef}/>
                         </div>
-                        <OrdersTable orders={table.orders} addOrder={addOrder}/>
+                        <OrdersTable orders={table.orders} addOrder={addOrder} deleteOrder={deleteOrder}/>
                         <div className="d-flex flex-column flex-lg-row pt-2">
                             {table.availability == 1 && <Button onClick={bookTable} variant="success" className="rounded-0">
                                 <i className="bi bi-calendar-fill me-2"></i>{t("book-table")}
