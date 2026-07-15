@@ -1,9 +1,12 @@
 {
+    "noOrders": "Aucune commande",
     "book-table": "Réserver",
     "add-order": "Commande",
-    "save-orders": "Enregistrer",
+    "confirm-orders": "Confirmer",
     "free-table": "Débarrasser",
     "select-dish": "Choisir des plats",
     "name": "Nom",
-    "price": "Prix"
+    "price": "Prix",
+    "dish": "Plat",
+    "status": "Etat"
 }

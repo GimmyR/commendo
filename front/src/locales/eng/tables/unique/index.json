@@ -1,9 +1,12 @@
 {
+    "noOrders": "No orders",
     "book-table": "Book table",
     "add-order": "Order",
-    "save-orders": "Save orders",
+    "confirm-orders": "Confirm orders",
     "free-table": "Free table",
     "select-dish": "Select dishes",
     "name": "Name",
-    "price": "Price"
+    "price": "Price",
+    "dish": "Dish",
+    "status": "Status"
 }

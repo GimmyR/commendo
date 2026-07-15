@@ -6,9 +6,10 @@ import { Link } from "react-router-dom";
 
 type Props = {
     dishes: DishWithIngredients[];
+    addOrder: (dish: DishWithIngredients) => void;
 };
 
-export default function DishesTable({ dishes } : Props) {
+export default function DishesTable({ dishes, addOrder } : Props) {
     const {t} = useTranslation("table");
 
     return (
@@ -25,7 +26,7 @@ export default function DishesTable({ dishes } : Props) {
                     <td>{dish.names[0].name}</td>
                     <td>{dish.price} {CURRENCY.symbol}</td>
                     <td>
-                        <Link to="#" className="text-success">
+                        <Link onClick={() => addOrder(dish)} to="#" className="text-success">
                             <i className="bi bi-plus-lg"></i>
                         </Link>
                     </td>
