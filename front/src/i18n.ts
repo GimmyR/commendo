@@ -14,6 +14,10 @@ import frSearchDishModal from "./locales/fr/dishes/search-modal.json";
 import engSearchDishModal from "./locales/eng/dishes/search-modal.json";
 import frTablesTable from "./locales/fr/tables/table.json";
 import engTablesTable from "./locales/eng/tables/table.json";
+import frOrdersTable from "./locales/fr/tables/unique/orders-table.json";
+import engOrdersTable from "./locales/eng/tables/unique/orders-table.json";
+import frTable from "./locales/fr/tables/unique/index.json";
+import engTable from "./locales/eng/tables/unique/index.json";
 
 i18n.use(initReactI18next)
     .init({
@@ -25,7 +29,9 @@ i18n.use(initReactI18next)
                 signOutModal: frSignOutModal,
                 signInModal: frSignInModal,
                 searchDishModal: frSearchDishModal,
-                tablesTable: frTablesTable
+                tablesTable: frTablesTable,
+                ordersTable: frOrdersTable,
+                table: frTable
             },
             eng: {
                 largeSearchButton: engLargeSearchButton,
@@ -34,7 +40,9 @@ i18n.use(initReactI18next)
                 signOutModal: engSignOutModal,
                 signInModal: engSignInModal,
                 searchDishModal: engSearchDishModal,
-                tablesTable: engTablesTable
+                tablesTable: engTablesTable,
+                ordersTable: engOrdersTable,
+                table: engTable
             }
         },
         fallbackLng: "fr",
