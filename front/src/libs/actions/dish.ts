@@ -30,11 +30,14 @@ export interface DishIngredientDTO {
     quantity: number;
 }
 
-export interface DishWithIngredients {
+export interface Dish {
     id: number;
     price: number;
-    active: boolean;
     names: DishNameDTO[];
+    active: boolean;
+}
+
+export interface DishWithIngredients extends Dish {
     ingredients: DishIngredientDTO[];
 }
 
