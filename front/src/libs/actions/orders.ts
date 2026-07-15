@@ -1,6 +1,6 @@
 // ================================ TYPES, INTERFACES, CLASSES =====================================
 
-import type { Dish } from "@/libs/actions/dish";
+import type { Dish } from "@/libs/actions/dishes";
 
 export interface Order {
     id: number;

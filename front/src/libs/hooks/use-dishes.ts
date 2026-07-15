@@ -1,4 +1,4 @@
-import { fetchAllDishesWithIngredients, type DishWithIngredients, type FilterDish } from "@/libs/actions/dish";
+import { fetchAllDishesWithIngredients, type DishWithIngredients, type FilterDish } from "@/libs/actions/dishes";
 import { useLanguage } from "@/libs/hooks/use-language";
 import { useEffect, useState } from "react";
 

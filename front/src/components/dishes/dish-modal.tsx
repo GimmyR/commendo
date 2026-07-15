@@ -1,4 +1,4 @@
-import type { DishWithIngredients } from "@/libs/actions/dish";
+import type { DishWithIngredients } from "@/libs/actions/dishes";
 import { CURRENCY } from "@/libs/utils/constants";
 import { Modal, Table } from "react-bootstrap";
 

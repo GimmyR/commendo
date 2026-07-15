@@ -1,5 +1,5 @@
 import SearchDishModal from "@/components/dishes/search-modal";
-import type { FilterDish } from "@/libs/actions/dish";
+import type { FilterDish } from "@/libs/actions/dishes";
 import { useSearch } from "@/libs/hooks/use-search";
 import { render, screen } from "@testing-library/react";
 import '@/i18n';
