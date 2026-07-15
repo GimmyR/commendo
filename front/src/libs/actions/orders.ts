@@ -15,6 +15,10 @@ export interface CreateOrder {
     dishId: number;
 }
 
+export interface EditOrder {
+    status: number;
+}
+
 // ========================================= FUNCTIONS ==============================================
 
 export function calculateOrdersTotal(orders: Partial<Order>[]): number {
@@ -55,5 +59,18 @@ export async function removeOrder(orderId: number): Promise<Order> {
         headers: {
             "Authorization": `Bearer ${token}`
         }
+    });
+}
+
+export async function partiallyEditOrder(id: number, order: EditOrder): Promise<Order> {
+    const token = useAuth.getState().token;
+
+    return await cmdFetch(`/order/${id}`, {
+        method: "PATCH",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(order)
     });
 }

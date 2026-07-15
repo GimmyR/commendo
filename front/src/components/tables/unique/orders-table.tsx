@@ -25,7 +25,7 @@ export default function OrdersTable({ orders, addOrder, deleteOrder } : Props) {
             <thead>
                 <tr>
                     <th>{t("dish")}</th>
-                    <th className="col-5 col-lg-2">{t("status")}</th>
+                    <th className="col-5 col-lg-2 text-center">{t("status")}</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -36,15 +36,15 @@ export default function OrdersTable({ orders, addOrder, deleteOrder } : Props) {
                         <span>{order.dish?.names[0].name}</span>
                         <span className="text-secondary" style={{ fontSize: "15px" }}>{order.dish?.price} {CURRENCY.symbol}</span>
                     </td>
-                    <td>
+                    <td className="text-center">
                         <OrderStatus status={order.status ?? 0}/>
                     </td>
-                    <th>
+                    <th className="text-center">
                         <Link onClick={() => addOrder(order.dish)} to="#" className="text-success">
                             <i className="bi bi-plus-lg"></i>
                         </Link>
                     </th>
-                    <th>
+                    <th className="text-center">
                         <Link onClick={() => deleteOrder(order)} to="#" className="text-success">
                             <i className="bi bi-trash"></i>
                         </Link>

@@ -17,7 +17,7 @@ type Props = {
 
 export default function UniqueTable() {
     const { id } = useParams<Props>();
-    const {table, loading, bookTable, freeTable, addOrder, deleteOrder} = useTable(parseInt(id as string));
+    const {table, loading, bookTable, freeTable, addOrder, deleteOrder, confirmOrders} = useTable(parseInt(id as string));
     const {t} = useTranslation("table");
     const [showDishesModal, setShowDishesModal] = useState<boolean>(false);
 
@@ -41,7 +41,7 @@ export default function UniqueTable() {
                                 <i className="bi bi-calendar-fill me-2"></i>{t("book-table")}
                             </Button>}
                             {table.availability == 2 && <>
-                                <Button variant="success" className="rounded-0 mb-3 mb-lg-0 me-lg-2" disabled={disableSaveOrder(table?.orders ?? [])}>
+                                <Button onClick={confirmOrders} variant="success" className="rounded-0 mb-3 mb-lg-0 me-lg-2" disabled={disableSaveOrder(table?.orders ?? [])}>
                                     <i className="bi bi-save-fill me-2"></i>{t("confirm-orders")}
                                 </Button>
                                 <Button onClick={freeTable} variant="secondary" className="rounded-0">

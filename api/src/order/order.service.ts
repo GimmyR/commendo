@@ -1,4 +1,4 @@
-import { CreateOrder } from '@/order/order.dto';
+import { CreateOrder, EditOrder } from '@/order/order.dto';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 
@@ -20,6 +20,13 @@ export class OrderService {
             where: {
                 id: orderId
             }
+        });
+    }
+
+    async updateById(orderId: number, order: EditOrder) {
+        return await this.prisma.order.update({
+            where: { id: orderId },
+            data: order
         });
     }
 }

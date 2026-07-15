@@ -1,7 +1,7 @@
 import { AccountGuard } from '@/account/account.guard';
-import { CreateOrder } from '@/order/order.dto';
+import { CreateOrder, EditOrder } from '@/order/order.dto';
 import { OrderService } from '@/order/order.service';
-import { Body, Controller, Delete, HttpStatus, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, HttpStatus, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('order')
@@ -27,5 +27,15 @@ export class OrderController {
     @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Order not found" })
     async deleteOrder(@Param("id") id: number) {
         return await this.orderServ.deleteById(id);
+    }
+
+    @Patch(":id")
+    @UseGuards(AccountGuard)
+    @ApiOperation({ summary: "Partially edit order" })
+    @ApiParam({ name: "id", description: "Order ID", type: Number, required: true, example: 1 })
+    @ApiResponse({ status: HttpStatus.OK, description: "Order has been successfully edited" })
+    @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Order not found" })
+    async partiallyEditOrder(@Param("id") id: number, @Body() order: EditOrder) {
+        return await this.orderServ.updateById(id, order);
     }
 }
