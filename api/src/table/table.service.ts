@@ -1,5 +1,5 @@
 import { PrismaService } from '@/prisma/prisma.service';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class TableService {
@@ -11,5 +11,45 @@ export class TableService {
                 tableRef: "asc"
             }
         });
+    }
+
+    async findUniqueByIdWithOrders(language: string, id: number) {
+        const table = await this.prisma.table.findUnique({
+            where: { 
+                id, 
+                orders: {
+                    some: {
+                        status: {
+                            not: 4
+                        }
+                    }
+                }
+            },
+            include: {
+                orders: {
+                    orderBy: {
+                        id: "asc"
+                    },
+                    include: {
+                        dish: {
+                            include: {
+                                names: {
+                                    where: {
+                                        lang: {
+                                            abbrev: language
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        if(!table)
+            throw new NotFoundException(`Table not found : ${id}`);
+
+        return table;
     }
 }
