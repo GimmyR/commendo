@@ -15,18 +15,14 @@ export class TableService {
 
     async findUniqueByIdWithOrders(language: string, id: number) {
         const table = await this.prisma.table.findUnique({
-            where: { 
-                id, 
+            where: { id },
+            include: {
                 orders: {
-                    some: {
+                    where: {
                         status: {
                             not: 4
                         }
-                    }
-                }
-            },
-            include: {
-                orders: {
+                    },
                     orderBy: {
                         id: "asc"
                     },
