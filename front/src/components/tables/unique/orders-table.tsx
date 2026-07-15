@@ -24,7 +24,7 @@ export default function OrdersTable({ orders, addOrder } : Props) {
             <thead>
                 <tr>
                     <th>{t("dish")}</th>
-                    <th>{t("status")}</th>
+                    <th className="col-5 col-lg-2">{t("status")}</th>
                     <th></th>
                     <th></th>
                 </tr>

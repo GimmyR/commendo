@@ -1,8 +1,12 @@
+import { useTranslation } from "react-i18next";
+
 type Props = {
     status: number;
 };
 
 export default function OrderStatus({ status } : Props) {
+    const {t} = useTranslation("table");
+
     return (
         <strong className={`px-2 py-1 
             ${status == 0 ?
@@ -17,14 +21,14 @@ export default function OrderStatus({ status } : Props) {
             }
         `}>
             {status == 0 ? 
-                "To confirm"
+                t("to-confirm")
             : status == 1 ? 
-                "To do"
+                t("to-do")
             : status == 2 ?
-                "In progress"
+                t("in-progress")
             : status == 3 ?
-                "Done"
-            : "Archived"}
+                t("done")
+            : t("archived")}
         </strong>
     );
 }

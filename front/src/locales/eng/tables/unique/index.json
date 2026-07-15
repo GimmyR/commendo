@@ -8,5 +8,10 @@
     "name": "Name",
     "price": "Price",
     "dish": "Dish",
-    "status": "Status"
+    "status": "Status",
+    "to-confirm": "To confirm",
+    "to-do": "To do",
+    "in-progress": "In progress",
+    "done": "Done",
+    "archived": "Archived"
 }

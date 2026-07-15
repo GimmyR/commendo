@@ -8,5 +8,10 @@
     "name": "Nom",
     "price": "Prix",
     "dish": "Plat",
-    "status": "Etat"
+    "status": "Etat",
+    "to-confirm": "A confirmer",
+    "to-do": "A faire",
+    "in-progress": "En préparation",
+    "done": "Terminé",
+    "archived": "Archivé"
 }
