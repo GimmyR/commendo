@@ -15,7 +15,7 @@ type Props = {
 
 export default function UniqueTable() {
     const { id } = useParams<Props>();
-    const {table, loading} = useTable(parseInt(id as string));
+    const {table, loading, bookTable, freeTable} = useTable(parseInt(id as string));
     const {t} = useTranslation("table");
 
     if(loading)
@@ -32,9 +32,17 @@ export default function UniqueTable() {
                         </div>
                         <OrdersTable orders={table.orders}/>
                         <div className="d-flex flex-column flex-lg-row pt-2">
-                            {table.availability == 1 && <Button variant="success" className="rounded-0">
+                            {table.availability == 1 && <Button onClick={bookTable} variant="success" className="rounded-0">
                                 <i className="bi bi-calendar-fill me-2"></i>{t("book-table")}
                             </Button>}
+                            {table.availability == 2 && <>
+                                <Button variant="success" className="rounded-0 mb-3 mb-lg-0 me-lg-2" disabled={table.orders.length == 0}>
+                                    <i className="bi bi-save-fill me-2"></i>{t("save-orders")}
+                                </Button>
+                                <Button onClick={freeTable} variant="secondary" className="rounded-0">
+                                    <i className="bi bi-arrow-clockwise me-2"></i>{t("free-table")}
+                                </Button>
+                            </>}
                         </div>
                         {table.availability == 2 && <Button variant="success" className="position-absolute bottom-0 end-0 me-3 mb-3 pe-lg-3">
                             <i className="bi bi-plus-lg me-0 me-lg-1"></i>

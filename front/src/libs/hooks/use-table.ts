@@ -1,4 +1,4 @@
-import { fetchUniqueTableByIdWithOrders, type TableWithOrders } from "@/libs/actions/tables";
+import { fetchUniqueTableByIdWithOrders, partiallyEditTable, type TableWithOrders } from "@/libs/actions/tables";
 import { useLanguage } from "@/libs/hooks/use-language";
 import { useEffect, useState } from "react";
 
@@ -6,6 +6,28 @@ export default function useTable(id: number) {
     const [table, setTable] = useState<TableWithOrders>();
     const [loading, setLoading] = useState<boolean>(true);
     const language = useLanguage((state) => state.lang);
+
+    const bookTable = async () => {
+        if(table) {
+            const newTable = await partiallyEditTable(table.id, {
+                availability: 2
+            });
+
+            if(newTable)
+                setTable({...table, availability: newTable.availability});
+        }
+    };
+
+    const freeTable = async () => {
+        if(table) {
+            const newTable = await partiallyEditTable(table.id, {
+                availability: 1
+            });
+
+            if(newTable)
+                setTable({...table, availability: newTable.availability});
+        }
+    };
 
     useEffect(() => {
         fetchUniqueTableByIdWithOrders(id)
@@ -16,5 +38,5 @@ export default function useTable(id: number) {
             .catch(err => console.error(err));
     }, [language]);
     
-    return {table, loading};
+    return {table, loading, bookTable, freeTable};
 }

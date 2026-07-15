@@ -15,6 +15,8 @@ export interface TableWithOrders extends ITable {
     orders: Order[];
 }
 
+export type EditTable = Omit<ITable, "id">;
+
 // ========================================= FUNCTIONS ==============================================
 
 export async function fetchAllTables(): Promise<ITable[]> {
@@ -35,5 +37,18 @@ export async function fetchUniqueTableByIdWithOrders(id: number) {
         headers: {
             "Authorization": `Bearer ${token}`
         }
+    });
+}
+
+export async function partiallyEditTable(id: number, table: Partial<EditTable>): Promise<ITable> {
+    const token = useAuth.getState().token;
+
+    return await cmdFetch(`/table/${id}`, {
+        method: "PATCH",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(table)
     });
 }
