@@ -1,10 +1,12 @@
 import Error from "@/components/error";
 import SignedIn from "@/components/signed-in";
 import SignedOut from "@/components/signed-out";
+import DishesModal from "@/components/tables/unique/dishes-modal";
 import OrdersTable from "@/components/tables/unique/orders-table";
 import OrdersTotal from "@/components/tables/unique/orders-total";
 import TableRef from "@/components/tables/unique/table-ref";
 import useTable from "@/libs/hooks/use-table";
+import { useState } from "react";
 import { Button, Col, Row, Spinner } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
@@ -17,6 +19,10 @@ export default function UniqueTable() {
     const { id } = useParams<Props>();
     const {table, loading, bookTable, freeTable} = useTable(parseInt(id as string));
     const {t} = useTranslation("table");
+    const [showDishesModal, setShowDishesModal] = useState<boolean>(false);
+
+    const handleShowDishesModal = () => setShowDishesModal(true);
+    const handleHideDishesModal = () => setShowDishesModal(false);
 
     if(loading)
         return <Spinner className="position-absolute top-50 start-50"/>;
@@ -44,10 +50,11 @@ export default function UniqueTable() {
                                 </Button>
                             </>}
                         </div>
-                        {table.availability == 2 && <Button variant="success" className="position-absolute bottom-0 end-0 me-3 mb-3 pe-lg-3">
+                        {table.availability == 2 && <Button onClick={handleShowDishesModal} variant="success" className="position-absolute bottom-0 end-0 me-3 mb-3 pe-lg-3">
                             <i className="bi bi-plus-lg me-0 me-lg-1"></i>
                             <span className="d-none d-lg-inline">{t("add-order")}</span>
                         </Button>}
+                        <DishesModal show={showDishesModal} onHide={handleHideDishesModal}/>
                     </Col>}
                 </Row>
             </SignedIn>

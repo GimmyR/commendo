@@ -2,5 +2,8 @@
     "book-table": "Book table",
     "add-order": "Order",
     "save-orders": "Save orders",
-    "free-table": "Free table"
+    "free-table": "Free table",
+    "select-dish": "Select dishes",
+    "name": "Name",
+    "price": "Price"
 }

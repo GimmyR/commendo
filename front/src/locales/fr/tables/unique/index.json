@@ -2,5 +2,8 @@
     "book-table": "Réserver",
     "add-order": "Commande",
     "save-orders": "Enregistrer",
-    "free-table": "Débarrasser"
+    "free-table": "Débarrasser",
+    "select-dish": "Choisir des plats",
+    "name": "Nom",
+    "price": "Prix"
 }
