@@ -1,5 +1,6 @@
 import UniqueTable from "@/components/tables/unique";
 import "@/i18n";
+import { fetchAllDishesWithIngredients } from "@/libs/actions/dishes";
 import { fetchUniqueTableByIdWithOrders, type TableWithOrders } from "@/libs/actions/tables";
 import { useAuth } from "@/libs/hooks/use-auth";
 import { CURRENCY } from "@/libs/utils/constants";
@@ -35,6 +36,12 @@ vi.mock("@/libs/actions/tables", () => {
     }
 });
 
+vi.mock("@/libs/actions/dishes", () => {
+    return {
+        fetchAllDishesWithIngredients: vi.fn()
+    };
+});
+
 describe("Test UniqueTable", () => {
     beforeEach(() => {
         vi.restoreAllMocks();
@@ -43,6 +50,11 @@ describe("Test UniqueTable", () => {
     it("Should display table reference", async () => {
         useAuth.getState().login(accessToken);
         vi.mocked(fetchUniqueTableByIdWithOrders).mockResolvedValue(table);
+        vi.mocked(fetchAllDishesWithIngredients).mockResolvedValue({
+            data: [table.orders[0].dish],
+            pages: 1,
+            total: 1
+        });
 
         render(<MemoryRouter>
             <UniqueTable/>
@@ -59,6 +71,11 @@ describe("Test UniqueTable", () => {
     it("Should display table orders", async () => {
         useAuth.getState().login(accessToken);
         vi.mocked(fetchUniqueTableByIdWithOrders).mockResolvedValue(table);
+        vi.mocked(fetchAllDishesWithIngredients).mockResolvedValue({
+            data: [table.orders[0].dish],
+            pages: 1,
+            total: 1
+        });
 
         render(<MemoryRouter>
             <UniqueTable/>
@@ -81,6 +98,11 @@ describe("Test UniqueTable", () => {
     it("Should display book table button", async () => {
         useAuth.getState().login(accessToken);
         vi.mocked(fetchUniqueTableByIdWithOrders).mockResolvedValue({...table, availability: 1, orders: []});
+        vi.mocked(fetchAllDishesWithIngredients).mockResolvedValue({
+            data: [table.orders[0].dish],
+            pages: 1,
+            total: 1
+        });
 
         render(<MemoryRouter>
             <UniqueTable/>
@@ -95,6 +117,11 @@ describe("Test UniqueTable", () => {
     it("Should display confirm and free table button", async () => {
         useAuth.getState().login(accessToken);
         vi.mocked(fetchUniqueTableByIdWithOrders).mockResolvedValue(table);
+        vi.mocked(fetchAllDishesWithIngredients).mockResolvedValue({
+            data: [table.orders[0].dish],
+            pages: 1,
+            total: 1
+        });
 
         render(<MemoryRouter>
             <UniqueTable/>

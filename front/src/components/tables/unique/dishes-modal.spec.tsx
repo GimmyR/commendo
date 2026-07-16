@@ -29,15 +29,21 @@ describe("Test DishesModal", () => {
         vi.restoreAllMocks();
     });
 
-    it("Should display header", () => {
-        vi.mocked(fetchAllDishesWithIngredients).mockResolvedValue([dish]);
+    it("Should display header", async () => {
+        vi.mocked(fetchAllDishesWithIngredients).mockResolvedValue({
+            data: [dish],
+            pages: 1,
+            total: 1
+        });
         
         render(<MemoryRouter>
             <DishesModal show orders={[]} addOrder={() => {}} onHide={() => {}}/>
         </MemoryRouter>);
 
-        const header = screen.getByText("Choisir des plats");
-        expect(header).toBeInTheDocument();
+        await waitFor(() => {
+            const header = screen.getByText("Choisir des plats");
+            expect(header).toBeInTheDocument();
+        });
     });
 
     it("Should display table with dishes", async () => {
