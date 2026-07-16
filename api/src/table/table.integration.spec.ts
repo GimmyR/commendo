@@ -88,4 +88,20 @@ describe("Test TableController", () => {
         expect(body.tableRef).toBe("01");
         expect(body.availability).toBe(2);
     });
+
+    it("Should free table", async () => {
+        const res = await fetch(`${apiURL}/api/table/2/free?lang=fr`, {
+            method: "PATCH",
+            headers: {
+                "Authorization": `Bearer ${mockToken}`
+            }
+        });
+
+        expect(res.status).toBe(HttpStatus.OK);
+        const body: Table = await res.json();
+        expect(body).toBeDefined();
+        expect(body.id).toBe(2);
+        expect(body.tableRef).toBe("02");
+        expect(body.availability).toBe(1);
+    });
 });
