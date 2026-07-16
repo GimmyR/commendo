@@ -6,7 +6,7 @@ type Props = {
 };
 
 export default function OrderStatus({ status } : Props) {
-    const {t} = useTranslation("table");
+    const {t} = useTranslation("orders");
 
     return (
         <strong className={`px-2 py-1 text-bg-${orderStates[status].color}`}>

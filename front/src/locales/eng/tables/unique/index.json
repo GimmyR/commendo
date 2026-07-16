@@ -1,5 +1,4 @@
 {
-    "noOrders": "No orders",
     "book-table": "Book table",
     "add-order": "Order",
     "confirm-orders": "Confirm orders",
@@ -7,11 +6,5 @@
     "select-dish": "Select dishes",
     "name": "Name",
     "price": "Price",
-    "dish": "Dish",
-    "status": "Status",
-    "to-confirm": "To confirm",
-    "to-do": "To do",
-    "in-progress": "In progress",
-    "done": "Done",
-    "archived": "Archived"
+    "dish": "Dish"
 }

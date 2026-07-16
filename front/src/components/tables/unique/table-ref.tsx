@@ -5,7 +5,7 @@ type Props = {
 };
 
 export default function TableRef({ reference } : Props) {
-    const { t } = useTranslation("tablesTable");
+    const { t } = useTranslation("tables");
 
     return (
         <div className="d-flex flex-row align-items-center">

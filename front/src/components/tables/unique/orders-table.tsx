@@ -13,11 +13,11 @@ type Props = {
 };
 
 export default function TableOrdersTable({ orders, addOrder, deleteOrder } : Props) {
-    const {t} = useTranslation("table");
+    const {t} = useTranslation("orders");
 
     if(orders.length == 0)
         return <div className="text-center border mb-4" style={{ paddingTop: "50px", paddingBottom: "50px" }}>
-            <strong className="align-middle text-uppercase">{t("noOrders")}</strong>
+            <strong className="align-middle text-uppercase">{t("no-orders")}</strong>
         </div>;
 
     return (

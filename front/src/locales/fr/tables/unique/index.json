@@ -1,5 +1,4 @@
 {
-    "noOrders": "Aucune commande",
     "book-table": "Réserver",
     "add-order": "Commande",
     "confirm-orders": "Confirmer",
@@ -7,11 +6,5 @@
     "select-dish": "Choisir des plats",
     "name": "Nom",
     "price": "Prix",
-    "dish": "Plat",
-    "status": "Etat",
-    "to-confirm": "A confirmer",
-    "to-do": "A faire",
-    "in-progress": "En préparation",
-    "done": "Terminé",
-    "archived": "Archivé"
+    "dish": "Plat"
 }
