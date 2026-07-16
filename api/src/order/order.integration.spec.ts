@@ -1,3 +1,4 @@
+import { CreateOrder } from "@/order/order.dto";
 import { PrismaService } from "@/prisma/prisma.service";
 import { initIntegrationTest } from "@/test.helper";
 import { HttpStatus, INestApplication } from "@nestjs/common";
@@ -64,5 +65,25 @@ describe("Test OrderController", () => {
         expect(orders[0].tableId).toBe(1);
         expect(orders[0].dishId).toBe(1);
         expect(orders[0].status).toBe(5);
+    });
+
+    it("Should create order", async () => {
+        const order: CreateOrder = new CreateOrder({
+            dishId: 1,
+            tableId: 1
+        });
+
+        const res = await fetch(`${apiURL}/api/order`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${mockToken}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(order)
+        });
+
+        expect(res.status).toBe(HttpStatus.CREATED);
+        const newOrder: Order = await res.json();
+        expect(newOrder.status).toBe(0);
     });
 });

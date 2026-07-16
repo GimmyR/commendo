@@ -12,6 +12,10 @@ export class CreateOrder implements Partial<Order> {
     @IsPositive({ message: "Dish ID should be a positive number" })
     @ApiProperty({ example: 1 })
     dishId!: number;
+
+    constructor(order: Partial<CreateOrder>) {
+        Object.assign(this, order);
+    }
 }
 
 export class EditOrder implements Partial<Order> {
