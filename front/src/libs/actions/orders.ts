@@ -1,4 +1,5 @@
 import type { DishWithIngredients } from "@/libs/actions/dishes";
+import type { ITable } from "@/libs/actions/tables";
 import { useAuth } from "@/libs/hooks/use-auth";
 import { cmdFetch } from "@/libs/utils/fetch";
 
@@ -10,6 +11,10 @@ export interface Order {
     status: number;
 }
 
+export interface OrderWithTableAndDish extends Order {
+    table: ITable;
+}
+
 export interface CreateOrder {
     tableId: number;
     dishId: number;
@@ -18,6 +23,15 @@ export interface CreateOrder {
 export interface EditOrder {
     status: number;
 }
+
+export const orderStates = [
+    { key: "to-confirm", color: "secondary" },
+    { key: "to-do", color: "primary" },
+    { key: "in-progress", color: "warning" },
+    { key: "done", color: "success" },
+    { key: "cancelled", color: "danger" },
+    { key: "archived", color: "dark" }
+];
 
 // ========================================= FUNCTIONS ==============================================
 
@@ -72,5 +86,15 @@ export async function partiallyEditOrder(id: number, order: EditOrder): Promise<
             "Content-Type": "application/json"
         },
         body: JSON.stringify(order)
+    });
+}
+
+export async function fetchAllOrders(): Promise<OrderWithTableAndDish[]> {
+    const token = useAuth.getState().token;
+
+    return await cmdFetch(`/order`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
     });
 }

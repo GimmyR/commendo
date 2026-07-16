@@ -1,6 +1,7 @@
 {
     "dishes": "Plats",
     "tables": "Tables",
+    "orders": "Commandes",
     "ingredients": "Ingrédients",
     "inventory": "Inventaire",
     "employees": "Employés"

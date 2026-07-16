@@ -25,7 +25,7 @@ export default function TableOrdersTable({ orders, addOrder, deleteOrder } : Pro
             <thead>
                 <tr>
                     <th>{t("dish")}</th>
-                    <th className="col-5 col-lg-2 text-center">{t("status")}</th>
+                    <th className="col-5 col-lg-3 text-center">{t("status")}</th>
                     <th></th>
                     <th></th>
                 </tr>

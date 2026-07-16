@@ -21,7 +21,7 @@ export class TableService {
                 orders: {
                     where: {
                         status: {
-                            not: 4
+                            lt: 4
                         }
                     },
                     orderBy: {

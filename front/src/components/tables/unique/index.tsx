@@ -30,8 +30,8 @@ export default function UniqueTable() {
     return (
         <>
             <SignedIn>
-                <Row className="pt-5 px-3 px-lg-5">
-                    {table && <Col>
+                <Row className="justify-content-center pt-5 px-3 px-lg-5">
+                    {table && <Col className="col-12 col-lg-7">
                         <div className="d-flex flex-row justify-content-start align-items-center mb-4">
                             <TableRef reference={table.tableRef}/>
                         </div>

@@ -8,7 +8,7 @@ type Props = {
     onHide: () => void;
 };
 
-const options = [ "dishes", "tables", "ingredients", "inventory", "employees" ];
+const options = [ "dishes", "tables", "orders", "ingredients", "inventory", "employees" ];
 
 export default function Menu({ show, onHide } : Props) {
     const { t } = useTranslation("menu");

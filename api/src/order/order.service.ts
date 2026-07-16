@@ -29,4 +29,24 @@ export class OrderService {
             data: order
         });
     }
+
+    async findAll(language: string) {
+        return await this.prisma.order.findMany({
+            orderBy: { id: "asc" },
+            include: {
+                table: true,
+                dish: {
+                    include: {
+                        names: {
+                            where: {
+                                lang: {
+                                    abbrev: language
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
 }

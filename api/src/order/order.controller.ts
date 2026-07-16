@@ -1,8 +1,8 @@
 import { AccountGuard } from '@/account/account.guard';
 import { CreateOrder, EditOrder } from '@/order/order.dto';
 import { OrderService } from '@/order/order.service';
-import { Body, Controller, Delete, HttpStatus, Param, Patch, Post, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('order')
 @ApiTags('order')
@@ -37,5 +37,15 @@ export class OrderController {
     @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Order not found" })
     async partiallyEditOrder(@Param("id") id: number, @Body() order: EditOrder) {
         return await this.orderServ.updateById(id, order);
+    }
+
+    @Get()
+    @UseGuards(AccountGuard)
+    @ApiOperation({ summary: "Find all orders" })
+    @ApiQuery({ name: "lang", type: String, required: true, example: "fr" })
+    @ApiResponse({ status: HttpStatus.OK, description: "All orders have been successfully returned" })
+    @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: "Access token is missing or invalid" })
+    async findAllOrders(@Query("lang") lang: string) {
+        return await this.orderServ.findAll(lang);
     }
 }

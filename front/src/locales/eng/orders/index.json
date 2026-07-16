@@ -1,0 +1,11 @@
+{
+    "dish": "Dish",
+    "price": "Price",
+    "status": "Status",
+    "to-confirm": "To confirm",
+    "to-do": "To do",
+    "in-progress": "In progress",
+    "done": "Done",
+    "cancelled": "Cancelled",
+    "archived": "Archived"
+}

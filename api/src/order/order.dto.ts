@@ -23,7 +23,8 @@ export class EditOrder implements Partial<Order> {
         * 1: To do
         * 2: In progress
         * 3: Done
-        * 4: Archived`, 
+        * 4: Cancelled
+        * 5: Archived`, 
         example: 1 
     })
     status!: number;

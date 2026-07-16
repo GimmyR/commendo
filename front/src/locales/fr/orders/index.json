@@ -1,0 +1,11 @@
+{
+    "dish": "Plat",
+    "price": "Prix",
+    "status": "Etat",
+    "to-confirm": "A confirmer",
+    "to-do": "A faire",
+    "in-progress": "En préparation",
+    "done": "Terminée",
+    "cancelled": "Annulée",
+    "archived": "Archivée"
+}

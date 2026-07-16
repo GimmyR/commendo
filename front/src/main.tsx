@@ -8,6 +8,7 @@ import "./i18n";
 import Dishes from '@/components/dishes';
 import Tables from '@/components/tables';
 import UniqueTable from '@/components/tables/unique';
+import Orders from '@/components/orders';
 
 const router = createBrowserRouter([{
     path: "/",
@@ -30,6 +31,10 @@ const router = createBrowserRouter([{
                     element: <UniqueTable/>
                 }
             ]
+        },
+        {
+            path: "orders",
+            element: <Orders/>
         }
     ]
 }]);
