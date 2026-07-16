@@ -15,7 +15,7 @@ export default function Orders() {
         <>
             <SignedIn>
                 <Row className="justify-content-center pt-5 px-2 px-lg-5">
-                    <Col className="col-12 col-lg-7">
+                    <Col className="col-12 col-lg-7 col-xxl-5">
                         <OrdersTable orders={orders} changeStatus={changeStatus}/>
                     </Col>
                 </Row>
