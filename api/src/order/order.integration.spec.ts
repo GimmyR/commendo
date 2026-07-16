@@ -105,4 +105,17 @@ describe("Test OrderController", () => {
         const newOrder: Order = await res.json();
         expect(newOrder.status).toBe(1);
     });
+
+    it("Should delete order", async () => {
+        const res = await fetch(`${apiURL}/api/order/1`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${mockToken}`
+            }
+        });
+
+        expect(res.status).toBe(HttpStatus.OK);
+        const newOrder: Order = await res.json();
+        expect(newOrder.id).toBe(1);
+    });
 });
