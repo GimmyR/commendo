@@ -11,7 +11,7 @@ type Props = {
 };
 
 export default function SearchDishModal({ filter, setFilter } : Props) {
-    const {t} = useTranslation("searchDishModal");
+    const {t} = useTranslation("dishes");
     const max = 9999999999;
     const [name, setName] = useState<string>(filter.name ?? "");
     const [minPrice, setMinPrice] = useState<number>(filter.minPrice ?? 0);

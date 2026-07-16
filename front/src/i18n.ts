@@ -10,8 +10,8 @@ import frSignOutModal from "./locales/fr/sign-out-modal.json";
 import engSignOutModal from "./locales/eng/sign-out-modal.json";
 import frSignInModal from "./locales/fr/sign-in-modal.json";
 import engSignInModal from "./locales/eng/sign-in-modal.json";
-import frSearchDishModal from "./locales/fr/dishes/search-modal.json";
-import engSearchDishModal from "./locales/eng/dishes/search-modal.json";
+import frDishes from "./locales/fr/dishes/index.json";
+import engDishes from "./locales/eng/dishes/index.json";
 import frTablesTable from "./locales/fr/tables/table.json";
 import engTablesTable from "./locales/eng/tables/table.json";
 import frTable from "./locales/fr/tables/unique/index.json";
@@ -28,7 +28,7 @@ i18n.use(initReactI18next)
                 menu: frMenu,
                 signOutModal: frSignOutModal,
                 signInModal: frSignInModal,
-                searchDishModal: frSearchDishModal,
+                dishes: frDishes,
                 tablesTable: frTablesTable,
                 table: frTable,
                 orders: frOrders
@@ -39,7 +39,7 @@ i18n.use(initReactI18next)
                 menu: engMenu,
                 signOutModal: engSignOutModal,
                 signInModal: engSignInModal,
-                searchDishModal: engSearchDishModal,
+                dishes: engDishes,
                 tablesTable: engTablesTable,
                 table: engTable,
                 orders: engOrders
