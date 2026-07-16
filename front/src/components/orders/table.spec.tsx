@@ -2,7 +2,6 @@ import OrdersTable from "@/components/orders/table";
 import "@/i18n";
 import type { OrderWithTableAndDish } from "@/libs/actions/orders";
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
 
 const order: OrderWithTableAndDish = {
     id: 1,
@@ -34,10 +33,7 @@ describe("Test OrdersTable", () => {
     });
 
     it("Should display table of orders", () => {
-        render(<MemoryRouter>
-            <OrdersTable orders={[order]} changeStatus={vi.fn()}/>
-        </MemoryRouter>);
-        
+        render(<OrdersTable orders={[order]} changeStatus={vi.fn()}/>);
         const tableColumn = screen.getByText("Table");
         expect(tableColumn).toBeInTheDocument();
         const dishColumn = screen.getByText("Plat");
@@ -51,10 +47,7 @@ describe("Test OrdersTable", () => {
     });
 
     it("Should display select with all states", () => {
-        render(<MemoryRouter>
-            <OrdersTable orders={[order]} changeStatus={vi.fn()}/>
-        </MemoryRouter>);
-
+        render(<OrdersTable orders={[order]} changeStatus={vi.fn()}/>);
         const status1 = screen.getByText("A confirmer");
         expect(status1).toBeInTheDocument();
         const status2 = screen.getByText("A faire");
