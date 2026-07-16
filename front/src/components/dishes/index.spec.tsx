@@ -12,7 +12,7 @@ const dish: DishWithIngredients = {
     ingredients: []
 };
 
-vi.mock('@/libs/actions/dish', () => {
+vi.mock('@/libs/actions/dishes', () => {
     return {
         fetchAllDishesWithIngredients: vi.fn()
     };

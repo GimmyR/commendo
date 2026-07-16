@@ -3,6 +3,7 @@ import { fetchAllTables, type ITable } from "@/libs/actions/tables";
 import { useAuth } from "@/libs/hooks/use-auth";
 import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import "@/i18n";
 
 vi.mock("@/libs/actions/tables", () => {
     return {
