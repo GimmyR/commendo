@@ -1,4 +1,5 @@
 import { PrismaService } from "@/prisma/prisma.service";
+import { EditTable } from "@/table/table.dto";
 import { initIntegrationTest } from "@/test.helper";
 import { HttpStatus, INestApplication } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
@@ -32,6 +33,7 @@ describe("Test TableController", () => {
 
         await prisma.$executeRawUnsafe(`
             INSERT INTO "public".cmd_table ("tableRef", availability) VALUES ('01', 1);
+            INSERT INTO "public".cmd_table ("tableRef", availability) VALUES ('02', 2);
         `);
     });
 
@@ -44,13 +46,13 @@ describe("Test TableController", () => {
 
         expect(res.status).toBe(HttpStatus.OK);
         const body: Table[] = await res.json();
-        expect(body.length).toBe(1);
+        expect(body.length).toBe(2);
         expect(body[0].id).toBe(1);
         expect(body[0].tableRef).toBe("01");
         expect(body[0].availability).toBe(1);
     });
 
-    it("Should return unqiue table", async () => {
+    it("Should return unique table", async () => {
         const res = await fetch(`${apiURL}/api/table/1`, {
             headers: {
                 "Authorization": `Bearer ${mockToken}`
@@ -63,5 +65,27 @@ describe("Test TableController", () => {
         expect(body.id).toBe(1);
         expect(body.tableRef).toBe("01");
         expect(body.availability).toBe(1);
+    });
+
+    it("Should edit table", async () => {
+        const table: EditTable = new EditTable({
+            availability: 2
+        });
+
+        const res = await fetch(`${apiURL}/api/table/1`, {
+            method: "PATCH",
+            headers: {
+                "Authorization": `Bearer ${mockToken}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(table)
+        });
+
+        expect(res.status).toBe(HttpStatus.OK);
+        const body: Table = await res.json();
+        expect(body).toBeDefined();
+        expect(body.id).toBe(1);
+        expect(body.tableRef).toBe("01");
+        expect(body.availability).toBe(2);
     });
 });
