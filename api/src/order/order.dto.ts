@@ -32,4 +32,8 @@ export class EditOrder implements Partial<Order> {
         example: 1 
     })
     status!: number;
+
+    constructor(order: Partial<EditOrder>) {
+        Object.assign(this, order);
+    }
 }

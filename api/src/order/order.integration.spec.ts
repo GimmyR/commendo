@@ -1,4 +1,4 @@
-import { CreateOrder } from "@/order/order.dto";
+import { CreateOrder, EditOrder } from "@/order/order.dto";
 import { PrismaService } from "@/prisma/prisma.service";
 import { initIntegrationTest } from "@/test.helper";
 import { HttpStatus, INestApplication } from "@nestjs/common";
@@ -85,5 +85,24 @@ describe("Test OrderController", () => {
         expect(res.status).toBe(HttpStatus.CREATED);
         const newOrder: Order = await res.json();
         expect(newOrder.status).toBe(0);
+    });
+
+    it("Should edit order", async () => {
+        const order: EditOrder = new EditOrder({
+            status: 1
+        });
+
+        const res = await fetch(`${apiURL}/api/order/1`, {
+            method: "PATCH",
+            headers: {
+                "Authorization": `Bearer ${mockToken}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(order)
+        });
+
+        expect(res.status).toBe(HttpStatus.OK);
+        const newOrder: Order = await res.json();
+        expect(newOrder.status).toBe(1);
     });
 });
