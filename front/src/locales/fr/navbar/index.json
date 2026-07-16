@@ -1,0 +1,12 @@
+{
+    "search-title": "Rechercher",
+    "login": "Connexion",
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "sign-in": "Se connecter",
+    "sign-out": "Déconnexion",
+    "sign-out-message": "Tu es sûr de vouloir te déconnecter ?",
+    "sign-out-cancel": "Annuler",
+    "sign-out-confirm": "Confirmer",
+    "settings": "Paramètres"
+}

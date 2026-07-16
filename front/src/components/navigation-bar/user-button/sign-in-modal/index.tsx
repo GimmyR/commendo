@@ -13,7 +13,7 @@ type Props = {
 const credentialsPlaceholder: SignIn = { username: "", password: "" };
 
 export default function SignInModal({ isShown, close } : Props) {
-    const { t } = useTranslation("signInModal");
+    const { t } = useTranslation("navbar");
     const [credentials, setCredentials] = useState<SignIn>(credentialsPlaceholder);
     const [error, setError] = useState<string | undefined>();
     const login = useAuth((state) => state.login);

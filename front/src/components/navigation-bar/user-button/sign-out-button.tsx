@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
 export default function SignOutButton() {
-    const { t } = useTranslation("userButtonMenu");
+    const { t } = useTranslation("navbar");
     const [isShown, setIsShown] = useState(false);
 
     const showSignOut = () => {

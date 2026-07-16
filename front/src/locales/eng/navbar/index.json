@@ -1,0 +1,12 @@
+{
+    "search-title": "Search",
+    "login": "Login",
+    "username": "Username",
+    "password": "Password",
+    "sign-in": "Sign in",
+    "sign-out": "Sign out",
+    "sign-out-message": "Do you really want to log out ?",
+    "sign-out-cancel": "Cancel",
+    "sign-out-confirm": "Log out",
+    "settings": "Settings"
+}

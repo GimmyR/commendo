@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 
 export default function SignInButton() {
-    const { t } = useTranslation("userButtonMenu");
+    const { t } = useTranslation("navbar");
     const [isShown, setIsShown] = useState(false);
 
     const showSignIn = () => {

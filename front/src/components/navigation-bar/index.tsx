@@ -23,7 +23,7 @@ export default function NavigationBar() {
                         <SignedIn>
                             <IconLink to="#" icon="list" iconClass="fs-3" onClick={handleShow}/>
                         </SignedIn>
-                        <Navbar.Brand className="text-light fw-bold">Commendo</Navbar.Brand>
+                        <Navbar.Brand href="/" className="text-light fw-bold">Commendo</Navbar.Brand>
                     </Stack>
                     <LargeSearchButton onClick={handleShowSearchModal}/>
                     <Stack direction="horizontal" gap={3}>
