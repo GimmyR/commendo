@@ -1,4 +1,7 @@
 {
+    "no-orders": "No orders",
+    "current-orders": "Current orders",
+    "others": "Others",
     "dish": "Dish",
     "price": "Price",
     "status": "Status",

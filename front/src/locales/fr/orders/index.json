@@ -1,4 +1,7 @@
 {
+    "no-orders": "Aucune commande",
+    "current-orders": "Commandes courantes",
+    "others": "Autres commandes",
     "dish": "Plat",
     "price": "Prix",
     "status": "Etat",

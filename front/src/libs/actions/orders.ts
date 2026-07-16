@@ -98,3 +98,16 @@ export async function fetchAllOrders(): Promise<OrderWithTableAndDish[]> {
         }
     });
 }
+
+export function sortOrders(orders: OrderWithTableAndDish[]): (OrderWithTableAndDish[])[] {
+    const first: OrderWithTableAndDish[] = [];
+    const second: OrderWithTableAndDish[] = [];
+
+    for(const order of orders) {
+        if([1, 2].includes(order.status))
+            first.push(order);
+        else second.push(order);
+    }
+
+    return [first, (second.sort((a, b) => b.id - a.id))];
+}
