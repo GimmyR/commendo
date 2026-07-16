@@ -2,7 +2,7 @@ import Error from "@/components/error";
 import SignedIn from "@/components/signed-in";
 import SignedOut from "@/components/signed-out";
 import DishesModal from "@/components/tables/unique/dishes-modal";
-import OrdersTable from "@/components/tables/unique/orders-table";
+import TableOrdersTable from "@/components/tables/unique/orders-table";
 import TableRef from "@/components/tables/unique/table-ref";
 import { disableSaveOrder } from "@/libs/actions/orders";
 import useTable from "@/libs/hooks/use-table";
@@ -35,7 +35,7 @@ export default function UniqueTable() {
                         <div className="d-flex flex-row justify-content-start align-items-center mb-4">
                             <TableRef reference={table.tableRef}/>
                         </div>
-                        <OrdersTable orders={table.orders} addOrder={addOrder} deleteOrder={deleteOrder}/>
+                        <TableOrdersTable orders={table.orders} addOrder={addOrder} deleteOrder={deleteOrder}/>
                         <div className="d-flex flex-column flex-lg-row pt-2">
                             {table.availability == 1 && <Button onClick={bookTable} variant="success" className="rounded-0">
                                 <i className="bi bi-calendar-fill me-2"></i>{t("book-table")}

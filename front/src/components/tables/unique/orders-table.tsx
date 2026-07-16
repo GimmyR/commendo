@@ -12,7 +12,7 @@ type Props = {
     deleteOrder: (order: Order) => void;
 };
 
-export default function OrdersTable({ orders, addOrder, deleteOrder } : Props) {
+export default function TableOrdersTable({ orders, addOrder, deleteOrder } : Props) {
     const {t} = useTranslation("table");
 
     if(orders.length == 0)
