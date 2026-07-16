@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default function TablesTable({ tables } : Props) {
-    const {t} = useTranslation("tablesTable");
+    const {t} = useTranslation("tables");
 
     return (
         <Table className="text-center">

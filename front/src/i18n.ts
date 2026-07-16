@@ -12,8 +12,8 @@ import frSignInModal from "./locales/fr/sign-in-modal.json";
 import engSignInModal from "./locales/eng/sign-in-modal.json";
 import frDishes from "./locales/fr/dishes/index.json";
 import engDishes from "./locales/eng/dishes/index.json";
-import frTablesTable from "./locales/fr/tables/table.json";
-import engTablesTable from "./locales/eng/tables/table.json";
+import frTables from "./locales/fr/tables/index.json";
+import engTables from "./locales/eng/tables/index.json";
 import frTable from "./locales/fr/tables/unique/index.json";
 import engTable from "./locales/eng/tables/unique/index.json";
 import frOrders from "./locales/fr/orders/index.json";
@@ -29,7 +29,7 @@ i18n.use(initReactI18next)
                 signOutModal: frSignOutModal,
                 signInModal: frSignInModal,
                 dishes: frDishes,
-                tablesTable: frTablesTable,
+                tables: frTables,
                 table: frTable,
                 orders: frOrders
             },
@@ -40,7 +40,7 @@ i18n.use(initReactI18next)
                 signOutModal: engSignOutModal,
                 signInModal: engSignInModal,
                 dishes: engDishes,
-                tablesTable: engTablesTable,
+                tables: engTables,
                 table: engTable,
                 orders: engOrders
             }
