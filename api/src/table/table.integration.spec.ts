@@ -49,4 +49,19 @@ describe("Test TableController", () => {
         expect(body[0].tableRef).toBe("01");
         expect(body[0].availability).toBe(1);
     });
+
+    it("Should return unqiue table", async () => {
+        const res = await fetch(`${apiURL}/api/table/1`, {
+            headers: {
+                "Authorization": `Bearer ${mockToken}`
+            }
+        });
+
+        expect(res.status).toBe(HttpStatus.OK);
+        const body: Table = await res.json();
+        expect(body).toBeDefined();
+        expect(body.id).toBe(1);
+        expect(body.tableRef).toBe("01");
+        expect(body.availability).toBe(1);
+    });
 });
