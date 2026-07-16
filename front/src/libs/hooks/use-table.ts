@@ -1,6 +1,6 @@
 import type { DishWithIngredients } from "@/libs/actions/dishes";
 import { createOrder, partiallyEditOrder, removeOrder, type Order } from "@/libs/actions/orders";
-import { fetchUniqueTableByIdWithOrders, partiallyEditTable, type TableWithOrders } from "@/libs/actions/tables";
+import { clearTable, fetchUniqueTableByIdWithOrders, partiallyEditTable, type TableWithOrders } from "@/libs/actions/tables";
 import { useLanguage } from "@/libs/hooks/use-language";
 import { useEffect, useState } from "react";
 
@@ -22,13 +22,10 @@ export default function useTable(id: number) {
 
     const freeTable = async () => {
         if(table) {
-            // Archiver les commandes ici
-            const newTable = await partiallyEditTable(table.id, {
-                availability: 1
-            });
+            const newTable = await clearTable(table.id);
 
             if(newTable)
-                setTable({...table, availability: newTable.availability});
+                setTable({...newTable});
         }
     };
 

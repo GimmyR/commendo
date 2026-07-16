@@ -52,3 +52,15 @@ export async function partiallyEditTable(id: number, table: Partial<EditTable>):
         body: JSON.stringify(table)
     });
 }
+
+export async function clearTable(id: number): Promise<TableWithOrders> {
+    const token = useAuth.getState().token;
+    const lang = useLanguage.getState().lang;
+
+    return await cmdFetch(`/table/${id}/free?lang=${lang}`, {
+        method: "PATCH",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+}

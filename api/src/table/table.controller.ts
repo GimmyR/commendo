@@ -41,4 +41,16 @@ export class TableController {
     async partiallyEditTable(@Param("id") id: number, @Body() table: EditTable) {
         return await this.tableServ.update(id, table);
     }
+
+    @Patch(":id/free")
+    @UseGuards(AccountGuard)
+    @ApiOperation({ summary: "Free table" })
+    @ApiParam(tableIdDoc)
+    @ApiQuery(langDoc)
+    @ApiResponse({ status: HttpStatus.OK, description: "Table has been successfully cleared" })
+    @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Table not found" })
+    async freeTable(@Param("id") tableId: number, @Query("lang") lang: string) {
+        await this.tableServ.free(tableId);
+        return await this.tableServ.findUniqueByIdWithOrders(lang, tableId);
+    }
 }

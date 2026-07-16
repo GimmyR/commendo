@@ -56,4 +56,44 @@ export class TableService {
             data: table
         });
     }
+
+    async free(tableId: number) {
+        await this.prisma.order.deleteMany({
+            where: {
+                tableId,
+                status: 0
+            }
+        });
+
+        await this.prisma.order.updateMany({
+            where: {
+                tableId,
+                status: {
+                    in: [1, 2]
+                }
+            },
+            data: {
+                status: 4
+            }
+        });
+
+        await this.prisma.order.updateMany({
+            where: {
+                tableId,
+                status: 3
+            },
+            data: {
+                status: 5
+            }
+        });
+
+        await this.prisma.table.update({
+            where: {
+                id: tableId
+            },
+            data: {
+                availability: 1
+            }
+        });
+    }
 }
