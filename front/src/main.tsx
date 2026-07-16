@@ -1,11 +1,14 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
 import Layout from './components/layout';
 import "./i18n";
 import Dishes from '@/components/dishes';
+import Tables from '@/components/tables';
+import UniqueTable from '@/components/tables/unique';
+import Orders from '@/components/orders';
 
 const router = createBrowserRouter([{
     path: "/",
@@ -14,6 +17,24 @@ const router = createBrowserRouter([{
         {
             path: "",
             element: <Dishes/>
+        },
+        {
+            path: "tables",
+            element: <Outlet/>,
+            children: [
+                {
+                    path: "",
+                    element: <Tables/>
+                },
+                {
+                    path: ":id",
+                    element: <UniqueTable/>
+                }
+            ]
+        },
+        {
+            path: "orders",
+            element: <Orders/>
         }
     ]
 }]);

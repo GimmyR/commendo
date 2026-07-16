@@ -1,5 +1,5 @@
 import SearchModal from "@/components/search-modal";
-import type { FilterDish } from "@/libs/actions/dish";
+import type { FilterDish } from "@/libs/actions/dishes";
 import { useSearch } from "@/libs/hooks/use-search";
 import { useState, type ChangeEvent, type SubmitEvent } from "react";
 import { Button, Form } from "react-bootstrap";
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export default function SearchDishModal({ filter, setFilter } : Props) {
-    const {t} = useTranslation("searchDishModal");
+    const {t} = useTranslation("dishes");
     const max = 9999999999;
     const [name, setName] = useState<string>(filter.name ?? "");
     const [minPrice, setMinPrice] = useState<number>(filter.minPrice ?? 0);

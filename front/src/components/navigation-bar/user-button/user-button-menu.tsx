@@ -7,7 +7,7 @@ import SignOutButton from "@/components/navigation-bar/user-button/sign-out-butt
 import { useTranslation } from "react-i18next";
 
 export default function UserButtonMenu() {
-    const { t } = useTranslation("userButtonMenu");
+    const { t } = useTranslation("navbar");
 
     return (
         <Dropdown.Menu>

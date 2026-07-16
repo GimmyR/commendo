@@ -5,7 +5,7 @@ import "@/i18n";
 describe("Test SignInButton", () => {
     it("Should display button with the correct title", () => {
         render(<SignInButton/>);
-        const btn = screen.getByRole("button", { name: /connexion/i });
+        const btn = screen.getByRole("button", { name: "Se connecter" });
         expect(btn).toBeInTheDocument();
     });
 });

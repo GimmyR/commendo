@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default function SignOutModal({ isShown, close } : Props) {
-    const { t } = useTranslation("signOutModal");
+    const { t } = useTranslation("navbar");
     const logout = useAuth((state) => state.logout);
 
     const confirm = () => {
@@ -21,11 +21,11 @@ export default function SignOutModal({ isShown, close } : Props) {
     return (
         <Modal show={isShown} onHide={close}>
             <Modal.Body className="text-center">
-                {t("message")}
+                {t("sign-out-message")}
             </Modal.Body>
             <Modal.Footer className="justify-content-center">
-                <Button variant="secondary" onClick={close} className="col-5">{t("cancel")}</Button>
-                <Button variant="danger" onClick={confirm} className="col-5">{t("confirm")}</Button>
+                <Button variant="secondary" onClick={close} className="col-5">{t("sign-out-cancel")}</Button>
+                <Button variant="danger" onClick={confirm} className="col-5">{t("sign-out-confirm")}</Button>
             </Modal.Footer>
         </Modal>
     );

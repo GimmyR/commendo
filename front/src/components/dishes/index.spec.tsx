@@ -1,5 +1,5 @@
 import Dishes from "@/components/dishes";
-import { fetchAllDishesWithIngredients, type DishWithIngredients } from "@/libs/actions/dish";
+import { fetchAllDishesWithIngredients, type DishWithIngredients } from "@/libs/actions/dishes";
 import { render, screen, waitFor } from "@testing-library/react";
 
 const dish: DishWithIngredients = {
@@ -12,7 +12,7 @@ const dish: DishWithIngredients = {
     ingredients: []
 };
 
-vi.mock('@/libs/actions/dish', () => {
+vi.mock('@/libs/actions/dishes', () => {
     return {
         fetchAllDishesWithIngredients: vi.fn()
     };
