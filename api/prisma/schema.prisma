@@ -53,11 +53,12 @@ model Account {
 
 model Dish {
     id                  Int             @id @default(autoincrement())
-    names               DishName[]
     price               Float
+    image               String?         @unique
+    active              Boolean         @default(true)
+    names               DishName[]
     ingredients         DishIngredient[]
     orders              Order[]
-    active              Boolean         @default(true)
     @@map("cmd_dish")
 }
 
