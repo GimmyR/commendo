@@ -11,6 +11,11 @@ It is built with:
 - **PostgreSQL** for data persistence  
 - **Docker** for containerized deployment
 
+## Live Demo
+
+<video src="./screenrecords/commendo-front.mp4" width="1280" controls autoplay loop muted></video>
+<video src="./screenrecords/commendo-api.mp4" width="1280" controls autoplay loop muted></video>
+
 ## Prerequisites
 
 Before building or running the application, make sure you have the following installed :
