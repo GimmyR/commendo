@@ -23,7 +23,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # Resource folder
-apps/api/resources
+api/resources
 
 # Editor directories and files
 .vscode/*
