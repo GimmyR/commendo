@@ -8,7 +8,7 @@ import { useState } from "react";
 import { Col, Row, Spinner } from "react-bootstrap";
 
 export default function Dishes() {
-    const {loadingDishes, dishes, pages, currPage, filter, setCurrPage, setFilter} = useDishes(1, 8);
+    const {loadingDishes, dishes, pages, currPage, filter, setCurrPage, setFilter} = useDishes(1, 9);
     const [showDishModal, setShowDishModal] = useState<boolean>(false);
     const [selectedDish, setSelectedDish] = useState<DishWithIngredients>();
 
@@ -24,9 +24,9 @@ export default function Dishes() {
 
     return (
         <Row className="justify-content-center pt-5">
-            <Col>
+            <Col className="col-10 col-sm-8 col-md-12 col-lg-10 col-xxl-7">
                 <div className="d-flex flex-wrap mb-5">
-                    {dishes.map(dish => <div key={dish.id} className="col-12 col-sm-6 col-xl-3 p-3">
+                    {dishes.map(dish => <div key={dish.id} className="col-12 col-md-4 col-xl-4 p-3">
                         <DishItem dish={dish} onClick={() => handleShowDishModal(dish)}/>
                     </div>)}
                 </div>

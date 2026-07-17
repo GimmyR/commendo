@@ -7,6 +7,7 @@ import SignedIn from "@/components/signed-in";
 import Menu from "@/components/menu";
 import { useSearch } from "@/libs/hooks/use-search";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function NavigationBar() {
     const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -23,7 +24,9 @@ export default function NavigationBar() {
                         <SignedIn>
                             <IconLink to="#" icon="list" iconClass="fs-3" onClick={handleShow}/>
                         </SignedIn>
-                        <Navbar.Brand href="/" className="text-light fw-bold">Commendo</Navbar.Brand>
+                        <Navbar.Brand className="text-light fw-bold">
+                            <Link to="/" className="text-light text-decoration-none">Commendo</Link>
+                        </Navbar.Brand>
                     </Stack>
                     <LargeSearchButton onClick={handleShowSearchModal}/>
                     <Stack direction="horizontal" gap={3}>

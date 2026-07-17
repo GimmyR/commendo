@@ -33,6 +33,7 @@ export interface DishIngredientDTO {
 export interface Dish {
     id: number;
     price: number;
+    image?: string;
     names: DishNameDTO[];
     active: boolean;
 }
