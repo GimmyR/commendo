@@ -11,10 +11,11 @@ It is built with:
 - **PostgreSQL** for data persistence  
 - **Docker** for containerized deployment
 
-## Live Demo
+## Demo
 
-<video src="./screenrecords/commendo-front.mp4" width="1280" controls autoplay loop muted></video>
-<video src="./screenrecords/commendo-api.mp4" width="1280" controls autoplay loop muted></video>
+<video src="https://github.com/user-attachments/assets/e93aa1bb-b802-4d76-ba3e-3c8a609a62c2" width="1280" controls autoplay loop muted></video>
+
+<video src="https://github.com/user-attachments/assets/b99380b2-0ac8-4e3b-b60f-35082a30fe48" width="1280" controls autoplay loop muted></video>
 
 ## Prerequisites
 
