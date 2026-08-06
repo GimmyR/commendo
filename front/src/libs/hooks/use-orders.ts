@@ -1,4 +1,4 @@
-import { fetchAllOrders, partiallyEditOrder, type Kanban } from "@/libs/actions/orders";
+import { fetchAllCurrentOrders, partiallyEditOrder, type Kanban } from "@/libs/actions/orders";
 import { useLanguage } from "@/libs/hooks/use-language";
 import { useEffect, useState } from "react";
 
@@ -12,7 +12,7 @@ export default function useOrders() {
     };
 
     useEffect(() => {
-        fetchAllOrders()
+        fetchAllCurrentOrders(language)
             .then(data => {
                 setKanban({
                     "1": data.filter(order => order.status == 1),

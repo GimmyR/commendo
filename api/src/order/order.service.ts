@@ -30,8 +30,13 @@ export class OrderService {
         });
     }
 
-    async findAll(language: string) {
+    async findAllCurrent(language: string) {
         return await this.prisma.order.findMany({
+            where: {
+                status: {
+                    in: [1, 2, 3]
+                }
+            },
             orderBy: { id: "asc" },
             include: {
                 table: true,

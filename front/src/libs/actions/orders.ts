@@ -96,10 +96,10 @@ export async function partiallyEditOrder(id: number, order: EditOrder): Promise<
     });
 }
 
-export async function fetchAllOrders(): Promise<OrderWithTableAndDish[]> {
+export async function fetchAllCurrentOrders(lang: string): Promise<OrderWithTableAndDish[]> {
     const token = useAuth.getState().token;
 
-    return await cmdFetch(`/order`, {
+    return await cmdFetch(`/order/current?lang=${lang}`, {
         headers: {
             "Authorization": `Bearer ${token}`
         }
