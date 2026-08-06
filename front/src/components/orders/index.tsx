@@ -1,34 +1,36 @@
-import OrdersTable from "@/components/orders/table";
-import { sortOrders } from "@/libs/actions/orders";
+import OrdersColumn from "@/components/orders/orders-column";
+import { findOrderStatus, orderStates } from "@/libs/actions/orders";
 import useOrders from "@/libs/hooks/use-orders";
-import { useMemo } from "react";
-import { Accordion, Col, Row, Spinner } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
+import { move } from "@dnd-kit/helpers";
+import { DragDropProvider, type DragOverEvent } from "@dnd-kit/react";
+import { Col, Row, Spinner } from "react-bootstrap";
 
 export default function Orders() {
-    const {orders, loading, changeStatus} = useOrders();
-    const [trueOrders, others] = useMemo(() => sortOrders(orders), [orders]);
-    const {t} = useTranslation("orders");
+    const {kanban, loading, setKanban, changeStatus} = useOrders();
+
+    const handleDragOver = (event: DragOverEvent) => {
+        setKanban((kanban) => move(kanban, event));
+        const { target } = event.operation;
+
+        if(target) {
+            const orderId = target.id as number;
+            const status = findOrderStatus(kanban, orderId);
+
+            if(status)
+                changeStatus(orderId, status);
+        }
+    };
 
     if(loading)
         return <Spinner className="position-absolute top-50 start-50"/>;
 
     return (
-        <Row className="justify-content-center pt-5 px-2 px-lg-5">
-            <Col className="col-12 col-lg-7 col-xxl-5">
-                <div className="mt-3 mb-5">
-                    <h1 className="text-center text-decoration-underline fs-5 mb-4">{t("current-orders")}</h1>
-                    <OrdersTable orders={trueOrders} changeStatus={changeStatus}/>
-                </div>
-                <Accordion>
-                    <Accordion.Item eventKey="0" className="rounded-0">
-                        <Accordion.Header>{t("others")}</Accordion.Header>
-                        <Accordion.Body>
-                            <OrdersTable orders={others} changeStatus={changeStatus}/>
-                        </Accordion.Body>
-                    </Accordion.Item>
-                </Accordion>
-            </Col>
-        </Row>
+        <DragDropProvider onDragOver={handleDragOver}>
+            <Row className="justify-content-center pt-5 px-lg-4">
+                {Object.entries(kanban).map(([status, orders]) => <Col key={status} className="col-8 col-md-4 col-xxl-3 pt-4 pt-md-0">
+                    <OrdersColumn group={status} status={orderStates[parseInt(status)]} orders={orders}/>
+                </Col>)}
+            </Row>
+        </DragDropProvider>
     );
 }
