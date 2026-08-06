@@ -54,4 +54,31 @@ export class OrderService {
             }
         });
     }
+
+    async findOthers(language: string) {
+        return await this.prisma.order.findMany({
+            where: {
+                status: {
+                    not: {
+                        in: [1, 2, 3]
+                    }
+                }
+            },
+            orderBy: { id: "asc" },
+            include: {
+                table: true,
+                dish: {
+                    include: {
+                        names: {
+                            where: {
+                                lang: {
+                                    abbrev: language
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
 }
