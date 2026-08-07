@@ -9,9 +9,10 @@ type Props = {
     group: string;
     status: OrderStatus;
     orders: OrderWithTableAndDish[];
+    target: string | undefined;
 };
 
-export default function OrdersColumn({ group, status, orders } : Props) {
+export default function OrdersColumn({ group, status, orders, target } : Props) {
     const { ref } = useDroppable({ 
         id: group, 
         type: "column", 
@@ -23,8 +24,8 @@ export default function OrdersColumn({ group, status, orders } : Props) {
 
     return (
         <Col className="col-10 col-md-4 col-xxl-3 pt-4 pt-md-0">
-            <Stack direction="vertical" className="pb-2 border">
-                <h1 className={`fs-4 text-center text-dark border-bottom border-4 border-${status.color} py-2`}>{t(status.key)}</h1>
+            <Stack direction="vertical" className={`pb-2 border`}>
+                <h1 className={`fs-4 text-center ${target == group ? "text-dark" : "text-secondary"} border-bottom border-4 border-${status.color} py-2`}>{t(status.key)}</h1>
                 <Stack ref={ref} direction="vertical" gap={3} className="px-3 py-2" style={{ minHeight: "50px" }}>
                     {orders.map((order, index) => <OrderItem key={order.id} order={order} index={index} group={group}/>)}
                 </Stack>
