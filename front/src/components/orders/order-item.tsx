@@ -18,6 +18,6 @@ export default function OrderItem({ order, index, group } : Props) {
     });
 
     return (
-        <Button ref={ref} variant="outline-dark" data-dragging={isDragging}>{order.dish.names[0].name}</Button>
+        <Button ref={ref} variant="outline-secondary" data-dragging={isDragging}>{order.dish.names[0].name}</Button>
     );
 }

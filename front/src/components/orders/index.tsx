@@ -3,7 +3,7 @@ import { findOrderStatus, orderStates } from "@/libs/actions/orders";
 import useOrders from "@/libs/hooks/use-orders";
 import { move } from "@dnd-kit/helpers";
 import { DragDropProvider, type DragOverEvent } from "@dnd-kit/react";
-import { Col, Row, Spinner } from "react-bootstrap";
+import { Row, Spinner } from "react-bootstrap";
 
 export default function Orders() {
     const {kanban, loading, setKanban, changeStatus} = useOrders();
@@ -27,9 +27,13 @@ export default function Orders() {
     return (
         <DragDropProvider onDragOver={handleDragOver}>
             <Row className="justify-content-center pt-5 px-lg-4">
-                {Object.entries(kanban).map(([status, orders]) => <Col key={status} className="col-8 col-md-4 col-xxl-3 pt-4 pt-md-0">
-                    <OrdersColumn group={status} status={orderStates[parseInt(status)]} orders={orders}/>
-                </Col>)}
+                {Object.entries(kanban).map(([status, orders]) => 
+                    <OrdersColumn key={status} 
+                        group={status} 
+                        status={orderStates[parseInt(status)]} 
+                        orders={orders}
+                    />
+                )}
             </Row>
         </DragDropProvider>
     );
