@@ -38,7 +38,7 @@ export const orderStates: OrderStatus[] = [
     { key: "archived", color: "dark" }
 ];
 
-export type Kanban = Record<string, Order[]>;
+export type Kanban = Record<string, OrderWithTableAndDish[]>;
 
 // ========================================= FUNCTIONS ==============================================
 

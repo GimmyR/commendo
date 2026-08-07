@@ -1,0 +1,4 @@
+.btn:hover .order-table-ref,
+.btn:active .order-table-ref {
+    color: rgb(170, 255, 187) !important;
+}

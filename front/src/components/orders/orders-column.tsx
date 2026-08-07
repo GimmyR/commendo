@@ -1,5 +1,5 @@
 import OrderItem from "@/components/orders/order-item";
-import type { Order, OrderStatus } from "@/libs/actions/orders";
+import type { OrderStatus, OrderWithTableAndDish } from "@/libs/actions/orders";
 import { CollisionPriority } from "@dnd-kit/abstract";
 import { useDroppable } from "@dnd-kit/react";
 import { Col, Stack } from "react-bootstrap";
@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 type Props = {
     group: string;
     status: OrderStatus;
-    orders: Order[];
+    orders: OrderWithTableAndDish[];
 };
 
 export default function OrdersColumn({ group, status, orders } : Props) {
