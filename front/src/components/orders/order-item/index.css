@@ -2,3 +2,8 @@
 .btn:active .order-table-ref {
     color: rgb(211, 211, 211) !important;
 }
+
+.btn:hover .order-dish-name,
+.btn:active .order-dish-name {
+    color: rgb(255, 255, 255) !important;
+}

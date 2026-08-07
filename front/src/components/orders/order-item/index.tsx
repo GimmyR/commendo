@@ -21,10 +21,10 @@ export default function OrderItem({ order, index, group } : Props) {
     return (
         <Button ref={ref} variant="outline-secondary" className="d-flex flex-row align-items-center" data-dragging={isDragging}>
             <div className="col-1 d-flex flex-row justify-content-start">
-                <span className="text-dark order-table-ref">{order.table.tableRef}</span>
+                <span className="order-table-ref">{order.table.tableRef}</span>
             </div>
             <div className="col-11">
-                <span className="me-4">{order.dish.names[0].name}</span>
+                <span className="text-dark me-4 order-dish-name">{order.dish.names[0].name}</span>
             </div>
         </Button>
     );
