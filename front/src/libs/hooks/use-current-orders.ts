@@ -2,7 +2,7 @@ import { fetchAllCurrentOrders, partiallyEditOrder, type Kanban } from "@/libs/a
 import { useLanguage } from "@/libs/hooks/use-language";
 import { useEffect, useState } from "react";
 
-export default function useOrders() {
+export default function useCurrentOrders() {
     const [kanban, setKanban] = useState<Kanban>({});
     const [loading, setLoading] = useState<boolean>(true);
     const language = useLanguage((state) => state.lang);

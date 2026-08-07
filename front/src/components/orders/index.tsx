@@ -1,13 +1,13 @@
 import OrdersColumn from "@/components/orders/orders-column";
 import OtherOrdersButton from "@/components/orders/other-orders-button";
 import { findOrderStatus, orderStates } from "@/libs/actions/orders";
-import useOrders from "@/libs/hooks/use-orders";
+import useCurrentOrders from "@/libs/hooks/use-current-orders";
 import { move } from "@dnd-kit/helpers";
 import { DragDropProvider, type DragOverEvent } from "@dnd-kit/react";
 import { Row, Spinner } from "react-bootstrap";
 
 export default function Orders() {
-    const {kanban, loading, setKanban, changeStatus} = useOrders();
+    const {kanban, loading, setKanban, changeStatus} = useCurrentOrders();
 
     const handleDragOver = (event: DragOverEvent) => {
         setKanban((kanban) => move(kanban, event));
