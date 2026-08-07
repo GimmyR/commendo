@@ -1,4 +1,5 @@
 import OrdersColumn from "@/components/orders/orders-column";
+import OtherOrdersButton from "@/components/orders/other-orders-button";
 import { findOrderStatus, orderStates } from "@/libs/actions/orders";
 import useOrders from "@/libs/hooks/use-orders";
 import { move } from "@dnd-kit/helpers";
@@ -35,6 +36,7 @@ export default function Orders() {
                     />
                 )}
             </Row>
+            <OtherOrdersButton/>
         </DragDropProvider>
     );
 }

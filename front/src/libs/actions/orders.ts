@@ -106,6 +106,16 @@ export async function fetchAllCurrentOrders(lang: string): Promise<OrderWithTabl
     });
 }
 
+export async function fetchOtherOrders(lang: string): Promise<OrderWithTableAndDish[]> {
+    const token = useAuth.getState().token;
+
+    return await cmdFetch(`/order/others?lang=${lang}`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+}
+
 export function sortOrders(orders: OrderWithTableAndDish[]): (OrderWithTableAndDish[])[] {
     const first: OrderWithTableAndDish[] = [];
     const second: OrderWithTableAndDish[] = [];
