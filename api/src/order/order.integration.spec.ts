@@ -48,12 +48,28 @@ describe("Test OrderController", () => {
             INSERT INTO "public".cmd_dish_name ("dishId", "langId", name, active) VALUES (1, 2, 'Grilled meat', true);
             INSERT INTO "public".cmd_dish_ingredient ("dishId", "ingredientId", quantity) VALUES (1, 1, 200);
             INSERT INTO "public".cmd_table ("tableRef", availability) VALUES ('01', 1);
+            INSERT INTO "public".cmd_order ("tableId", "dishId", status) VALUES (1, 1, 1);
             INSERT INTO "public".cmd_order ("tableId", "dishId", status) VALUES (1, 1, 5);
         `);
     });
 
-    it("Should return orders", async () => {
-        const res = await fetch(`${apiURL}/api/order`, {
+    it("Should return current orders", async () => {
+        const res = await fetch(`${apiURL}/api/order/current?lang=fr`, {
+            headers: {
+                "Authorization": `Bearer ${mockToken}`
+            }
+        });
+
+        expect(res.status).toBe(HttpStatus.OK);
+        const orders: Order[] = await res.json();
+        expect(orders.length).toBe(1);
+        expect(orders[0].tableId).toBe(1);
+        expect(orders[0].dishId).toBe(1);
+        expect(orders[0].status).toBe(1);
+    });
+
+    it("Should return other orders", async () => {
+        const res = await fetch(`${apiURL}/api/order/others?lang=fr`, {
             headers: {
                 "Authorization": `Bearer ${mockToken}`
             }
