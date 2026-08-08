@@ -1,6 +1,6 @@
 import Orders from "@/components/orders";
 import "@/i18n";
-import { fetchAllOrders, type OrderWithTableAndDish } from "@/libs/actions/orders";
+import { fetchAllCurrentOrders, type OrderWithTableAndDish } from "@/libs/actions/orders";
 import { useAuth } from "@/libs/hooks/use-auth";
 import { render, screen, waitFor } from "@testing-library/react";
 
@@ -32,7 +32,7 @@ vi.mock("@/libs/actions/orders", async (importOriginal) => {
     const actual = await importOriginal<typeof import("@/libs/actions/orders")>();
     return {
         ...actual,
-        fetchAllOrders: vi.fn()
+        fetchAllCurrentOrders: vi.fn()
     };
 });
 
@@ -41,67 +41,24 @@ describe("Test Orders", () => {
         vi.restoreAllMocks();
     });
 
-    it("Should display current orders and others title", async () => {
+    it("Should display columns (to do, in progress and done), one order and 'See others' button", async () => {
         useAuth.getState().login(accessToken);
-        vi.mocked(fetchAllOrders).mockResolvedValue([]);
+        vi.mocked(fetchAllCurrentOrders).mockResolvedValue([order]);
         render(<Orders/>);
 
         await waitFor(() => {
-            const h1 = screen.getByRole("heading", { name: "Commandes courantes" });
-            expect(h1).toBeInTheDocument();
-            const others = screen.getByText("Autres commandes");
-            expect(others).toBeInTheDocument();
-        });
-    });
-
-    it("Should not display table of orders", async () => {
-        useAuth.getState().login(accessToken);
-        vi.mocked(fetchAllOrders).mockResolvedValue([]);
-        render(<Orders/>);
-
-        await waitFor(() => {
-            const titles = screen.getAllByText("Aucune commande");
-            expect(titles[0]).toBeInTheDocument();
-        });
-    });
-
-    it("Should display table of orders", async () => {
-        useAuth.getState().login(accessToken);
-        vi.mocked(fetchAllOrders).mockResolvedValue([order]);
-        render(<Orders/>);
-
-        await waitFor(() => {
-            const tableColumn = screen.getByText("Table");
-            expect(tableColumn).toBeInTheDocument();
-            const dishColumn = screen.getByText("Plat");
-            expect(dishColumn).toBeInTheDocument();
-            const statusColumn = screen.getByText("Etat");
-            expect(statusColumn).toBeInTheDocument();
+            const toDoColumn = screen.getByRole("heading", { name: "A faire" });
+            expect(toDoColumn).toBeInTheDocument();
+            const inProgressColumn = screen.getByRole("heading", { name: "En préparation" });
+            expect(inProgressColumn).toBeInTheDocument();
+            const doneColumn = screen.getByRole("heading", { name: "Terminée" });
+            expect(doneColumn).toBeInTheDocument();
             const tableRef = screen.getByText(order.table.tableRef);
             expect(tableRef).toBeInTheDocument();
             const dishName = screen.getByText(order.dish.names[0].name);
             expect(dishName).toBeInTheDocument();
-        });
-    });
-    
-    it("Should display select with all states", async () => {
-        useAuth.getState().login(accessToken);
-        vi.mocked(fetchAllOrders).mockResolvedValue([order]);
-        render(<Orders/>);
-
-        await waitFor(() => {
-            const status1 = screen.getByText("A confirmer");
-            expect(status1).toBeInTheDocument();
-            const status2 = screen.getByText("A faire");
-            expect(status2).toBeInTheDocument();
-            const status3 = screen.getByText("En préparation");
-            expect(status3).toBeInTheDocument();
-            const status4 = screen.getByText("Terminée");
-            expect(status4).toBeInTheDocument();
-            const status5 = screen.getByText("Annulée");
-            expect(status5).toBeInTheDocument();
-            const status6 = screen.getByText("Archivée");
-            expect(status6).toBeInTheDocument();
+            const btn = screen.getByRole("button", { name: "Voir autres" });
+            expect(btn).toBeInTheDocument();
         });
     });
 });
