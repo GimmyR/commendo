@@ -1,34 +1,48 @@
-import OrdersTable from "@/components/orders/table";
-import { sortOrders } from "@/libs/actions/orders";
-import useOrders from "@/libs/hooks/use-orders";
-import { useMemo } from "react";
-import { Accordion, Col, Row, Spinner } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
+import OrdersColumn from "@/components/orders/orders-column";
+import OtherOrdersButton from "@/components/orders/other-orders-button";
+import { orderStates } from "@/libs/actions/orders";
+import useCurrentOrders from "@/libs/hooks/use-current-orders";
+import { move } from "@dnd-kit/helpers";
+import { DragDropProvider, type DragOverEvent } from "@dnd-kit/react";
+import { useState } from "react";
+import { Row, Spinner } from "react-bootstrap";
 
 export default function Orders() {
-    const {orders, loading, changeStatus} = useOrders();
-    const [trueOrders, others] = useMemo(() => sortOrders(orders), [orders]);
-    const {t} = useTranslation("orders");
+    const {kanban, loading, setKanban, changeStatus} = useCurrentOrders();
+    const [target, setTarget] = useState<string>();
+
+    const handleDragOver = (event: DragOverEvent) => {
+        const e = (event as any);
+
+        if(e.operation.target) {
+            const group = e.operation.target.group;
+            setTarget(group);
+        }
+
+        setKanban((kanban) => move(kanban, event));
+        changeStatus(event);
+    };
+
+    const handleDragEnd = () => {
+        setTarget(undefined);
+    };
 
     if(loading)
         return <Spinner className="position-absolute top-50 start-50"/>;
 
     return (
-        <Row className="justify-content-center pt-5 px-2 px-lg-5">
-            <Col className="col-12 col-lg-7 col-xxl-5">
-                <div className="mt-3 mb-5">
-                    <h1 className="text-center text-decoration-underline fs-5 mb-4">{t("current-orders")}</h1>
-                    <OrdersTable orders={trueOrders} changeStatus={changeStatus}/>
-                </div>
-                <Accordion>
-                    <Accordion.Item eventKey="0" className="rounded-0">
-                        <Accordion.Header>{t("others")}</Accordion.Header>
-                        <Accordion.Body>
-                            <OrdersTable orders={others} changeStatus={changeStatus}/>
-                        </Accordion.Body>
-                    </Accordion.Item>
-                </Accordion>
-            </Col>
-        </Row>
+        <DragDropProvider onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
+            <Row className="justify-content-center pt-5 px-lg-4">
+                {Object.entries(kanban).map(([status, orders]) => 
+                    <OrdersColumn key={status} 
+                        group={status} 
+                        status={orderStates[parseInt(status)]} 
+                        orders={orders}
+                        target={target}
+                    />
+                )}
+            </Row>
+            <OtherOrdersButton/>
+        </DragDropProvider>
     );
 }

@@ -39,13 +39,23 @@ export class OrderController {
         return await this.orderServ.updateById(id, order);
     }
 
-    @Get()
+    @Get("current")
     @UseGuards(AccountGuard)
-    @ApiOperation({ summary: "Find all orders" })
+    @ApiOperation({ summary: "Find all current orders" })
     @ApiQuery({ name: "lang", type: String, required: true, example: "fr" })
-    @ApiResponse({ status: HttpStatus.OK, description: "All orders have been successfully returned" })
+    @ApiResponse({ status: HttpStatus.OK, description: "All current orders have been successfully returned" })
     @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: "Access token is missing or invalid" })
-    async findAllOrders(@Query("lang") lang: string) {
-        return await this.orderServ.findAll(lang);
+    async findAllCurrentOrders(@Query("lang") lang: string) {
+        return await this.orderServ.findAllCurrent(lang);
+    }
+
+    @Get("others")
+    @UseGuards(AccountGuard)
+    @ApiOperation({ summary: "Find all cancelled or archived orders" })
+    @ApiQuery({ name: "lang", type: String, required: true, example: "fr" })
+    @ApiResponse({ status: HttpStatus.OK, description: "All cancelled or archived orders have been successfully returned" })
+    @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: "Access token is missing or invalid" })
+    async findOtherOrders(@Query("lang") lang: string) {
+        return await this.orderServ.findOthers(lang);
     }
 }

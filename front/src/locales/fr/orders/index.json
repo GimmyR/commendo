@@ -10,5 +10,7 @@
     "in-progress": "En préparation",
     "done": "Terminée",
     "cancelled": "Annulée",
-    "archived": "Archivée"
+    "archived": "Archivée",
+    "see-others": "Voir autres",
+    "other-orders": "Autres commandes"
 }

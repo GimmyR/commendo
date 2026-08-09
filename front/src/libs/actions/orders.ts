@@ -24,7 +24,12 @@ export interface EditOrder {
     status: number;
 }
 
-export const orderStates = [
+export interface OrderStatus {
+    key: string;
+    color: string;
+}
+
+export const orderStates: OrderStatus[] = [
     { key: "to-confirm", color: "secondary" },
     { key: "to-do", color: "primary" },
     { key: "in-progress", color: "warning" },
@@ -32,6 +37,8 @@ export const orderStates = [
     { key: "cancelled", color: "danger" },
     { key: "archived", color: "dark" }
 ];
+
+export type Kanban = Record<string, OrderWithTableAndDish[]>;
 
 // ========================================= FUNCTIONS ==============================================
 
@@ -89,10 +96,20 @@ export async function partiallyEditOrder(id: number, order: EditOrder): Promise<
     });
 }
 
-export async function fetchAllOrders(): Promise<OrderWithTableAndDish[]> {
+export async function fetchAllCurrentOrders(lang: string): Promise<OrderWithTableAndDish[]> {
     const token = useAuth.getState().token;
 
-    return await cmdFetch(`/order`, {
+    return await cmdFetch(`/order/current?lang=${lang}`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+}
+
+export async function fetchOtherOrders(lang: string): Promise<OrderWithTableAndDish[]> {
+    const token = useAuth.getState().token;
+
+    return await cmdFetch(`/order/others?lang=${lang}`, {
         headers: {
             "Authorization": `Bearer ${token}`
         }
@@ -110,4 +127,15 @@ export function sortOrders(orders: OrderWithTableAndDish[]): (OrderWithTableAndD
     }
 
     return [first, (second.sort((a, b) => b.id - a.id))];
+}
+
+export function findOrderStatus(kanban: Kanban, orderId: number) {
+    const entries = Object.entries(kanban);
+
+    for(const [status, orders] of entries) {
+        if(orders.some(order => order.id == orderId))
+            return parseInt(status);
+    }
+
+    return undefined;
 }

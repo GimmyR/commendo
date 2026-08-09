@@ -1,6 +1,4 @@
 import { AccountGuard } from '@/account/account.guard';
-import { langDoc } from '@/dish/dish.doc';
-import { tableIdDoc } from '@/table/table.doc';
 import { EditTable } from '@/table/table.dto';
 import { TableService } from '@/table/table.service';
 import { Body, Controller, Get, HttpStatus, Param, Patch, Query, UseGuards } from '@nestjs/common';
@@ -24,8 +22,8 @@ export class TableController {
     @Get(":id")
     @UseGuards(AccountGuard)
     @ApiOperation({ summary: "Find unique table by id with current orders" })
-    @ApiParam(tableIdDoc)
-    @ApiQuery(langDoc)
+    @ApiParam({ name: "id", type: Number, required: true, example: 1 })
+    @ApiQuery({ name: 'lang', type: String, required: true, example: "fr" })
     @ApiResponse({ status: HttpStatus.OK, description: "Unique table has been successfully returned" })
     @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Table not found" })
     async findUniqueByIdWithOrders(@Param("id") id: number, @Query("lang") lang: string) {
@@ -35,7 +33,7 @@ export class TableController {
     @Patch(":id")
     @UseGuards(AccountGuard)
     @ApiOperation({ summary: "Partially edit table" })
-    @ApiParam(tableIdDoc)
+    @ApiParam({ name: "id", type: Number, required: true, example: 1 })
     @ApiResponse({ status: HttpStatus.OK, description: "Table has been successfully edited" })
     @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Table not found" })
     async partiallyEditTable(@Param("id") id: number, @Body() table: EditTable) {
@@ -45,8 +43,8 @@ export class TableController {
     @Patch(":id/free")
     @UseGuards(AccountGuard)
     @ApiOperation({ summary: "Free table" })
-    @ApiParam(tableIdDoc)
-    @ApiQuery(langDoc)
+    @ApiParam({ name: "id", type: Number, required: true, example: 1 })
+    @ApiQuery({ name: 'lang', type: String, required: true, example: "fr" })
     @ApiResponse({ status: HttpStatus.OK, description: "Table has been successfully cleared" })
     @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Table not found" })
     async freeTable(@Param("id") tableId: number, @Query("lang") lang: string) {

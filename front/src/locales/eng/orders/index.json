@@ -10,5 +10,7 @@
     "in-progress": "In progress",
     "done": "Done",
     "cancelled": "Cancelled",
-    "archived": "Archived"
+    "archived": "Archived",
+    "see-others": "See others",
+    "other-orders": "Other orders"
 }
