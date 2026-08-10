@@ -1,4 +1,4 @@
-import TablesTable from "@/components/tables/table";
+import TablesList from "@/components/tables/list";
 import useTables from "@/libs/hooks/use-tables";
 import { Col, Row, Spinner } from "react-bootstrap";
 
@@ -10,8 +10,8 @@ export default function Tables() {
 
     return (
         <Row className="justify-content-center pt-5">
-            <Col className="col-12 col-lg-6 col-xl-5 col-xxl-4">
-                <TablesTable tables={tables}/>
+            <Col className="col-12 col-xxl-8">
+                <TablesList tables={tables}/>
             </Col>
         </Row>
     );

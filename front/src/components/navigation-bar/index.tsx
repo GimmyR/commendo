@@ -22,7 +22,7 @@ export default function NavigationBar() {
                 <Container fluid className="justify-content-between">
                     <Stack direction="horizontal" gap={2}>
                         <SignedIn>
-                            <IconLink to="#" icon="list" iconClass="fs-3" onClick={handleShow}/>
+                            <IconLink to="#" icon="list" linkClass="text-light" iconClass="fs-3" onClick={handleShow}/>
                         </SignedIn>
                         <Navbar.Brand className="text-light fw-bold">
                             <Link to="/" className="text-light text-decoration-none">Commendo</Link>
@@ -30,7 +30,7 @@ export default function NavigationBar() {
                     </Stack>
                     <LargeSearchButton onClick={handleShowSearchModal}/>
                     <Stack direction="horizontal" gap={3}>
-                        <IconLink to="#" onClick={handleShowSearchModal} icon="search" linkClass="d-inline d-md-none" iconClass="cmd-btn fs-5"/>
+                        <IconLink to="#" onClick={handleShowSearchModal} icon="search" linkClass="d-inline d-md-none text-light" iconClass="cmd-btn fs-5"/>
                         <UserButton/>
                     </Stack>
                 </Container>

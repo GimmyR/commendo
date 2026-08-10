@@ -10,7 +10,7 @@ type Props = {
 
 export default function IconLink({ to, icon, linkClass, iconClass, onClick } : Props) {
     return (
-        <Link to={to} className={`text-decoration-none text-light ${linkClass}`} onClick={onClick}>
+        <Link to={to} className={`text-decoration-none ${linkClass}`} onClick={onClick}>
             <i className={`bi bi-${icon} ${iconClass}`}></i>
         </Link>
     );
