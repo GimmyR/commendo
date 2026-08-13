@@ -31,7 +31,7 @@ export default function Dishes() {
         <Row className="justify-content-center pt-5">
             <Col className="col-10 col-sm-8 col-md-12 col-lg-10 col-xxl-7">
                 <div className="d-flex flex-row justify-content-center">
-                    <div className="col-6 mt-4 mb-5 ">
+                    <div className="col-10 col-lg-6 mt-4 mb-5 ">
                         <Form.Control type="text" value={filter.name} onChange={handleChange} className="rounded-5 px-3 shadow-sm" placeholder={t("search")}/>
                     </div>
                 </div>
