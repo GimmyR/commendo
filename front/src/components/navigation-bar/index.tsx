@@ -1,20 +1,17 @@
 import { Container, Navbar, Stack } from "react-bootstrap";
 import IconLink from "../icon-link";
 import "./navbar.css";
-import LargeSearchButton from "./large-search-button";
 import UserButton from "./user-button";
 import SignedIn from "@/components/signed-in";
 import Menu from "@/components/menu";
-import { useSearch } from "@/libs/hooks/use-search";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import LangButton from "@/components/navigation-bar/lang-button";
 
 export default function NavigationBar() {
     const [showMenu, setShowMenu] = useState<boolean>(false);
     const handleClose = () => setShowMenu(false);
     const handleShow = () => setShowMenu(true);
-    const setShowSearchModal = useSearch((state) => state.setShow);
-    const handleShowSearchModal = () => setShowSearchModal(true);
 
     return (
         <>
@@ -28,9 +25,8 @@ export default function NavigationBar() {
                             <Link to="/" className="text-light text-decoration-none">Commendo</Link>
                         </Navbar.Brand>
                     </Stack>
-                    <LargeSearchButton onClick={handleShowSearchModal}/>
-                    <Stack direction="horizontal" gap={3}>
-                        <IconLink to="#" onClick={handleShowSearchModal} icon="search" linkClass="d-inline d-md-none text-light" iconClass="cmd-btn fs-5"/>
+                    <Stack direction="horizontal" gap={1}>
+                        <LangButton/>
                         <UserButton/>
                     </Stack>
                 </Container>
