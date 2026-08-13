@@ -32,6 +32,8 @@ describe("Test Dishes", () => {
 
         render(<Dishes/>);
         await waitFor(() => {
+            const search = screen.getByPlaceholderText("Rechercher");
+            expect(search).toBeInTheDocument();
             const name = screen.getByText(dish.names[0].name);
             expect(name).toBeInTheDocument();
             const price = screen.getByText(dish.price);
