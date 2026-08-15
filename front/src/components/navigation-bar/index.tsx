@@ -7,6 +7,7 @@ import Menu from "@/components/menu";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import LangButton from "@/components/navigation-bar/lang-button";
+import MenuBar from "@/components/menu-bar";
 
 export default function NavigationBar() {
     const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -15,15 +16,18 @@ export default function NavigationBar() {
 
     return (
         <>
-            <Navbar className="bg-success fixed-top">
-                <Container fluid className="justify-content-between">
+            <Navbar className="bg-success fixed-top py-1 py-md-2">
+                <Container fluid className="justify-content-between px-3 px-md-4">
                     <Stack direction="horizontal" gap={2}>
                         <SignedIn>
-                            <IconLink to="#" icon="list" linkClass="text-light" iconClass="fs-3" onClick={handleShow}/>
+                            <IconLink to="#" icon="list" linkClass="d-inline-block d-md-none text-light" iconClass="fs-1" onClick={handleShow}/>
                         </SignedIn>
                         <Navbar.Brand className="text-light fw-bold">
                             <Link to="/" className="text-light text-decoration-none">Commendo</Link>
                         </Navbar.Brand>
+                        <SignedIn>
+                            <MenuBar/>
+                        </SignedIn>
                     </Stack>
                     <Stack direction="horizontal" gap={1}>
                         <LangButton/>
