@@ -1,7 +1,6 @@
-import TablesTable from "@/components/tables/table";
+import TableItem from "@/components/tables/item";
 import type { ITable } from "@/libs/actions/tables";
 import { render, screen } from "@testing-library/react";
-import "@/i18n";
 import { MemoryRouter } from "react-router-dom";
 
 const table: ITable = {
@@ -10,12 +9,12 @@ const table: ITable = {
     availability: 1
 };
 
-describe("Test TablesTable", () => {
-    it("Should display table with a row", () => {
+describe("Test TableItem", () => {
+    it("Should display table reference", () => {
         render(<MemoryRouter>
-            <TablesTable tables={[table]}/>
+            <TableItem table={table}/>
         </MemoryRouter>);
-        const ref = screen.getByText(table.tableRef);
-        expect(ref).toBeInTheDocument();
+        const tableRef = screen.getByText(table.tableRef);
+        expect(tableRef).toBeInTheDocument();
     });
 });

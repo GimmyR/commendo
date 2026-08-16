@@ -1,0 +1,17 @@
+.lang-btn {
+    color: white;
+    border-color: transparent !important;
+    background-color: transparent !important;
+    background: none !important;
+    font-size: 25px;
+}
+
+.lang-btn:hover,
+.lang-btn:focus,
+.lang-btn:active {
+    color: rgb(255, 230, 0) !important;
+}
+
+.lang-btn::after {
+    display: none !important;
+}

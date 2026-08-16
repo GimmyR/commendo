@@ -4,5 +4,6 @@
     "dishMinPrice": "Prix minimum",
     "dishMaxPrice": "Prix maximum",
     "reset": "Réinitialiser",
-    "submit": "Chercher"
+    "submit": "Chercher",
+    "search": "Rechercher"
 }

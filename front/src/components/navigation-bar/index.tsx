@@ -1,36 +1,36 @@
 import { Container, Navbar, Stack } from "react-bootstrap";
 import IconLink from "../icon-link";
 import "./navbar.css";
-import LargeSearchButton from "./large-search-button";
 import UserButton from "./user-button";
 import SignedIn from "@/components/signed-in";
 import Menu from "@/components/menu";
-import { useSearch } from "@/libs/hooks/use-search";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import LangButton from "@/components/navigation-bar/lang-button";
+import MenuBar from "@/components/menu-bar";
 
 export default function NavigationBar() {
     const [showMenu, setShowMenu] = useState<boolean>(false);
     const handleClose = () => setShowMenu(false);
     const handleShow = () => setShowMenu(true);
-    const setShowSearchModal = useSearch((state) => state.setShow);
-    const handleShowSearchModal = () => setShowSearchModal(true);
 
     return (
         <>
-            <Navbar className="bg-success fixed-top">
-                <Container fluid className="justify-content-between">
+            <Navbar className="bg-success fixed-top py-1 py-md-2">
+                <Container fluid className="justify-content-between px-3 px-md-4">
                     <Stack direction="horizontal" gap={2}>
                         <SignedIn>
-                            <IconLink to="#" icon="list" iconClass="fs-3" onClick={handleShow}/>
+                            <IconLink to="#" icon="list" linkClass="d-inline-block d-md-none text-light" iconClass="fs-1" onClick={handleShow}/>
                         </SignedIn>
                         <Navbar.Brand className="text-light fw-bold">
                             <Link to="/" className="text-light text-decoration-none">Commendo</Link>
                         </Navbar.Brand>
+                        <SignedIn>
+                            <MenuBar/>
+                        </SignedIn>
                     </Stack>
-                    <LargeSearchButton onClick={handleShowSearchModal}/>
-                    <Stack direction="horizontal" gap={3}>
-                        <IconLink to="#" onClick={handleShowSearchModal} icon="search" linkClass="d-inline d-md-none" iconClass="cmd-btn fs-5"/>
+                    <Stack direction="horizontal" gap={1}>
+                        <LangButton/>
                         <UserButton/>
                     </Stack>
                 </Container>
