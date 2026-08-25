@@ -22,6 +22,9 @@ export class IngredientController {
 
     @Post()
     @UseGuards(AccountGuard)
+    @ApiOperation({ summary: "Create ingredient with name(s)" })
+    @ApiResponse({ status: HttpStatus.CREATED, description: "Given ingredient has been successfully created" })
+    @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Language not found" })
     async createIngredient(@Body() ingredient: CreateIngredient) {
         return await this.ingredientServ.create(ingredient);
     }

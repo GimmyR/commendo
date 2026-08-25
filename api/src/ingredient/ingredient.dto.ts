@@ -21,6 +21,7 @@ export class CreateIngredient {
     unit!: string;
 
     @IsArray({ message: "Names should be an array" })
+    @ApiProperty({ example: [{ lang: "eng", name: "Rice" }] })
     names!: CreateIngredientName[];
 
     constructor(ingredient: Partial<CreateIngredient>) {
