@@ -2,7 +2,7 @@ import { AccountGuard } from '@/account/account.guard';
 import { CreateIngredient } from '@/ingredient/ingredient.dto';
 import { IngredientService } from '@/ingredient/ingredient.service';
 import { Body, Controller, Get, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
-import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('ingredient')
 @ApiTags("ingredient")
@@ -22,6 +22,7 @@ export class IngredientController {
 
     @Post()
     @UseGuards(AccountGuard)
+    @ApiBearerAuth("access-token")
     @ApiOperation({ summary: "Create ingredient with name(s)" })
     @ApiResponse({ status: HttpStatus.CREATED, description: "Given ingredient has been successfully created" })
     @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Language not found" })
