@@ -9,6 +9,10 @@ export class CreateIngredientName {
     @IsNotEmpty({ message: "Ingredient name is missing" })
     @ApiProperty({ example: "Rice" })
     name!: string;
+
+    constructor(name: Partial<CreateIngredientName>) {
+        Object.assign(this, name);
+    }
 }
 
 export class CreateIngredient {
@@ -18,4 +22,8 @@ export class CreateIngredient {
 
     @IsArray({ message: "Names should be an array" })
     names!: CreateIngredientName[];
+
+    constructor(ingredient: Partial<CreateIngredient>) {
+        Object.assign(this, ingredient);
+    }
 }
