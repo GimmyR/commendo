@@ -56,3 +56,16 @@ GET http://localhost:8000/api/dish?lang=eng&page=1&limit=4&filter=name:contains:
 
 ### GET find all ingredients
 GET http://localhost:8000/api/ingredient?lang=fr
+
+### POST create ingredient
+POST http://localhost:8000/api/ingredient
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsIm5hbWUiOiJnaW1teSIsImlhdCI6MTc4MTc3NDU0N30.Qv2Hr9XbEt7ivnDEiNAJQdXnJtiEvjt16zQ423_uvbU
+Content-Type: application/json
+
+{
+    "unit": "g",
+    "names": [
+        { "lang": "fr", "name": "Merde" },
+        { "lang": "eng", "name": "Shit" }
+    ]
+}

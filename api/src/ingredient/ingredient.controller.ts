@@ -1,5 +1,7 @@
+import { AccountGuard } from '@/account/account.guard';
+import { CreateIngredient } from '@/ingredient/ingredient.dto';
 import { IngredientService } from '@/ingredient/ingredient.service';
-import { Controller, Get, HttpStatus, Query } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('ingredient')
@@ -16,5 +18,11 @@ export class IngredientController {
     @ApiResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: "Unexpected error occurs" })
     async findAllIngredients(@Query("lang") language: string) {
         return await this.ingredientServ.findAll(language);
+    }
+
+    @Post()
+    @UseGuards(AccountGuard)
+    async createIngredient(@Body() ingredient: CreateIngredient) {
+        return await this.ingredientServ.create(ingredient);
     }
 }
