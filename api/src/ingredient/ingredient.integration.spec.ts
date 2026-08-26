@@ -1,9 +1,9 @@
-import { CreateIngredient } from "@/ingredient/ingredient.dto";
+import { CreateIngredient, UpdateIngredient } from "@/ingredient/ingredient.dto";
 import { PrismaService } from "@/prisma/prisma.service";
 import { initIntegrationTest } from "@/test.helper";
-import { INestApplication } from "@nestjs/common";
+import { HttpStatus, INestApplication } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { Ingredient, IngredientName } from "@prisma/client";
+import { Ingredient, IngredientName, Lang } from "@prisma/client";
 
 describe("Test IngredientController", () => {
     let app: INestApplication;
@@ -62,11 +62,41 @@ describe("Test IngredientController", () => {
             body: JSON.stringify(ingredient)
         });
 
-        expect(res.ok).toBe(true);
+        expect(res.status).toBe(HttpStatus.CREATED);
         const newIngredient: Ingredient = await res.json();
         expect(newIngredient).toBeDefined();
         expect(newIngredient.id).toBe(2);
         expect(newIngredient.unit).toBe(ingredient.unit);
         expect(newIngredient.active).toBe(true);
+    });
+
+    it("Should update ingredient", async () => {
+        const ingredient: UpdateIngredient = new UpdateIngredient({
+            id: 1,
+            active: false,
+            names: [
+                { lang: "eng", name: "Saffron" }
+            ]
+        });
+
+        const res = await fetch(`${apiURL}/api/ingredient`, {
+            method: "PATCH",
+            headers: {
+                "Authorization": `Bearer ${mockToken}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(ingredient)
+        });
+
+        expect(res.ok).toBe(true);
+        const updated: Ingredient & { names: (IngredientName & { lang: Lang })[] } = await res.json();
+        expect(updated).toBeDefined();
+        expect(updated.id).toBe(ingredient.id);
+        expect(updated.active).toBe(ingredient.active);
+
+        if(ingredient.names) {
+            const ingrName = ingredient.names[0];
+            expect(updated.names.some(name => (name.lang.abbrev == ingrName.lang) && (name.name == ingrName.name))).toBe(true);
+        }
     });
 });

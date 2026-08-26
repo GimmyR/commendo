@@ -1,7 +1,7 @@
-import { CreateIngredient, CreateIngredientName } from '@/ingredient/ingredient.dto';
+import { CreateIngredient, CreateIngredientName, UpdateIngredient } from '@/ingredient/ingredient.dto';
 import { PrismaService } from '@/prisma/prisma.service';
-import { Injectable } from '@nestjs/common';
-import { Ingredient } from '@prisma/client';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Ingredient, Lang } from '@prisma/client';
 
 @Injectable()
 export class IngredientService {
@@ -31,9 +31,8 @@ export class IngredientService {
             }
         });
 
-        for(const name of ingredient.names) {
+        for(const name of ingredient.names)
             await this.createName(newIngredient.id, name);
-        }
 
         return newIngredient;
     }
@@ -54,6 +53,53 @@ export class IngredientService {
                         name: name.name
                     }
                 }
+            }
+        });
+    }
+
+    async update(ingredient: UpdateIngredient) {
+        if(ingredient.names) {
+            for(const name of ingredient.names)
+                await this.updateName(ingredient.id, name);
+        }
+
+        const { id, ...ingredientWithoutId } = ingredient;
+        const { names, ...ingredientWithoutNames } = ingredientWithoutId;
+
+        return await this.prisma.ingredient.update({
+            where: { id },
+            data: {
+                ...ingredientWithoutNames
+            },
+            include: {
+                names: {
+                    include: {
+                        lang: true
+                    }
+                }
+            }
+        });
+    }
+
+    async updateName(ingredientId: number, name: CreateIngredientName) {
+        const lang: Lang | null = await this.prisma.lang.findUnique({
+            where: {
+                abbrev: name.lang
+            }
+        });
+
+        if(!lang)
+            throw new NotFoundException("Language not found");
+
+        await this.prisma.ingredientName.update({
+            where: {
+                ingredientId_langId: {
+                    ingredientId,
+                    langId: lang.id
+                }
+            },
+            data: {
+                name: name.name
             }
         });
     }

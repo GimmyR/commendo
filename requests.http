@@ -69,3 +69,18 @@ Content-Type: application/json
         { "lang": "eng", "name": "Shit" }
     ]
 }
+
+### PATCH update ingredient
+PATCH http://localhost:8000/api/ingredient
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsIm5hbWUiOiJnaW1teSIsImlhdCI6MTc4MTc3NDU0N30.Qv2Hr9XbEt7ivnDEiNAJQdXnJtiEvjt16zQ423_uvbU
+Content-Type: application/json
+
+{
+    "id": 31,
+    "unit": "g",
+    "active": true,
+    "names": [
+        { "lang": "fr", "name": "Safran" },
+        { "lang": "eng", "name": "Saffron" }
+    ]
+}

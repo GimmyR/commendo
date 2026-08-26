@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsArray, IsNotEmpty } from "class-validator";
+import { IsArray, IsBoolean, IsDefined, IsNotEmpty, IsOptional } from "class-validator";
 
 export class CreateIngredientName {
     @IsNotEmpty({ message: "Language is missing" })
@@ -25,6 +25,30 @@ export class CreateIngredient {
     names!: CreateIngredientName[];
 
     constructor(ingredient: Partial<CreateIngredient>) {
+        Object.assign(this, ingredient);
+    }
+}
+
+export class UpdateIngredient {
+    @IsDefined({ message: "Id is undefined" })
+    @ApiProperty({ required: true, example: 1 })
+    id!: number;
+
+    @IsOptional()
+    @IsNotEmpty({ message: "Unit is missing" })
+    @ApiProperty({ required: false, example: "g" })
+    unit?: string;
+
+    @IsOptional()
+    @IsBoolean({ message: "Active is invalid" })
+    @ApiProperty({ required: false, example: true })
+    active?: boolean;
+
+    @IsOptional()
+    @IsArray({ message: "Names should be an array" })
+    names?: CreateIngredientName[];
+
+    constructor(ingredient: Partial<UpdateIngredient>) {
         Object.assign(this, ingredient);
     }
 }

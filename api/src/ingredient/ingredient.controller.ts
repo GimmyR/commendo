@@ -1,7 +1,7 @@
 import { AccountGuard } from '@/account/account.guard';
-import { CreateIngredient } from '@/ingredient/ingredient.dto';
+import { CreateIngredient, UpdateIngredient } from '@/ingredient/ingredient.dto';
 import { IngredientService } from '@/ingredient/ingredient.service';
-import { Body, Controller, Get, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('ingredient')
@@ -28,5 +28,15 @@ export class IngredientController {
     @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Language not found" })
     async createIngredient(@Body() ingredient: CreateIngredient) {
         return await this.ingredientServ.create(ingredient);
+    }
+
+    @Patch()
+    @UseGuards(AccountGuard)
+    @ApiBearerAuth("access-token")
+    @ApiOperation({ summary: "Update ingredient" })
+    @ApiResponse({ status: HttpStatus.OK, description: "Ingredient has been successfully updated" })
+    @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Ingredient not found" })
+    async updateIngredient(@Body() ingredient: UpdateIngredient) {
+        return await this.ingredientServ.update(ingredient);
     }
 }
