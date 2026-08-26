@@ -99,4 +99,19 @@ describe("Test IngredientController", () => {
             expect(updated.names.some(name => (name.lang.abbrev == ingrName.lang) && (name.name == ingrName.name))).toBe(true);
         }
     });
+
+    it("Should remove ingredient", async () => {
+        const res = await fetch(`${apiURL}/api/ingredient/1`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${mockToken}`
+            }
+        });
+
+        expect(res.ok).toBe(true);
+        const ingredient: Ingredient = await res.json();
+        expect(ingredient.id).toBe(1);
+        expect(ingredient.unit).toBe("g");
+        expect(ingredient.active).toBe(true);
+    });
 });
