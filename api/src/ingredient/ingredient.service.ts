@@ -103,4 +103,21 @@ export class IngredientService {
             }
         });
     }
+
+    async delete(ingredientId: number) {
+        const ingredient: Ingredient | null = await this.prisma.ingredient.findUnique({
+            where: {
+                id: ingredientId
+            }
+        });
+
+        if(!ingredient)
+            throw new NotFoundException("Ingredient not found");
+
+        return await this.prisma.ingredient.delete({
+            where: {
+                id: ingredientId
+            }
+        });
+    }
 }
