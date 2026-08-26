@@ -2,7 +2,7 @@ import { AccountGuard } from '@/account/account.guard';
 import { CreateIngredient, UpdateIngredient } from '@/ingredient/ingredient.dto';
 import { IngredientService } from '@/ingredient/ingredient.service';
 import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('ingredient')
 @ApiTags("ingredient")
@@ -43,6 +43,11 @@ export class IngredientController {
 
     @Delete(":id")
     @UseGuards(AccountGuard)
+    @ApiBearerAuth("access-token")
+    @ApiOperation({ summary: "Delete ingredient" })
+    @ApiParam({ name: "id", type: Number, required: true, description: "ID of ingredient to remove" })
+    @ApiResponse({ status: HttpStatus.OK, description: "Ingredient has been successfully removed" })
+    @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Ingredient not found" })
     async deleteIngredient(@Param("id") id: number) {
         return await this.ingredientServ.delete(id);
     }
