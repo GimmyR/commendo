@@ -1,0 +1,10 @@
+{
+    "name": "Nom",
+    "quantity": "Quantité",
+    "status": "Etat",
+    "edit": "Modifier",
+    "archive": "Archiver",
+    "delete": "Supprimer",
+    "active": "Activé",
+    "inactive": "Archivé"
+}

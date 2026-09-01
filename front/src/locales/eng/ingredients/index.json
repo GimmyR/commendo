@@ -1,0 +1,10 @@
+{
+    "name": "Name",
+    "quantity": "Quantity",
+    "status": "Status",
+    "edit": "Edit",
+    "archive": "Archive",
+    "delete": "Delete",
+    "active": "Active",
+    "inactive": "Inactive"
+}
