@@ -1,4 +1,7 @@
-import type { SubmitEvent } from "react";
+import IngredientNameInput from "@/components/ingredients/ingredient-name-input";
+import useCreateIngredient from "@/libs/hooks/use-create-ingredient";
+import useLanguages from "@/libs/hooks/use-languages";
+import { type SubmitEvent } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
 type Props = {
@@ -7,30 +10,47 @@ type Props = {
 };
 
 export default function AddIngredientModal({ show, onHide } : Props) {
-    const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        console.log("ADD INGREDIENT");
+    const { languages } = useLanguages();
+    const { ingredient, changeUnit, changeName, create, reset } = useCreateIngredient(languages);
+
+    const findLanguage = (langAbbrev: string) => {
+        const lang = languages.find(language => language.abbrev == langAbbrev);
+
+        if(lang)
+            return `${lang.name} (${lang.abbrev})`;
+
+        return "";
+    };
+
+    const handleClose = () => {
         onHide();
+        reset();
+    };
+
+    const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        await create();
+        onHide();
+        reset();
     };
 
     return (
-        <Modal show={show} onHide={onHide}>
+        <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                Add ingredient
+                <strong>Add ingredient</strong>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3">
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control type="text" placeholder="Lorem ipsum"/>
-                    </Form.Group>
-                    <Form.Group className="mb-3">
                         <Form.Label>Unit</Form.Label>
-                        <Form.Control type="text" placeholder="g"/>
+                        <Form.Control type="text" placeholder="g" value={ingredient.unit} onChange={changeUnit}/>
+                    </Form.Group>
+                    <Form.Group className="mb-4">
+                        <Form.Label>Names</Form.Label>
+                        {ingredient.names.map(ingrName => <IngredientNameInput key={ingrName.lang} name={ingrName} language={findLanguage(ingrName.lang)} onChange={(e) => changeName(e, ingrName.lang)}/>)}
                     </Form.Group>
                     <Form.Group className="d-flex flex-row justify-content-end">
-                        <Button type="button" variant="secondary" className="me-2" onClick={onHide}>Cancel</Button>
-                        <Button type="submit" variant="success">Save</Button>
+                        <Button type="submit" variant="success">Submit</Button>
                     </Form.Group>
                 </Form>
             </Modal.Body>
