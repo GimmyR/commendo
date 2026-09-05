@@ -36,6 +36,10 @@ export async function fetchAllIngredients(language: string): Promise<Ingredient[
     return await cmdFetch(`/ingredient?${params.toString()}`);
 }
 
+export async function fetchUniqueIngredient(id: number) {
+    return await cmdFetch(`/ingredient/${id}`);
+}
+
 export async function createIngredient(ingredient: CreateIngredient) {
     const token = useAuth.getState().token;
     
@@ -62,6 +66,13 @@ export async function removeIngredient(id: number) {
 
 export async function editIngredient(ingredient: Partial<Ingredient>) {
     const token = useAuth.getState().token;
+    const toEdit = {
+        ...ingredient,
+        names: ingredient.names?.map(ingrName => ({
+            lang: ingrName.lang.abbrev,
+            name: ingrName.name
+        }))
+    };
 
     return await cmdFetch(`/ingredient/`, {
         method: "PATCH",
@@ -69,6 +80,6 @@ export async function editIngredient(ingredient: Partial<Ingredient>) {
             "Authorization": `Bearer ${token}`,
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(ingredient)
+        body: JSON.stringify(toEdit)
     });
 }

@@ -47,7 +47,7 @@ export default function AddIngredientModal({ show, onHide } : Props) {
                     </Form.Group>
                     <Form.Group className="mb-4">
                         <Form.Label>Names</Form.Label>
-                        {ingredient.names.map(ingrName => <IngredientNameInput key={ingrName.lang} name={ingrName} language={findLanguage(ingrName.lang)} onChange={(e) => changeName(e, ingrName.lang)}/>)}
+                        {ingredient.names.map(ingrName => <IngredientNameInput key={ingrName.lang} value={ingrName.name} language={findLanguage(ingrName.lang)} onChange={(e) => changeName(e, ingrName.lang)}/>)}
                     </Form.Group>
                     <Form.Group className="d-flex flex-row justify-content-end">
                         <Button type="submit" variant="success">Submit</Button>

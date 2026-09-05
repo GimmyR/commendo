@@ -7,9 +7,10 @@ type Props = {
     ingredients: Ingredient[];
     selectToDelete: (ingredient: Ingredient) => void;
     selectToToggleStatus: (ingredient: Ingredient) => void;
+    selectToEdit: (id: number) => void;
 };
 
-export default function IngredientsList({ ingredients, selectToDelete, selectToToggleStatus } : Props) {
+export default function IngredientsList({ ingredients, selectToDelete, selectToToggleStatus, selectToEdit } : Props) {
     const {t} = useTranslation("ingredients");
 
     if(ingredients.length == 0)
@@ -39,7 +40,7 @@ export default function IngredientsList({ ingredients, selectToDelete, selectToT
                     <td>{0} {ingredient.unit}</td>
                     <td>{ingredient.active ? t("active") : t("inactive")}</td>
                     <td>
-                        <IconLink to="#" icon="pencil-square" linkClass="text-success"/>
+                        <IconLink to="#" icon="pencil-square" linkClass="text-success" onClick={() => selectToEdit(ingredient.id)}/>
                     </td>
                     <td>
                         <IconLink to="#" icon={ingredient.active ? "archive-fill" : "archive"} linkClass="text-success" onClick={() => selectToToggleStatus(ingredient)}/>
