@@ -23,6 +23,19 @@ export class IngredientService {
         });
     }
 
+    async findUnique(id: number) {
+        return await this.prisma.ingredient.findUnique({
+            where: { id },
+            include: {
+                names: {
+                    include: {
+                        lang: true
+                    }
+                }
+            }
+        });
+    }
+
     async create(ingredient: CreateIngredient) {
         const newIngredient = await this.prisma.ingredient.create({
             data: {

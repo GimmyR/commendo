@@ -14,10 +14,19 @@ export class IngredientController {
     @Get()
     @ApiOperation({ summary: "Find all ingredients in relation to a language" })
     @ApiQuery({ name: "lang", type: String, required: true, description: "Language to use for ingredients", example: "eng" })
-    @ApiResponse({ status: HttpStatus.OK, description: "All ingredients has been successfully returned with the right language" })
+    @ApiResponse({ status: HttpStatus.OK, description: "All ingredients have been successfully returned with the right language" })
     @ApiResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: "Unexpected error occurs" })
     async findAllIngredients(@Query("lang") language: string) {
         return await this.ingredientServ.findAll(language);
+    }
+
+    @Get(":id")
+    @ApiOperation({ summary: "Find unique ingredient with its ID" })
+    @ApiParam({ name: "id", type: Number, required: true, description: "ID of the ingredient", example: "1" })
+    @ApiResponse({ status: HttpStatus.OK, description: "Ingredient has been successfully returned" })
+    @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Ingredient not found" })
+    async findUniqueIngredient(@Param("id") id: number) {
+        return await this.ingredientServ.findUnique(id);
     }
 
     @Post()

@@ -45,6 +45,18 @@ describe("Test IngredientController", () => {
         expect(ingredients[0].names[0].name).toBe("Beef fillet");
     });
 
+    it("Should return an ingredient", async () => {
+        const res = await fetch(`${apiURL}/api/ingredient/1`);
+        expect(res.ok).toBe(true);
+        const ingredient: (Ingredient & { names: IngredientName[] }) = await res.json();
+        expect(ingredient).toBeDefined();
+        expect(ingredient.active).toBe(true);
+        expect(ingredient.unit).toBe("g");
+        expect(ingredient.names.length).toBe(2);
+        expect(ingredient.names[0].name).toBe("Filet de boeuf");
+        expect(ingredient.names[1].name).toBe("Beef fillet");
+    });
+
     it("Should create ingredient with name in english", async () => {
         const ingredient: CreateIngredient = new CreateIngredient({
             unit: "g",
