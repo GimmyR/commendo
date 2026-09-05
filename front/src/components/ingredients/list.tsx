@@ -5,9 +5,10 @@ import { useTranslation } from "react-i18next";
 
 type Props = {
     ingredients: Ingredient[];
+    selectToDelete: (ingredient: Ingredient) => void;
 };
 
-export default function IngredientsList({ ingredients } : Props) {
+export default function IngredientsList({ ingredients, selectToDelete } : Props) {
     const {t} = useTranslation("ingredients");
 
     if(ingredients.length == 0)
@@ -43,7 +44,7 @@ export default function IngredientsList({ ingredients } : Props) {
                         <IconLink to="#" icon="archive-fill" linkClass="text-success"/>
                     </td>
                     <td>
-                        <IconLink to="#" icon="trash-fill" linkClass="text-success"/>
+                        <IconLink to="#" icon="trash-fill" linkClass="text-success" onClick={() => selectToDelete(ingredient)}/>
                     </td>
                 </tr>)}
             </tbody>

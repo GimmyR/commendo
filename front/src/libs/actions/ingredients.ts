@@ -48,3 +48,14 @@ export async function createIngredient(ingredient: CreateIngredient) {
         body: JSON.stringify(ingredient)
     });
 }
+
+export async function removeIngredient(id: number) {
+    const token = useAuth.getState().token;
+
+    return await cmdFetch(`/ingredient/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+}
