@@ -59,3 +59,16 @@ export async function removeIngredient(id: number) {
         }
     });
 }
+
+export async function editIngredient(ingredient: Partial<Ingredient>) {
+    const token = useAuth.getState().token;
+
+    return await cmdFetch(`/ingredient/`, {
+        method: "PATCH",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(ingredient)
+    });
+}
