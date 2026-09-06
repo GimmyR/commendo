@@ -16,7 +16,7 @@ export default function IngredientsList({ ingredients, selectToDelete, selectToT
     if(ingredients.length == 0)
         return (
             <div className="d-flex flex-row justify-content-center align-items-center border" style={{ height: "200px" }}>
-                <p className="fw-bold text-uppercase mb-0">No data</p>
+                <p className="fw-bold text-uppercase mb-0">{t("no-data")}</p>
             </div>
         );
 
