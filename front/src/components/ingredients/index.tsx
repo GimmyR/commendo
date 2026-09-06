@@ -10,8 +10,10 @@ import useIngredients from "@/libs/hooks/use-ingredients";
 import useRemoveIngredient from "@/libs/hooks/use-remove-ingredient";
 import { useState, type SubmitEvent } from "react";
 import { Col, Row } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 export default function Ingredients() {
+    const {t} = useTranslation("ingredients");
     const {ingredients} = useIngredients();
     const {showAdd, displayAdd, hideAdd} = useAddIngredient();
     const {toDelete, setToDelete, remove} = useRemoveIngredient();
@@ -48,15 +50,15 @@ export default function Ingredients() {
             <Col>
                 <IngredientsList ingredients={ingredients} selectToDelete={setToDelete} selectToToggleStatus={setToToggleStatus} selectToEdit={setIngredientId}/>
                 <IconButton icon="plus-lg" variant="success" className="position-absolute position-fixed bottom-0 end-0 mb-3 me-3" onClick={displayAdd}>
-                    Add ingredient
+                    {t("add-ingredient")}
                 </IconButton>
                 <AddIngredientModal show={showAdd} onHide={hideAdd} ingredients={ingredients}/>
                 <EditIngredientModal show={ingredientId != undefined} onHide={() => setIngredientId(undefined)} ingredientId={ingredientId} ingredients={ingredients}/>
                 <ConfirmModal show={toDelete != undefined} onCancel={() => setToDelete(undefined)} onConfirm={deleteIngredient}>
-                    Do you want to remove this ingredient ?
+                    {t("confirm-delete")}
                 </ConfirmModal>
                 <ConfirmModal show={toToggleStatus != undefined} onCancel={() => setToToggleStatus(undefined)} onConfirm={editStatus}>
-                    Do you want to change the status of this ingredient ?
+                    {t("confirm-toggle")}
                 </ConfirmModal>
             </Col>
         </Row>

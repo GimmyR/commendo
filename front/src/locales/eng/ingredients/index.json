@@ -6,5 +6,12 @@
     "archive": "Archive",
     "delete": "Delete",
     "active": "Active",
-    "inactive": "Inactive"
+    "inactive": "Inactive",
+    "add-ingredient": "Add ingredient",
+    "confirm-delete": "Do you want to remove this ingredient ?",
+    "confirm-toggle": "Do you want to change the status of this ingredient ?",
+    "unit": "Unit",
+    "names": "Names",
+    "submit": "Submit",
+    "edit-ingredient": "Edit ingredient"
 }

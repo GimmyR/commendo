@@ -4,6 +4,7 @@ import useCreateIngredient from "@/libs/hooks/use-create-ingredient";
 import useLanguages from "@/libs/hooks/use-languages";
 import { type SubmitEvent } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     show: boolean;
@@ -12,6 +13,7 @@ type Props = {
 };
 
 export default function AddIngredientModal({ show, onHide, ingredients } : Props) {
+    const {t} = useTranslation("ingredients");
     const { languages } = useLanguages();
     const { ingredient, changeUnit, changeName, create, reset } = useCreateIngredient(languages);
 
@@ -40,20 +42,20 @@ export default function AddIngredientModal({ show, onHide, ingredients } : Props
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <strong>Add ingredient</strong>
+                <strong>{t("add-ingredient")}</strong>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3">
-                        <Form.Label>Unit</Form.Label>
+                        <Form.Label>{t("unit")}</Form.Label>
                         <Form.Control type="text" placeholder="g" value={ingredient.unit} onChange={changeUnit}/>
                     </Form.Group>
                     <Form.Group className="mb-4">
-                        <Form.Label>Names</Form.Label>
+                        <Form.Label>{t("names")}</Form.Label>
                         {ingredient.names.map(ingrName => <IngredientNameInput key={ingrName.lang} value={ingrName.name} language={findLanguage(ingrName.lang)} onChange={(e) => changeName(e, ingrName.lang)}/>)}
                     </Form.Group>
                     <Form.Group className="d-flex flex-row justify-content-end">
-                        <Button type="submit" variant="success">Submit</Button>
+                        <Button type="submit" variant="success">{t("submit")}</Button>
                     </Form.Group>
                 </Form>
             </Modal.Body>
