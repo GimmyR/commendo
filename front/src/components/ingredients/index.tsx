@@ -31,6 +31,18 @@ export default function Ingredients() {
         }
     };
 
+    const deleteIngredient = async (e: SubmitEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const ingredient: Ingredient | undefined = await remove();
+
+        if(ingredient) {
+            const index = ingredients.findIndex(ingr => ingr.id == ingredient.id);
+
+            if(index >= 0)
+                ingredients.splice(index, 1);
+        }
+    };
+
     return (
         <Row className="justify-content-center py-5 px-lg-4">
             <Col>
@@ -40,7 +52,7 @@ export default function Ingredients() {
                 </IconButton>
                 <AddIngredientModal show={showAdd} onHide={hideAdd} ingredients={ingredients}/>
                 <EditIngredientModal show={ingredientId != undefined} onHide={() => setIngredientId(undefined)} ingredientId={ingredientId} ingredients={ingredients}/>
-                <ConfirmModal show={toDelete != undefined} onCancel={() => setToDelete(undefined)} onConfirm={remove}>
+                <ConfirmModal show={toDelete != undefined} onCancel={() => setToDelete(undefined)} onConfirm={deleteIngredient}>
                     Do you want to remove this ingredient ?
                 </ConfirmModal>
                 <ConfirmModal show={toToggleStatus != undefined} onCancel={() => setToToggleStatus(undefined)} onConfirm={editStatus}>
