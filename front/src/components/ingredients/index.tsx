@@ -24,7 +24,7 @@ export default function Ingredients() {
                 <IconButton icon="plus-lg" variant="success" className="position-absolute position-fixed bottom-0 end-0 mb-3 me-3" onClick={displayAdd}>
                     Add ingredient
                 </IconButton>
-                <AddIngredientModal show={showAdd} onHide={hideAdd}/>
+                <AddIngredientModal show={showAdd} onHide={hideAdd} ingredients={ingredients}/>
                 <EditIngredientModal show={ingredientId != undefined} onHide={() => setIngredientId(undefined)} ingredientId={ingredientId}/>
                 <ConfirmModal show={toDelete != undefined} onCancel={() => setToDelete(undefined)} onConfirm={remove}>
                     Do you want to remove this ingredient ?

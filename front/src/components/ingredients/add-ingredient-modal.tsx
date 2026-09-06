@@ -1,4 +1,5 @@
 import IngredientNameInput from "@/components/ingredients/ingredient-name-input";
+import type { Ingredient } from "@/libs/actions/ingredients";
 import useCreateIngredient from "@/libs/hooks/use-create-ingredient";
 import useLanguages from "@/libs/hooks/use-languages";
 import { type SubmitEvent } from "react";
@@ -7,9 +8,10 @@ import { Button, Form, Modal } from "react-bootstrap";
 type Props = {
     show: boolean;
     onHide: () => void;
+    ingredients: Ingredient[];
 };
 
-export default function AddIngredientModal({ show, onHide } : Props) {
+export default function AddIngredientModal({ show, onHide, ingredients } : Props) {
     const { languages } = useLanguages();
     const { ingredient, changeUnit, changeName, create, reset } = useCreateIngredient(languages);
 
@@ -29,7 +31,8 @@ export default function AddIngredientModal({ show, onHide } : Props) {
 
     const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
-        await create();
+        const ingredient: Ingredient = await create();
+        ingredients.push(ingredient);
         onHide();
         reset();
     };

@@ -47,7 +47,7 @@ export class IngredientService {
         for(const name of ingredient.names)
             await this.createName(newIngredient.id, name);
 
-        return newIngredient;
+        return this.findUnique(newIngredient.id);
     }
 
     async createName(ingredientId: number, name: CreateIngredientName) {

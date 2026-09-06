@@ -1,8 +1,11 @@
-import { createIngredient, type CreateIngredient } from "@/libs/actions/ingredients";
+import { createIngredient, type CreateIngredient, type Ingredient } from "@/libs/actions/ingredients";
 import type { Language } from "@/libs/actions/language";
+import { useLanguage } from "@/libs/hooks/use-language";
 import { useEffect, useState, type ChangeEvent } from "react";
 
 export default function useCreateIngredient(languages: Language[]) {
+    const language = useLanguage((state) => state.lang);
+
     const [ingredient, setIngredient] = useState<CreateIngredient>({
         unit: "",
         names: []
@@ -19,8 +22,14 @@ export default function useCreateIngredient(languages: Language[]) {
     };
 
     const create = async () => {
-        await createIngredient(ingredient);
-    };
+        const newIngr: Ingredient = await createIngredient(ingredient);
+        const created: Ingredient = {
+            ...newIngr,
+            names: newIngr.names.filter(name => name.lang.abbrev == language)
+        };
+
+        return created;
+    }
 
     const reset = () => {
         ingredient.unit = "";
