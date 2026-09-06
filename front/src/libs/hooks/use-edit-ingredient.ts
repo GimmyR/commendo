@@ -1,7 +1,9 @@
 import { editIngredient, fetchUniqueIngredient, type Ingredient } from "@/libs/actions/ingredients";
-import { useEffect, useState, type ChangeEvent, type SubmitEvent } from "react";
+import { useLanguage } from "@/libs/hooks/use-language";
+import { useEffect, useState, type ChangeEvent } from "react";
 
 export default function useEditIngredient(id?: number) {
+    const language = useLanguage((state) => state.lang);
     const [toEdit, setToEdit] = useState<Ingredient>();
     const [toToggleStatus, setToToggleStatus] = useState<Ingredient>();
     
@@ -21,21 +23,36 @@ export default function useEditIngredient(id?: number) {
     const reset = () => setToEdit(undefined);
 
     const edit = async () => {
-        if(toEdit)
-            await editIngredient(toEdit);
+        if(toEdit) {
+            const ingredient: Ingredient = await editIngredient(toEdit);
+            const ingr: Ingredient = {
+                ...ingredient,
+                names: ingredient.names.filter(name => name.lang.abbrev == language)
+            };
+
+            return ingr;
+        }
+
+        return undefined;
     };
 
-    const toggleStatus = async (e: SubmitEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
+    const toggleStatus = async () => {
         if(toToggleStatus) {
-            await editIngredient({
+            const ingredient: Ingredient = await editIngredient({
                 id: toToggleStatus.id,
                 active: !toToggleStatus.active
             });
+
+            const ingr: Ingredient = {
+                ...ingredient,
+                names: ingredient.names.filter(name => name.lang.abbrev == language)
+            };
             
             setToToggleStatus(undefined);
+            return ingr;
         }
+
+        return undefined;
     };
 
     useEffect(() => {

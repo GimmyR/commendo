@@ -1,4 +1,5 @@
 import IngredientNameInput from "@/components/ingredients/ingredient-name-input";
+import type { Ingredient } from "@/libs/actions/ingredients";
 import useEditIngredient from "@/libs/hooks/use-edit-ingredient";
 import useLanguages from "@/libs/hooks/use-languages";
 import { type SubmitEvent } from "react";
@@ -8,9 +9,10 @@ type Props = {
     show: boolean;
     onHide: () => void;
     ingredientId?: number;
+    ingredients: Ingredient[];
 };
 
-export default function EditIngredientModal({ show, onHide, ingredientId } : Props) {
+export default function EditIngredientModal({ show, onHide, ingredientId, ingredients } : Props) {
     const { languages } = useLanguages();
     const { toEdit, changeUnit, changeName, edit, reset } = useEditIngredient(ingredientId);
 
@@ -30,7 +32,16 @@ export default function EditIngredientModal({ show, onHide, ingredientId } : Pro
 
     const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
-        await edit();
+        const ingredient: Ingredient | undefined = await edit();
+
+        if(ingredient) {
+            const index = ingredients.findIndex(ingr => ingr.id == ingredient.id);
+
+            if(index >= 0) {
+                ingredients[index] = ingredient;
+            }
+        }
+
         onHide();
         reset();
     };
