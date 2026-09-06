@@ -23,6 +23,15 @@ const ingredient: Ingredient = {
 };
 
 describe("Test IngredientsList", () => {
+    it("Should display 'No data'", () => {
+        render(<MemoryRouter>
+            <IngredientsList ingredients={[]} selectToEdit={() => {}} selectToToggleStatus={() => {}} selectToDelete={() => {}}/>
+        </MemoryRouter>);
+
+        const noData = screen.getByText("Aucune donnée");
+        expect(noData).toBeInTheDocument();
+    });
+
     it("Should display ingredients", () => {
         render(<MemoryRouter>
             <IngredientsList ingredients={[ingredient]} selectToEdit={() => {}} selectToToggleStatus={() => {}} selectToDelete={() => {}}/>
