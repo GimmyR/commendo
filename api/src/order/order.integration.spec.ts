@@ -32,10 +32,10 @@ describe("Test OrderController", () => {
         await prisma.$executeRaw`
             TRUNCATE TABLE
                 cmd_dish_ingredient, 
+                cmd_ingredient_name, 
+                cmd_ingredient, 
                 cmd_dish_name, 
                 cmd_dish, 
-                cmd_ingredient_name, 
-                cmd_dish_ingredient, 
                 cmd_table
             RESTART IDENTITY CASCADE`;
 
