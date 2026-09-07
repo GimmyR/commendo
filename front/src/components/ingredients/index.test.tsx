@@ -1,7 +1,14 @@
 import Ingredients from "@/components/ingredients";
 import { fetchAllIngredients, type Ingredient } from "@/libs/actions/ingredients";
+import { fetchAllLanguages, type Language } from "@/libs/actions/language";
 import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+
+const language: Language = {
+    id: 1,
+    name: "Français",
+    abbrev: "fr"
+};
 
 const ingredient: Ingredient = {
     id: 1,
@@ -21,6 +28,12 @@ const ingredient: Ingredient = {
     ]
 };
 
+vi.mock("@/libs/actions/language", () => {
+    return {
+        fetchAllLanguages: vi.fn()
+    };
+});
+
 vi.mock("@/libs/actions/ingredients", () => {
     return {
         fetchAllIngredients: vi.fn()
@@ -33,6 +46,7 @@ describe("Test Ingredients page", () => {
     });
 
     it("Should display 'Add ingredient' button", async () => {
+        vi.mocked(fetchAllLanguages).mockResolvedValue([language]);
         vi.mocked(fetchAllIngredients).mockResolvedValue([]);
         
         render(<MemoryRouter>
@@ -46,6 +60,7 @@ describe("Test Ingredients page", () => {
     });
 
     it("Should display 'No data'", async () => {
+        vi.mocked(fetchAllLanguages).mockResolvedValue([language]);
         vi.mocked(fetchAllIngredients).mockResolvedValue([]);
         
         render(<MemoryRouter>
@@ -59,6 +74,7 @@ describe("Test Ingredients page", () => {
     });
 
     it("Should display ingredients", async () => {
+        vi.mocked(fetchAllLanguages).mockResolvedValue([language]);
         vi.mocked(fetchAllIngredients).mockResolvedValue([ingredient]);
         
         render(<MemoryRouter>
