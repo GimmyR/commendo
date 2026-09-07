@@ -20,7 +20,7 @@ describe('Test DishController', () => {
     });
 
     beforeEach(async () => {
-        await prisma.$executeRaw`TRUNCATE TABLE cmd_dish_ingredient, cmd_dish_name, cmd_dish, cmd_ingredient_name, cmd_dish_ingredient RESTART IDENTITY CASCADE`;
+        await prisma.$executeRaw`TRUNCATE TABLE cmd_dish_ingredient, cmd_ingredient_name, cmd_ingredient, cmd_dish_name, cmd_dish RESTART IDENTITY CASCADE`;
 
         await prisma.$executeRawUnsafe(`
             INSERT INTO "public".cmd_ingredient (unit, active) VALUES ('g', true);

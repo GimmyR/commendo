@@ -1,0 +1,18 @@
+{
+    "no-data": "Aucune donnée",
+    "name": "Nom",
+    "quantity": "Quantité",
+    "status": "Etat",
+    "edit": "Modifier",
+    "archive": "Archiver",
+    "delete": "Supprimer",
+    "active": "Activé",
+    "inactive": "Archivé",
+    "add-ingredient": "Ajouter ingrédient",
+    "confirm-delete": "Voulez-vous vraiment supprimer cet ingrédient ?",
+    "confirm-toggle": "Voulez-vous vraiment modifier l'état de cette ingrédient ?",
+    "unit": "Unité",
+    "names": "Noms",
+    "submit": "Enregistrer",
+    "edit-ingredient": "Modifier ingrédient"
+}

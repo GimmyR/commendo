@@ -12,6 +12,10 @@ import frTable from "./locales/fr/tables/unique/index.json";
 import engTable from "./locales/eng/tables/unique/index.json";
 import frOrders from "./locales/fr/orders/index.json";
 import engOrders from "./locales/eng/orders/index.json";
+import frIngredients from "./locales/fr/ingredients/index.json";
+import engIngredients from "./locales/eng/ingredients/index.json";
+import frCommon from "./locales/fr/common.json";
+import engCommon from "./locales/eng/common.json";
 
 i18n.use(initReactI18next)
     .init({
@@ -22,7 +26,9 @@ i18n.use(initReactI18next)
                 dishes: frDishes,
                 tables: frTables,
                 table: frTable,
-                orders: frOrders
+                orders: frOrders,
+                ingredients: frIngredients,
+                common: frCommon
             },
             eng: {
                 navbar: engNavBar,
@@ -30,7 +36,9 @@ i18n.use(initReactI18next)
                 dishes: engDishes,
                 tables: engTables,
                 table: engTable,
-                orders: engOrders
+                orders: engOrders,
+                ingredients: engIngredients,
+                common: engCommon
             }
         },
         fallbackLng: "fr",

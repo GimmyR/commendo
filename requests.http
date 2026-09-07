@@ -53,3 +53,41 @@ Content-Type: application/json
 
 ### GET find all dishes
 GET http://localhost:8000/api/dish?lang=eng&page=1&limit=4&filter=name:contains:maza;price:gte:10000;price:lte:20000
+
+### GET find all ingredients
+GET http://localhost:8000/api/ingredient?lang=fr
+
+### GET find unique ingredient
+GET http://localhost:8000/api/ingredient/1
+
+### POST create ingredient
+POST http://localhost:8000/api/ingredient
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsIm5hbWUiOiJnaW1teSIsImlhdCI6MTc4MTc3NDU0N30.Qv2Hr9XbEt7ivnDEiNAJQdXnJtiEvjt16zQ423_uvbU
+Content-Type: application/json
+
+{
+    "unit": "g",
+    "names": [
+        { "lang": "fr", "name": "Merde" },
+        { "lang": "eng", "name": "Shit" }
+    ]
+}
+
+### PATCH update ingredient
+PATCH http://localhost:8000/api/ingredient
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsIm5hbWUiOiJnaW1teSIsImlhdCI6MTc4MTc3NDU0N30.Qv2Hr9XbEt7ivnDEiNAJQdXnJtiEvjt16zQ423_uvbU
+Content-Type: application/json
+
+{
+    "id": 31,
+    "unit": "g",
+    "active": true,
+    "names": [
+        { "lang": "fr", "name": "Safran" },
+        { "lang": "eng", "name": "Saffron" }
+    ]
+}
+
+### DELETE remove ingredient
+DELETE  http://localhost:8000/api/ingredient/31
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsIm5hbWUiOiJnaW1teSIsImlhdCI6MTc4MTc3NDU0N30.Qv2Hr9XbEt7ivnDEiNAJQdXnJtiEvjt16zQ423_uvbU
