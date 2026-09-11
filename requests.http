@@ -111,3 +111,13 @@ Content-Type: application/json
     "quantity": 10000,
     "purchasePrice": 35000
 }
+
+### PATCH update ingredient movement
+PATCH http://localhost:8000/api/inventory/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsIm5hbWUiOiJnaW1teSIsImlhdCI6MTc4MTc3NDU0N30.Qv2Hr9XbEt7ivnDEiNAJQdXnJtiEvjt16zQ423_uvbU
+Content-Type: application/json
+
+{
+    "id": 35,
+    "purchasePrice": 50000
+}

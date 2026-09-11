@@ -1,7 +1,7 @@
 import { AccountGuard } from '@/account/account.guard';
-import { CreateMovement } from '@/inventory/inventory.dto';
+import { CreateMovement, UpdateMovement } from '@/inventory/inventory.dto';
 import { InventoryService } from '@/inventory/inventory.service';
-import { Body, Controller, Get, HttpStatus, Param, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller('inventory')
@@ -39,5 +39,15 @@ export class InventoryController {
     @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Ingredient not found" })
     async createMovement(@Body() movement: CreateMovement) {
         return await this.inventoryServ.create(movement);
+    }
+
+    @Patch()
+    @UseGuards(AccountGuard)
+    @ApiOperation({ summary: "Update movement" })
+    @ApiResponse({ status: HttpStatus.CREATED, description: "The movement has been successfully updated" })
+    @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Movement not found" })
+    @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Ingredient not found" })
+    async updateMovement(@Body() movement: UpdateMovement) {
+        return await this.inventoryServ.update(movement);
     }
 }

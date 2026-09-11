@@ -1,6 +1,6 @@
-import { CreateMovement } from '@/inventory/inventory.dto';
+import { CreateMovement, UpdateMovement } from '@/inventory/inventory.dto';
 import { PrismaService } from '@/prisma/prisma.service';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { IngredientMovement } from '@prisma/client';
 
 @Injectable()
@@ -46,13 +46,9 @@ export class InventoryService {
         });
     }
 
-    async create(movement: CreateMovement) {
-        const newMovement: IngredientMovement = await this.prisma.ingredientMovement.create({
-            data: {...movement}
-        });
-
+    async findUniqueWithAllLanguages(id: number) {
         return await this.prisma.ingredientMovement.findUnique({
-            where: { id: newMovement.id },
+            where: { id },
             include: {
                 ingredient: {
                     include: {
@@ -65,5 +61,30 @@ export class InventoryService {
                 }
             }
         });
+    }
+
+    async create(movement: CreateMovement) {
+        const newMovement: IngredientMovement = await this.prisma.ingredientMovement.create({
+            data: {...movement}
+        });
+
+        return await this.findUniqueWithAllLanguages(newMovement.id);
+    }
+
+    async update(movement: UpdateMovement) {
+        const {id, ...movementWithoutId} = movement;
+
+        const current: IngredientMovement | null = await this.prisma.ingredientMovement.findUnique({
+            where: { id }
+        });
+
+        if(!current) throw new NotFoundException();
+
+        const newMovement: IngredientMovement = await this.prisma.ingredientMovement.update({
+            where: { id },
+            data: {...movementWithoutId}
+        });
+
+        return await this.findUniqueWithAllLanguages(newMovement.id);
     }
 }
