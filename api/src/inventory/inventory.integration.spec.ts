@@ -124,4 +124,22 @@ describe("Test InventoryController", () => {
         expect(newMovement.quantity).toBe(5000);
         expect(newMovement.purchasePrice).toBe(120000);
     });
+
+    it("Should remove movement", async () => {
+        const res = await fetch(`${apiURL}/api/inventory/1`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${mockToken}`
+            }
+        });
+
+        expect(res.status).toBe(HttpStatus.OK);
+        const movement: IngredientMovement = await res.json();
+        expect(movement).toBeDefined();
+        expect(movement.id).toBe(1);
+        expect(movement.ingredientId).toBe(1);
+        expect(movement.type).toBe(1);
+        expect(movement.quantity).toBe(10000);
+        expect(movement.purchasePrice).toBe(240000);
+    });
 });
