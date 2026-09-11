@@ -14,7 +14,6 @@ export interface IngredientName {
 export interface Ingredient {
     id: number;
     unit: string;
-    quantity: number;
     active: boolean;
     names: IngredientName[];
 }

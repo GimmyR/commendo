@@ -76,7 +76,6 @@ model DishName {
 model Ingredient {
     id          Int                     @id @default(autoincrement())
     unit        String                  @db.VarChar(10)
-    quantity    Float                   @default(0)
     active      Boolean                 @default(true)
     names       IngredientName[]
     dishes      DishIngredient[]
