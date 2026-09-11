@@ -6,4 +6,22 @@ export class InventoryService {
     constructor(
         private readonly prisma: PrismaService
     ) {}
+
+    async findAll(language: string) {
+        return await this.prisma.ingredientMovement.findMany({
+            include: {
+                ingredient: {
+                    include: {
+                        names: {
+                            where: {
+                                lang: {
+                                    abbrev: language
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
 }
