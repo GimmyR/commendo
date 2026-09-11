@@ -1,4 +1,4 @@
-import { CreateMovement } from "@/inventory/inventory.dto";
+import { CreateMovement, UpdateMovement } from "@/inventory/inventory.dto";
 import { PrismaService } from "@/prisma/prisma.service";
 import { initIntegrationTest } from "@/test.helper";
 import { HttpStatus, INestApplication } from "@nestjs/common";
@@ -93,6 +93,32 @@ describe("Test InventoryController", () => {
         const newMovement: IngredientMovement = await res.json();
         expect(newMovement).toBeDefined();
         expect(newMovement.id).toBe(2);
+        expect(newMovement.ingredientId).toBe(1);
+        expect(newMovement.type).toBe(1);
+        expect(newMovement.quantity).toBe(5000);
+        expect(newMovement.purchasePrice).toBe(120000);
+    });
+
+    it("Should update movement", async () => {
+        const movement: UpdateMovement = new UpdateMovement({
+            id: 1,
+            quantity: 5000,
+            purchasePrice: 120000
+        });
+
+        const res = await fetch(`${apiURL}/api/inventory`, {
+            method: "PATCH",
+            headers: {
+                "Authorization": `Bearer ${mockToken}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(movement)
+        });
+
+        expect(res.status).toBe(HttpStatus.OK);
+        const newMovement: IngredientMovement = await res.json();
+        expect(newMovement).toBeDefined();
+        expect(newMovement.id).toBe(1);
         expect(newMovement.ingredientId).toBe(1);
         expect(newMovement.type).toBe(1);
         expect(newMovement.quantity).toBe(5000);
