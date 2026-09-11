@@ -27,7 +27,17 @@ export class InventoryService {
         });
     }
 
-    async findUnique(id: number, language: string) {
+    async findUnique(id: number) {
+        const current: IngredientMovement | null = await this.prisma.ingredientMovement.findUnique({
+            where: { id }
+        });
+
+        if(!current) throw new NotFoundException();
+
+        return current;
+    }
+
+    async findUniqueWithSpecifiedLanguage(id: number, language: string) {
         const movement: IngredientMovement | null = await this.prisma.ingredientMovement.findUnique({
             where: { id },
             include: {
@@ -77,13 +87,8 @@ export class InventoryService {
 
     async update(movement: UpdateMovement) {
         const {id, ...movementWithoutId} = movement;
-
-        const current: IngredientMovement | null = await this.prisma.ingredientMovement.findUnique({
-            where: { id }
-        });
-
-        if(!current) throw new NotFoundException();
-
+        const current: IngredientMovement = await this.findUnique(movement.id);
+        
         const newMovement: IngredientMovement = await this.prisma.ingredientMovement.update({
             where: { id },
             data: {...movementWithoutId}
@@ -93,11 +98,7 @@ export class InventoryService {
     }
 
     async remove(movementId: number) {
-        const movement: IngredientMovement | null = await this.prisma.ingredientMovement.findUnique({
-            where: { id: movementId }
-        });
-
-        if(!movement) throw new NotFoundException();
+        const current: IngredientMovement = await this.findUnique(movementId);
 
         return await this.prisma.ingredientMovement.delete({
             where: { id: movementId }

@@ -29,7 +29,7 @@ export class InventoryController {
     @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Movement not found" })
     @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Language not found" })
     async findUniqueMovement(@Param("id") id: number, @Query("lang") language: string) {
-        return this.inventoryServ.findUnique(id, language);
+        return this.inventoryServ.findUniqueWithSpecifiedLanguage(id, language);
     }
 
     @Post()
