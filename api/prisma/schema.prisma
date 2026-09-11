@@ -75,11 +75,12 @@ model DishName {
 
 model Ingredient {
     id          Int                     @id @default(autoincrement())
-    names       IngredientName[]
     unit        String                  @db.VarChar(10)
+    quantity    Float                   @default(0)
+    active      Boolean                 @default(true)
+    names       IngredientName[]
     dishes      DishIngredient[]
     movements   IngredientMovement[]
-    active      Boolean                 @default(true)
     @@map("cmd_ingredient")
 }
 
