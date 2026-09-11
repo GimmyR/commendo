@@ -53,4 +53,21 @@ describe("Test InventoryController", () => {
         expect(movements[0].quantity).toBe(10000);
         expect(movements[0].purchasePrice).toBe(240000);
     });
+
+    it("Should return unique movement", async () => {
+        const res = await fetch(`${apiURL}/api/inventory/1?lang=eng`, {
+            headers: {
+                "Authorization": `Bearer ${mockToken}`
+            }
+        });
+
+        expect(res.status).toBe(HttpStatus.OK);
+        const movement: IngredientMovement = await res.json();
+        expect(movement).toBeDefined();
+        expect(movement.id).toBe(1);
+        expect(movement.ingredientId).toBe(1);
+        expect(movement.type).toBe(1);
+        expect(movement.quantity).toBe(10000);
+        expect(movement.purchasePrice).toBe(240000);
+    });
 });
