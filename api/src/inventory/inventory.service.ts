@@ -87,4 +87,16 @@ export class InventoryService {
 
         return await this.findUniqueWithAllLanguages(newMovement.id);
     }
+
+    async remove(movementId: number) {
+        const movement: IngredientMovement | null = await this.prisma.ingredientMovement.findUnique({
+            where: { id: movementId }
+        });
+
+        if(!movement) throw new NotFoundException();
+
+        return await this.prisma.ingredientMovement.delete({
+            where: { id: movementId }
+        });
+    }
 }

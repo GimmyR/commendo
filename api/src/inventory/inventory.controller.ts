@@ -1,7 +1,7 @@
 import { AccountGuard } from '@/account/account.guard';
 import { CreateMovement, UpdateMovement } from '@/inventory/inventory.dto';
 import { InventoryService } from '@/inventory/inventory.service';
-import { Body, Controller, Get, HttpStatus, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller('inventory')
@@ -49,5 +49,15 @@ export class InventoryController {
     @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Ingredient not found" })
     async updateMovement(@Body() movement: UpdateMovement) {
         return await this.inventoryServ.update(movement);
+    }
+
+    @Delete(":id")
+    @UseGuards(AccountGuard)
+    @ApiOperation({ summary: "Delete a movement" })
+    @ApiParam({ name: "id", type: "number", required: true, description: "ID of the movement", example: 1 })
+    @ApiResponse({ status: HttpStatus.OK, description: "The movement has been successfully removed" })
+    @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Movement not found" })
+    async deleteMovement(@Param("id") id: number) {
+        return this.inventoryServ.remove(id);
     }
 }

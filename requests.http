@@ -121,3 +121,7 @@ Content-Type: application/json
     "id": 35,
     "purchasePrice": 50000
 }
+
+### DELETE remove ingredient movement
+DELETE http://localhost:8000/api/inventory/31
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsIm5hbWUiOiJnaW1teSIsImlhdCI6MTc4MTc3NDU0N30.Qv2Hr9XbEt7ivnDEiNAJQdXnJtiEvjt16zQ423_uvbU
