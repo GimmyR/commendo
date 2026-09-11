@@ -24,4 +24,23 @@ export class InventoryService {
             }
         });
     }
+
+    async findUnique(id: number, language: string) {
+        return await this.prisma.ingredientMovement.findUnique({
+            where: { id },
+            include: {
+                ingredient: {
+                    include: {
+                        names: {
+                            where: {
+                                lang: {
+                                    abbrev: language
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
 }
