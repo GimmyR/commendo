@@ -1,6 +1,7 @@
 import { AccountGuard } from '@/account/account.guard';
+import { CreateMovement } from '@/inventory/inventory.dto';
 import { InventoryService } from '@/inventory/inventory.service';
-import { Controller, Get, HttpStatus, Param, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller('inventory')
@@ -29,5 +30,14 @@ export class InventoryController {
     @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Language not found" })
     async findUniqueMovement(@Param("id") id: number, @Query("lang") language: string) {
         return this.inventoryServ.findUnique(id, language);
+    }
+
+    @Post()
+    @UseGuards(AccountGuard)
+    @ApiOperation({ summary: "Create movement" })
+    @ApiResponse({ status: HttpStatus.CREATED, description: "The movement has been successfully created" })
+    @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "Ingredient not found" })
+    async createMovement(@Body() movement: CreateMovement) {
+        return await this.inventoryServ.create(movement);
     }
 }

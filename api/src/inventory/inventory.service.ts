@@ -1,5 +1,7 @@
+import { CreateMovement } from '@/inventory/inventory.dto';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
+import { IngredientMovement } from '@prisma/client';
 
 @Injectable()
 export class InventoryService {
@@ -36,6 +38,27 @@ export class InventoryService {
                                 lang: {
                                     abbrev: language
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    async create(movement: CreateMovement) {
+        const newMovement: IngredientMovement = await this.prisma.ingredientMovement.create({
+            data: {...movement}
+        });
+
+        return await this.prisma.ingredientMovement.findUnique({
+            where: { id: newMovement.id },
+            include: {
+                ingredient: {
+                    include: {
+                        names: {
+                            include: {
+                                lang: true
                             }
                         }
                     }

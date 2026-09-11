@@ -99,3 +99,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsIm5hbWUiO
 ### GET find unique ingredient movement
 GET http://localhost:8000/api/inventory/1?lang=fr
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsIm5hbWUiOiJnaW1teSIsImlhdCI6MTc4MTc3NDU0N30.Qv2Hr9XbEt7ivnDEiNAJQdXnJtiEvjt16zQ423_uvbU
+
+### POST create ingredient movement
+POST http://localhost:8000/api/inventory/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsIm5hbWUiOiJnaW1teSIsImlhdCI6MTc4MTc3NDU0N30.Qv2Hr9XbEt7ivnDEiNAJQdXnJtiEvjt16zQ423_uvbU
+Content-Type: application/json
+
+{
+    "ingredientId": 1,
+    "type": 1,
+    "quantity": 10000,
+    "purchasePrice": 35000
+}
