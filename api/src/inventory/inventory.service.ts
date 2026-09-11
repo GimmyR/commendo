@@ -28,7 +28,7 @@ export class InventoryService {
     }
 
     async findUnique(id: number, language: string) {
-        return await this.prisma.ingredientMovement.findUnique({
+        const movement: IngredientMovement | null = await this.prisma.ingredientMovement.findUnique({
             where: { id },
             include: {
                 ingredient: {
@@ -44,6 +44,10 @@ export class InventoryService {
                 }
             }
         });
+
+        if(!movement) throw new NotFoundException();
+
+        return movement;
     }
 
     async findUniqueWithAllLanguages(id: number) {
