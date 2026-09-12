@@ -13,7 +13,9 @@ export default function MovementsList({ movements } : Props) {
     if(movements.length == 0)
         return (
             <div className="d-flex flex-row justify-content-center">
-                <div className="col-12 col-lg-8 text-dark fw-bold text-center text-uppercase py-5 border">No data</div>
+                <div className="col-12 col-lg-8 text-dark fw-bold text-center text-uppercase py-5 border">
+                    {t("no-data")}
+                </div>
             </div>
         );
 

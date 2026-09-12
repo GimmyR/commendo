@@ -2,5 +2,6 @@
     "ingredient": "Ingrédient",
     "quantity": "Quantité",
     "purchase-price": "Prix d'achat",
-    "movement": "Mouvement"
+    "movement": "Mouvement",
+    "no-data": "Aucune donnée"
 }
