@@ -1,12 +1,15 @@
 import IconLink from "@/components/icon-link";
 import type { IngredientMovement } from "@/libs/actions/inventory";
 import { Table } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     movements: IngredientMovement[]
 };
 
 export default function MovementsList({ movements } : Props) {
+    const {t} = useTranslation("inventory");
+
     if(movements.length == 0)
         return (
             <div className="d-flex flex-row justify-content-center">
@@ -19,10 +22,10 @@ export default function MovementsList({ movements } : Props) {
             <thead>
                 <tr className="align-middle">
                     <th>ID</th>
-                    <th>Ingredient</th>
+                    <th>{t("ingredient")}</th>
                     <th>Type</th>
-                    <th>Quantity</th>
-                    <th>Purchase price</th>
+                    <th>{t("quantity")}</th>
+                    <th>{t("purchase-price")}</th>
                     <th></th>
                     <th></th>
                 </tr>
