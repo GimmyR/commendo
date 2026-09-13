@@ -10,7 +10,7 @@ export interface IngredientMovement {
     ingredient: Ingredient;
     type: number;
     quantity: number;
-    purchasePrice: number;
+    purchasePrice?: number;
 }
 
 // ======================================== FUNCTIONS ==============================================
@@ -48,5 +48,16 @@ export async function editMovement(movement: Partial<IngredientMovement>) {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(movement)
+    });
+}
+
+export async function deleteMovement(movementId: number) {
+    const token = useAuth.getState().token;
+
+    return await cmdFetch(`/inventory/${movementId}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
     });
 }

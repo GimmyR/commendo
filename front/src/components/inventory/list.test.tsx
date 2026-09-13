@@ -31,14 +31,14 @@ const movement: IngredientMovement = {
 
 describe("Test MovementsList", () => {
     it("Should display no data", () => {
-        render(<MovementsList movements={[]} onEdit={() => {}}/>);
+        render(<MovementsList movements={[]} onEdit={() => {}} onDelete={() => {}}/>);
         const text = screen.getByText("Aucune donnée");
         expect(text).toBeInTheDocument();
     });
 
     it("Should display movements", () => {
         render(<MemoryRouter>
-            <MovementsList movements={[movement]} onEdit={() => {}}/>
+            <MovementsList movements={[movement]} onEdit={() => {}} onDelete={() => {}}/>
         </MemoryRouter>);
         const ingredient = screen.getByText(movement.ingredient.names[0].name);
         expect(ingredient).toBeInTheDocument();

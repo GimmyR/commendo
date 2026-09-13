@@ -19,8 +19,8 @@ export default function CreateMovementModal({ show, movement, onHide, create, ed
     const language = useLanguage((state) => state.lang);
     const [ingredient, setIngredient] = useState<Ingredient | undefined>();
     const [type, setType] = useState<number | undefined>();
-    const [quantity, setQuantity] = useState<number>();
-    const [price, setPrice] = useState<number>(movement ? movement.purchasePrice : 0);
+    const [quantity, setQuantity] = useState<number>(0);
+    const [price, setPrice] = useState<number>(0);
 
     const resetAll = () => {
         setIngredient(undefined);
@@ -76,7 +76,7 @@ export default function CreateMovementModal({ show, movement, onHide, create, ed
                 ingredientId: ingredient.id,
                 type,
                 quantity,
-                purchasePrice: price
+                purchasePrice: price > 0 ? price : undefined
             };
 
             if(movement && movement.id)
@@ -96,7 +96,7 @@ export default function CreateMovementModal({ show, movement, onHide, create, ed
             setIngredient(movement ? movement.ingredient : undefined);
             setType(movement ? movement.type : undefined);
             setQuantity(movement ? movement.quantity : 0);
-            setPrice(movement ? movement.purchasePrice : 0);
+            setPrice((movement && movement.purchasePrice) ? movement.purchasePrice : 0);
 
             fetchAllIngredients(language)
                 .then(data => {

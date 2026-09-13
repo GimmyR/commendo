@@ -6,9 +6,10 @@ import { useTranslation } from "react-i18next";
 type Props = {
     movements: IngredientMovement[];
     onEdit: (movement: IngredientMovement) => void;
+    onDelete: (movement: IngredientMovement) => void;
 };
 
-export default function MovementsList({ movements, onEdit } : Props) {
+export default function MovementsList({ movements, onEdit, onDelete } : Props) {
     const {t} = useTranslation("inventory");
 
     if(movements.length == 0)
@@ -44,12 +45,12 @@ export default function MovementsList({ movements, onEdit } : Props) {
                     </td>
                     <td>{movement.type}</td>
                     <td>{movement.quantity} {movement.ingredient.unit}</td>
-                    <td>{movement.purchasePrice} Ar</td>
+                    <td>{movement.purchasePrice} {movement.purchasePrice ? "Ar" : ""}</td>
                     <td>
                         <IconLink to="#" icon="pencil-square" linkClass="text-success" onClick={() => onEdit(movement)}/>
                     </td>
                     <td>
-                        <IconLink to="#" icon="trash" linkClass="text-success"/>
+                        <IconLink to="#" icon="trash" linkClass="text-success" onClick={() => onDelete(movement)}/>
                     </td>
                 </tr>)}
             </tbody>

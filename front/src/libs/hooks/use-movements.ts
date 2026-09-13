@@ -1,5 +1,5 @@
 import type { IngredientName } from "@/libs/actions/ingredients";
-import { createMovement, editMovement, fetchAllMovements, type IngredientMovement } from "@/libs/actions/inventory";
+import { createMovement, deleteMovement, editMovement, fetchAllMovements, type IngredientMovement } from "@/libs/actions/inventory";
 import { useLanguage } from "@/libs/hooks/use-language";
 import { useEffect, useState } from "react";
 
@@ -52,6 +52,21 @@ export default function useMovements() {
             .catch(err => console.warn(err));
     };
 
+    const remove = (movement: IngredientMovement | undefined) => {
+        if(movement) {
+            deleteMovement(movement.id)
+                .then((deleted: IngredientMovement) => {
+                    const index: number = movements.findIndex(mvt => mvt.id === deleted.id);
+                    
+                    if(index >= 0) {
+                        movements.splice(index, 1);
+                        setMovements([...movements]);
+                    }
+                })
+                .catch(err => console.warn(err));
+        }
+    };
+
     useEffect(() => {
         fetchAllMovements(language)
             .then(data => {
@@ -60,5 +75,5 @@ export default function useMovements() {
             .catch(err => console.warn(err));
     }, [language]);
     
-    return {movements, create, edit};
+    return {movements, create, edit, remove};
 }

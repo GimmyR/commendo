@@ -9,5 +9,6 @@
     "unit": "Unit",
     "submit": "Submit",
     "in": "In",
-    "out": "Out"
+    "out": "Out",
+    "confirm-delete": "Are you sure you want to remove this movement ?"
 }

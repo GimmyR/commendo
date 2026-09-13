@@ -9,5 +9,6 @@
     "unit": "Unité",
     "submit": "Enregistrer",
     "in": "Entrée",
-    "out": "Sortie"
+    "out": "Sortie",
+    "confirm-delete": "Etes-vous sûr de vouloir supprimer ce mouvement ?"
 }
