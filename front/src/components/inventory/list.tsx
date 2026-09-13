@@ -4,10 +4,11 @@ import { Table } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
 type Props = {
-    movements: IngredientMovement[]
+    movements: IngredientMovement[];
+    onEdit: (movement: IngredientMovement) => void;
 };
 
-export default function MovementsList({ movements } : Props) {
+export default function MovementsList({ movements, onEdit } : Props) {
     const {t} = useTranslation("inventory");
 
     if(movements.length == 0)
@@ -45,7 +46,7 @@ export default function MovementsList({ movements } : Props) {
                     <td>{movement.quantity} {movement.ingredient.unit}</td>
                     <td>{movement.purchasePrice} Ar</td>
                     <td>
-                        <IconLink to="#" icon="pencil-square" linkClass="text-success"/>
+                        <IconLink to="#" icon="pencil-square" linkClass="text-success" onClick={() => onEdit(movement)}/>
                     </td>
                     <td>
                         <IconLink to="#" icon="trash" linkClass="text-success"/>

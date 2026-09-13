@@ -37,3 +37,16 @@ export async function createMovement(movement: Partial<IngredientMovement>) {
         body: JSON.stringify(movement)
     });
 }
+
+export async function editMovement(movement: Partial<IngredientMovement>) {
+    const token = useAuth.getState().token;
+
+    return await cmdFetch(`/inventory`, {
+        method: "PATCH",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(movement)
+    });
+}

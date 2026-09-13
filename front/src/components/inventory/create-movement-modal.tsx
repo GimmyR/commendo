@@ -7,18 +7,28 @@ import { useTranslation } from "react-i18next";
 
 type Props = {
     show: boolean;
+    movement?: IngredientMovement;
     onHide: () => void;
     create: (mvt: Partial<IngredientMovement>) => void;
+    edit: (mvt: Partial<IngredientMovement>) => void;
 };
 
-export default function CreateMovementModal({ show, onHide, create } : Props) {
+export default function CreateMovementModal({ show, movement, onHide, create, edit } : Props) {
     const {t} = useTranslation("inventory");
     const [ingredients, setIngredients] = useState<Ingredient[]>([]);
     const language = useLanguage((state) => state.lang);
-    const [ingredient, setIngredient] = useState<Ingredient>();
-    const [type, setType] = useState<number>();
-    const [quantity, setQuantity] = useState<number>(0);
-    const [price, setPrice] = useState<number>(0);
+    const [ingredient, setIngredient] = useState<Ingredient | undefined>();
+    const [type, setType] = useState<number | undefined>();
+    const [quantity, setQuantity] = useState<number>();
+    const [price, setPrice] = useState<number>(movement ? movement.purchasePrice : 0);
+
+    const resetAll = () => {
+        setIngredient(undefined);
+        setType(undefined);
+        setQuantity(0);
+        setPrice(0);
+        setIngredients([]);
+    };
 
     const handleSelectIngredient = (e: ChangeEvent<HTMLSelectElement>) => {
         const value = parseInt(e.target.value);
@@ -61,46 +71,59 @@ export default function CreateMovementModal({ show, onHide, create } : Props) {
     const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if(ingredient && type && quantity > 0) {
-            create({
+        if(ingredient && type && quantity && quantity > 0) {
+            const mvt: Partial<IngredientMovement> = {
                 ingredientId: ingredient.id,
                 type,
                 quantity,
                 purchasePrice: price
-            });
+            };
+
+            if(movement && movement.id)
+                edit({
+                    ...mvt,
+                    id: movement.id
+                });
+
+            else create(mvt);
 
             onHide();
         }
     }; 
 
     useEffect(() => {
-        if(show)
+        if(show) {
+            setIngredient(movement ? movement.ingredient : undefined);
+            setType(movement ? movement.type : undefined);
+            setQuantity(movement ? movement.quantity : 0);
+            setPrice(movement ? movement.purchasePrice : 0);
+
             fetchAllIngredients(language)
                 .then(data => {
                     setIngredients(data);
                 })
                 .catch(err => console.warn(err));
 
-        else setIngredients([]);
+        } else resetAll();
     }, [show, language]);
 
     return (
         <Modal show={show} onHide={onHide}>
             <Modal.Header closeButton className="fw-bold">
-                {t("create-movement")}
+                {t(movement ? "edit-movement" : "create-movement")}
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3">
-                        <Form.Label>{t("ingredient")}</Form.Label>
-                        <Form.Select onChange={handleSelectIngredient}>
+                        <Form.Label htmlFor="ingredient">{t("ingredient")}</Form.Label>
+                        {ingredients.length > 0 && <Form.Select id="ingredient" defaultValue={movement ? movement.ingredient.id : 0} onChange={handleSelectIngredient}>
                             <option value={0}>--</option>
-                            {ingredients.map(ingredient => <option key={ingredient.id} value={ingredient.id}>{ingredient.names[0].name}</option>)}
-                        </Form.Select>
+                            {ingredients.map(ingr => <option key={ingr.id} value={ingr.id}>{ingr.names[0].name}</option>)}
+                        </Form.Select>}
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <Form.Label>Type</Form.Label>
-                        <Form.Select onChange={handleSelectType}>
+                        <Form.Label htmlFor="type">Type</Form.Label>
+                        <Form.Select id="type" defaultValue={movement ? movement.type : 0} onChange={handleSelectType}>
                             <option value={0}>--</option>
                             <option value={1}>{t("in")}</option>
                             <option value={-1}>{t("out")}</option>
