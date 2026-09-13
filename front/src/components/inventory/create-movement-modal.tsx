@@ -107,12 +107,12 @@ export default function CreateMovementModal({ show, onHide, create } : Props) {
                         </Form.Select>
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <Form.Label>{t("quantity")} ({t("unit")} : {ingredient ? ingredient.unit : "XXX"})</Form.Label>
-                        <Form.Control type="number" value={quantity} onChange={handleChangeQuantity}/>
+                        <Form.Label htmlFor="quantity">{t("quantity")} ({t("unit")} : {ingredient ? ingredient.unit : "XXX"})</Form.Label>
+                        <Form.Control type="number" id="quantity" value={quantity} onChange={handleChangeQuantity}/>
                     </Form.Group>
                     <Form.Group className="mb-4">
-                        <Form.Label>{t("purchase-price")} (Ar)</Form.Label>
-                        <Form.Control type="number" value={price} onChange={handleChangePrice} disabled={type != 1}/>
+                        <Form.Label htmlFor="purchase-price">{t("purchase-price")} (Ar)</Form.Label>
+                        <Form.Control type="number" id="purchase-price" value={price} onChange={handleChangePrice} disabled={type != 1}/>
                     </Form.Group>
                     <Form.Group className="d-flex flex-row justify-content-end">
                         <Button type="submit" variant="success" disabled={!ingredient || !type || quantity == 0}>{t("submit")}</Button>
