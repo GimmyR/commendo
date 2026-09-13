@@ -9,8 +9,9 @@ import { DishModule } from './dish/dish.module';
 import { TableModule } from './table/table.module';
 import { OrderModule } from './order/order.module';
 import { IngredientModule } from './ingredient/ingredient.module';
+import { InventoryModule } from './inventory/inventory.module';
 
 @Module({
-    imports: [LangModule, PrismaModule, AccountModule, RoleModule, SeederModule, ResourceModule, DishModule, TableModule, OrderModule, IngredientModule],
+    imports: [LangModule, PrismaModule, AccountModule, RoleModule, SeederModule, ResourceModule, DishModule, TableModule, OrderModule, IngredientModule, InventoryModule],
 })
 export class AppModule {}

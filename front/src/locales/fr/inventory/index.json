@@ -1,0 +1,14 @@
+{
+    "ingredient": "Ingrédient",
+    "quantity": "Quantité",
+    "purchase-price": "Prix d'achat",
+    "movement": "Mouvement",
+    "no-data": "Aucune donnée",
+    "create-movement": "Créer mouvement",
+    "edit-movement": "Modifier mouvement",
+    "unit": "Unité",
+    "submit": "Enregistrer",
+    "in": "Entrée",
+    "out": "Sortie",
+    "confirm-delete": "Etes-vous sûr de vouloir supprimer ce mouvement ?"
+}

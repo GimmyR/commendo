@@ -75,11 +75,11 @@ model DishName {
 
 model Ingredient {
     id          Int                     @id @default(autoincrement())
-    names       IngredientName[]
     unit        String                  @db.VarChar(10)
+    active      Boolean                 @default(true)
+    names       IngredientName[]
     dishes      DishIngredient[]
     movements   IngredientMovement[]
-    active      Boolean                 @default(true)
     @@map("cmd_ingredient")
 }
 
@@ -127,6 +127,6 @@ model IngredientMovement {
     ingredient          Ingredient      @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
     type                Int             // -1: used for a dish | 1: restock
     quantity            Float
-    purchasePrice       Float
+    purchasePrice       Float?
     @@map("cmd_ingredient_movement")
 }

@@ -16,6 +16,8 @@ import frIngredients from "./locales/fr/ingredients/index.json";
 import engIngredients from "./locales/eng/ingredients/index.json";
 import frCommon from "./locales/fr/common.json";
 import engCommon from "./locales/eng/common.json";
+import engInventory from "./locales/eng/inventory/index.json";
+import frInventory from "./locales/fr/inventory/index.json";
 
 i18n.use(initReactI18next)
     .init({
@@ -28,7 +30,8 @@ i18n.use(initReactI18next)
                 table: frTable,
                 orders: frOrders,
                 ingredients: frIngredients,
-                common: frCommon
+                common: frCommon,
+                inventory: frInventory
             },
             eng: {
                 navbar: engNavBar,
@@ -38,7 +41,8 @@ i18n.use(initReactI18next)
                 table: engTable,
                 orders: engOrders,
                 ingredients: engIngredients,
-                common: engCommon
+                common: engCommon,
+                inventory: engInventory
             }
         },
         fallbackLng: "fr",
