@@ -3,5 +3,10 @@
     "quantity": "Quantité",
     "purchase-price": "Prix d'achat",
     "movement": "Mouvement",
-    "no-data": "Aucune donnée"
+    "no-data": "Aucune donnée",
+    "create-movement": "Créer mouvement",
+    "unit": "Unité",
+    "submit": "Enregistrer",
+    "in": "Entrée",
+    "out": "Sortie"
 }

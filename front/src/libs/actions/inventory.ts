@@ -24,3 +24,16 @@ export async function fetchAllMovements(language: string) {
         }
     });
 }
+
+export async function createMovement(movement: Partial<IngredientMovement>) {
+    const token = useAuth.getState().token;
+
+    return await cmdFetch(`/inventory`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(movement)
+    });
+}
